@@ -8,12 +8,14 @@ OBJS 		=	$(SRCS:.c=.o)
 # Compiler
 CC			=	cc
 LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
+RM_FLAFS	=	-rf
+
 
 # Rules
-all:		$(NAME)
+all: $(NAME)
 
-$(NAME):	$(OBJS) $(MLX)
-			$(CC) $(OBJS) $(LIBX_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(MLX)
+	$(CC) $(OBJS) $(LIBX_FLAGS) -o $(NAME)
 
 %.o:%.c $(MLX_HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -26,10 +28,11 @@ $(MLX):
 	make -C minilibx-linux
 
 clean:
-			$(RM) $(OBJS)
+	$(RM)  $(RM_FLAFS) minilibx-linux/
+	$(RM) $(OBJS)
 
-fclean:		clean
-			$(RM) $(NAME)
+fclean:	clean
+	$(RM) $(NAME)
 
 re:			fclean all
 
