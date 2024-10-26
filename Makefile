@@ -14,6 +14,8 @@ $(NAME):	$(OBJS) $(MLX)
 			$(CC) $(OBJS) $(LIBX_FLAGS) -o $(NAME)
 
 $(MLX):
+	@ git submodule init
+	@ git submodule update
 	make -C minilibx-linux
 
 clean:
