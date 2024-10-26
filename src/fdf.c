@@ -5,7 +5,8 @@
 
 int event_handler(int key, void *mlx)
 {
- printf("called\n");
+	(void) mlx;
+ printf("called %d \n", key);
  return (0);
 }
 
