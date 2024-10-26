@@ -30,6 +30,7 @@ $(MLX):
 clean:
 	$(RM)  $(RM_FLAFS) minilibx-linux/
 	$(RM) $(OBJS)
+	mkdir minilibx-linux/
 
 fclean:	clean
 	$(RM) $(NAME)
