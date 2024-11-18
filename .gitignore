@@ -3,4 +3,5 @@ minilibx_test
 maps/
 *.o
 *.a
-
+*.swp
+*.swo
