@@ -1,5 +1,5 @@
 # minilibx_test
-NAME		=	minilibx_test
+NAME		=	fdf
 SRCS		=	src/fdf.c
 MLX		=	minilibx-linux/libmlx.a
 MLX_HEADER	=	minilibx-linux/mlx.h
