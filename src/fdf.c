@@ -34,7 +34,7 @@ int main(void)
 	t_zcolor zc;
 	uint32_t z = (uint32_t) 123;
 	uint32_t color = (uint32_t) 321;
-	zc = encode(z, color);
+	zc = encode_zcolor(z, color);
 	printf("z %d\n", decode_z(zc));
 	printf("color %d\n", decode_color(zc));
 
