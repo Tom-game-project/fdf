@@ -1,6 +1,8 @@
 # minilibx_test
 NAME		=	fdf
-SRCS		=	src/fdf.c
+SRCS		=	src/fdf.c\
+			src/draw/draw_line.c\
+			src/data/zcolor.c
 MLX		=	minilibx-linux/libmlx.a
 MLX_HEADER	=	minilibx-linux/mlx.h
 
@@ -27,7 +29,7 @@ $(MLX_HEADER):
 
 # Minilibx のビルド
 $(MLX):
-	make -C minilibx-linux
+	$(MAKE) -C minilibx-linux
 
 clean:
 	$(RM) $(RM_FLAGS) minilibx-linux/
