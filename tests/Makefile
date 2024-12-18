@@ -7,6 +7,7 @@ SRC=\
 OBJ=$(SRC:.c=.o)
 
 MAIN_TARGET=test_tmp
+TEST=
 
 all:$(MAIN_TARGET)
 
