@@ -6,7 +6,6 @@
 
 t_i32x2 encode_i32x2(int32_t x, int32_t y)
 {
-	//return ((t_i32x2) ((uint64_t) x << 32) + y);
 	return ((t_i32x2) ((uint64_t)(uint32_t)x << 32) | (uint32_t)y);
 }
 

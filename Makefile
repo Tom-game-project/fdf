@@ -2,19 +2,24 @@
 NAME		=	fdf
 MAIN_SRC	=	src/fdf.c
 SRCS		=	src/draw/draw_line.c\
+			src/data/i32u32.c\
 			src/data/u32x2.c\
 			src/data/i32x2.c\
-			src/data/vec2d_64.c\
+			src/data/vec2d_64.c
+
 # for test
 TEST		=	test
 TEST_SRCS	=	tests/test_u32x2.c
+
 # mlx tools
 MLX		=	minilibx-linux/libmlx.a
 MLX_HEADER	=	minilibx-linux/mlx.h
+
 # objects
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 OBJS 		=	$(SRCS:.c=.o)
 TEST_OBJS	=	$(TEST_SRCS:.c=.o)
+
 # Compiler option
 CC		=	cc
 CFLAGS		=	-Wextra -Werror -Wall -g

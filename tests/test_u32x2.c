@@ -1,3 +1,4 @@
+#include "../src/data/i32u32.h"
 #include "../src/data/u32x2.h"
 #include "../src/data/i32x2.h"
 #include "../src/data/vec2d_64.h"
@@ -8,7 +9,7 @@
 
 #include <stdbool.h>
 
-#define TESTLENGTH 5
+#define TESTLENGTH 7
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -16,6 +17,22 @@
 #define CYANSTR "\x1b[34m"
 #define RESETSTR "\x1b[39m"
 
+
+// 表示のための関数郡
+int print_u32x2(t_u32x2 data)
+{
+	return printf("(%u, %u) ",decode_uint_x(data) ,decode_uint_y(data));
+}
+
+int print_i32x2(t_i32x2 data)
+{
+	return printf("(%d, %d) ", decode_int_x(data) ,decode_int_y(data));
+}
+
+int print_i32u32(t_i32u32 data)
+{
+	return printf("(%d, %u) ", decode_iu_x(data), decode_iu_y(data));
+}
 
 // #[test]
 int test00()
@@ -74,9 +91,10 @@ int test01()
 {
 	uint8_t width = 10;
 	uint8_t height = 10;
+
 	printf(
 			CYANSTR
-			"vec2d_64の動作をチェックする\n"
+			"vec2d_64の動作をチェック\n"
 			RESETSTR
 	);
 	t_64_elem r;
@@ -95,13 +113,13 @@ int test01()
 		for (uint32_t x = 0; x < width;x++)
 		{
 			tmp = get_vec2d_elem(a, x, y);
-			printf("(%d %d) ", decode_uint_x(tmp.u32x2), decode_uint_y(tmp.u32x2));
+			print_i32x2(tmp.i32x2);
+			// printf("(%d %d) ", decode_uint_x(tmp.u32x2), decode_uint_y(tmp.u32x2));
 		}
 		printf("\n");
 	}
 	return (0);
 }
-
 
 // #[test]
 int test02()
@@ -145,7 +163,62 @@ int test03()
 
 int test04()
 {
+	printf(
+			CYANSTR
+			"t_64_elemnのサイズ確認\n"
+			RESETSTR
+	);
 	printf("sizeof t_64_elem union: %lu bit\n", sizeof(t_64_elem) * 8);
+	return (0);
+}
+
+int test05()
+{
+	printf(
+			CYANSTR
+			"t_i32u32の演算の動作チェック\n"
+			RESETSTR
+	);
+	t_i32u32 a = encode_i32u32(-10, 0xFFFFFFFF);
+	t_i32u32 b = encode_i32u32(42, 0);
+
+	print_i32u32(a);
+	print_i32u32(b);
+	printf("\n");
+
+	return (0);
+}
+
+int test06()
+{
+	uint8_t width = 10;
+	uint8_t height = 10;
+
+	printf(
+			CYANSTR
+			"vec2d_64(t_i32u32)の動作をチェック\n"
+			RESETSTR
+	);
+	t_64_elem r;
+	vec2d_64 a = init_vec2d_64(width, height);
+	for (uint32_t y = 0; y < height;y++)
+	{
+		for (uint32_t x = 0; x < width;x++)
+		{
+			r.i32u32 = encode_i32u32(0 - x, 0xFFFFFFFF);
+			set_vec2d_elem(a, x, y, r);
+		}
+	}
+	t_64_elem tmp;
+	for (uint32_t y = 0; y < height;y++)
+	{
+		for (uint32_t x = 0; x < width;x++)
+		{
+			tmp = get_vec2d_elem(a, x, y);
+			print_i32u32(tmp.i32u32);
+		}
+		printf("\n");
+	}
 	return (0);
 }
 
@@ -157,6 +230,8 @@ int main()
 		test02,
 		test03,
 		test04,
+		test05,
+		test06,
 	};
 	for (int i = 0; i < TESTLENGTH; i++)
 	{
