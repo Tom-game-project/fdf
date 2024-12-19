@@ -1,5 +1,7 @@
 #include "../src/data/u32x2.h"
 #include "../src/data/i32x2.h"
+#include "../src/data/vec2d_64.h"
+
 #include <stdio.h>
 #include <limits.h>
 
@@ -73,21 +75,23 @@ int test01()
 			"vec2d_u32x2の動作をチェックする\n"
 			RESETSTR
 	);
-	vec2d_u32x2 a = init_vec2d_u32x2(3, 3);
+	t_64_elem r;
+	vec2d_64 a = init_vec2d_64(3, 3);
 	for (uint32_t y = 0; y < 3;y++)
 	{
 		for (uint32_t x = 0; x < 3;x++)
 		{
-			set_vec2d_u32x2_elem(a, x, y, encode_u32x2(x, y));
+			r.u32x2 = encode_u32x2(x, y);
+			set_vec2d_elem(a, x, y, r);
 		}
 	}
-	t_u32x2 tmp;
+	t_64_elem tmp;
 	for (uint32_t y = 0; y < 3;y++)
 	{
 		for (uint32_t x = 0; x < 3;x++)
 		{
-			tmp = get_vec2d_u32x2_elem(a, x, y);
-			printf("%d %d\n", decode_uint_x(tmp), decode_uint_y(tmp));
+			tmp = get_vec2d_elem(a, x, y);
+			printf("%d %d\n", decode_uint_x(tmp.u32x2), decode_uint_y(tmp.u32x2));
 		}
 	}
 	return (0);
