@@ -22,9 +22,4 @@ t_u32x2 t_u32x2_sub(t_u32x2 a, t_u32x2 b);
 t_u32x2 t_u32x2_mul(t_u32x2 a, t_u32x2 b);
 
 
-typedef t_u32x2 *vec2d_u32x2;
-vec2d_u32x2 init_vec2d_u32x2(uint32_t width, uint32_t height);
-t_u32x2 get_vec2d_u32x2_elem(vec2d_u32x2 data,uint32_t x, uint32_t y);
-int set_vec2d_u32x2_elem(vec2d_u32x2 data, uint32_t x, uint32_t y, t_u32x2 i);
-
 #endif

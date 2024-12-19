@@ -43,3 +43,12 @@ t_i32x2 t_i32x2_mul(t_i32x2 a,t_i32x2 b)
 		decode_int_y(a) * decode_int_y(b)
 	));
 }
+
+int32_t t_i32x2_dot(t_i32x2 a,t_i32x2 b)
+{
+	return (
+		decode_int_x(a) * decode_int_x(b) +\
+		decode_int_y(a) * decode_int_y(b)
+	);
+}
+

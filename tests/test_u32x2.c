@@ -146,9 +146,17 @@ int main()
 	{
 		printf("=========== start test %d ===========\n", i);
 		if (test[i]())
-			printf("%s^^^^^^^^^^^ test %d done  ^^^^^^^^^^^%s\n", REDSTR, i, RESETSTR);
+			printf(
+					REDSTR
+					"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
+					RESETSTR
+					,i);
 		else
-			printf("%s^^^^^^^^^^^ test %d done  ^^^^^^^^^^^%s\n", GREENSTR, i, RESETSTR);
+			printf(
+					GREENSTR
+					"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
+					RESETSTR
+					, i);
 	}
 	return (0);
 }
