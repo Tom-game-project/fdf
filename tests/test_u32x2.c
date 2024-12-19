@@ -2,12 +2,13 @@
 #include "../src/data/i32x2.h"
 #include "../src/data/vec2d_64.h"
 
+#include <stdint.h>
 #include <stdio.h>
 #include <limits.h>
 
 #include <stdbool.h>
 
-#define TESTLENGTH 4
+#define TESTLENGTH 5
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -67,32 +68,36 @@ int test00()
 	return (0);
 }
 
+
 // #[test]
 int test01()
 {
+	uint8_t width = 10;
+	uint8_t height = 10;
 	printf(
 			CYANSTR
-			"vec2d_u32x2の動作をチェックする\n"
+			"vec2d_64の動作をチェックする\n"
 			RESETSTR
 	);
 	t_64_elem r;
-	vec2d_64 a = init_vec2d_64(3, 3);
-	for (uint32_t y = 0; y < 3;y++)
+	vec2d_64 a = init_vec2d_64(width, height);
+	for (uint32_t y = 0; y < height;y++)
 	{
-		for (uint32_t x = 0; x < 3;x++)
+		for (uint32_t x = 0; x < width;x++)
 		{
 			r.u32x2 = encode_u32x2(x, y);
 			set_vec2d_elem(a, x, y, r);
 		}
 	}
 	t_64_elem tmp;
-	for (uint32_t y = 0; y < 3;y++)
+	for (uint32_t y = 0; y < height;y++)
 	{
-		for (uint32_t x = 0; x < 3;x++)
+		for (uint32_t x = 0; x < width;x++)
 		{
 			tmp = get_vec2d_elem(a, x, y);
-			printf("%d %d\n", decode_uint_x(tmp.u32x2), decode_uint_y(tmp.u32x2));
+			printf("(%d %d) ", decode_uint_x(tmp.u32x2), decode_uint_y(tmp.u32x2));
 		}
+		printf("\n");
 	}
 	return (0);
 }
@@ -138,6 +143,12 @@ int test03()
 	return (0);
 }
 
+int test04()
+{
+	printf("sizeof t_64_elem union: %lu bit\n", sizeof(t_64_elem) * 8);
+	return (0);
+}
+
 int main()
 {
 	int (*test[TESTLENGTH])() = {
@@ -145,22 +156,25 @@ int main()
 		test01,
 		test02,
 		test03,
+		test04,
 	};
 	for (int i = 0; i < TESTLENGTH; i++)
 	{
 		printf("=========== start test %d ===========\n", i);
 		if (test[i]())
 			printf(
-					REDSTR
-					"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
-					RESETSTR
-					,i);
+				REDSTR
+				"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
+				RESETSTR
+				, i
+			);
 		else
 			printf(
-					GREENSTR
-					"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
-					RESETSTR
-					, i);
+				GREENSTR
+				"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
+				RESETSTR
+				, i
+			);
 	}
 	return (0);
 }
