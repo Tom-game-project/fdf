@@ -3,10 +3,28 @@
 #include <stdio.h>
 #include <limits.h>
 
-#define TESTLENGTH 2
+#include <stdbool.h>
 
+#define TESTLENGTH 4
+
+// 文字色
+#define REDSTR "\x1b[31m"
+#define GREENSTR "\x1b[32m"
+#define CYANSTR "\x1b[34m"
+#define RESETSTR "\x1b[39m"
+
+
+// #[test]
 int test00()
 {
+	// DOC
+	printf(
+			CYANSTR
+			"正しくencodeされているかどうかを確かめるテスト\n"
+			"SIMD的な動作についても確認\n"
+			RESETSTR
+	);
+
 	t_u32x2 u_a = encode_u32x2(10, 20);
 	t_u32x2 u_b = encode_u32x2(30, 40);
 	t_u32x2 u_c;
@@ -47,8 +65,14 @@ int test00()
 	return (0);
 }
 
+// #[test]
 int test01()
 {
+	printf(
+			CYANSTR
+			"vec2d_u32x2の動作をチェックする\n"
+			RESETSTR
+	);
 	vec2d_u32x2 a = init_vec2d_u32x2(3, 3);
 	for (uint32_t y = 0; y < 3;y++)
 	{
@@ -66,7 +90,48 @@ int test01()
 			printf("%d %d\n", decode_uint_x(tmp), decode_uint_y(tmp));
 		}
 	}
-	return 0;
+	return (0);
+}
+
+
+// #[test]
+int test02()
+{
+	printf(
+			CYANSTR
+			"t_u32x2の演算の動作チェック\n"
+			RESETSTR
+	);
+	t_u32x2 a = encode_u32x2(2, 3);
+	t_u32x2 b = encode_u32x2(5, 7);
+
+	if (t_u32x2_add(a, b) != encode_u32x2(7, 10)) // assert
+		return (1);
+	if (t_u32x2_sub(b, a) != encode_u32x2(3, 4)) // assert
+		return (1);
+	if (t_u32x2_mul(a, b) != encode_u32x2(10, 21)) //assert
+		return (1);
+	return (0);
+}
+
+// #[test]
+int test03()
+{
+	printf(
+			CYANSTR
+			"t_i32x2の演算の動作チェック\n"
+			RESETSTR
+	);
+	t_i32x2 a = encode_i32x2(-2, 3);
+	t_i32x2 b = encode_i32x2(5, -7);
+
+	if (t_i32x2_add(a, b) != encode_i32x2(3, -4)) // assert
+		return (1);
+	if (t_i32x2_sub(a, b) != encode_i32x2(-7, 10)) // assert
+		return (1);
+	if (t_i32x2_mul(a, b) != encode_i32x2(-10, -21)) // assert
+		return (1);
+	return (0);
 }
 
 int main()
@@ -74,12 +139,16 @@ int main()
 	int (*test[TESTLENGTH])() = {
 		test00,
 		test01,
+		test02,
+		test03,
 	};
 	for (int i = 0; i < TESTLENGTH; i++)
 	{
 		printf("=========== start test %d ===========\n", i);
-		test[i]();
-		printf("^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n", i);
+		if (test[i]())
+			printf("%s^^^^^^^^^^^ test %d done  ^^^^^^^^^^^%s\n", REDSTR, i, RESETSTR);
+		else
+			printf("%s^^^^^^^^^^^ test %d done  ^^^^^^^^^^^%s\n", GREENSTR, i, RESETSTR);
 	}
 	return (0);
 }

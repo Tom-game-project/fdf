@@ -3,6 +3,7 @@ NAME		=	fdf
 MAIN_SRC	=	src/fdf.c
 SRCS		=	src/draw/draw_line.c\
 			src/data/u32x2.c\
+			src/data/i32x2.c\
 			src/data/vec2d_u32x2.c
 # for test
 TEST		=	test
