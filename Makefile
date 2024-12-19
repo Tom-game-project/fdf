@@ -5,7 +5,10 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/i32u32.c\
 			src/data/u32x2.c\
 			src/data/i32x2.c\
-			src/data/vec2d_64.c
+			src/data/vec2d_64.c\
+			src/fdf_loader/loader.c\
+			src/fdf_loader/gnl/get_next_line.c\
+			src/fdf_loader/gnl/get_next_line_utils.c
 
 # for test
 TEST		=	test

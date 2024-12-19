@@ -1,3 +1,6 @@
 [submodule "minilibx-linux"]
 	path = minilibx-linux
 	url = https://github.com/42Paris/minilibx-linux
+[submodule "src/fdf_loader/gnl"]
+	path = src/fdf_loader/gnl
+	url = https://github.com/Tom-game-project/get_next_line

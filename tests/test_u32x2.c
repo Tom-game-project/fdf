@@ -3,13 +3,15 @@
 #include "../src/data/i32x2.h"
 #include "../src/data/vec2d_64.h"
 
+// fdf loader
+#include "../src/fdf_loader/loader.h"
+
 #include <stdint.h>
 #include <stdio.h>
 #include <limits.h>
-
 #include <stdbool.h>
 
-#define TESTLENGTH 7
+#define TESTLENGTH 8
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -17,11 +19,10 @@
 #define CYANSTR "\x1b[34m"
 #define RESETSTR "\x1b[39m"
 
-
 // 表示のための関数郡
 int print_u32x2(t_u32x2 data)
 {
-	return printf("(%u, %u) ",decode_uint_x(data) ,decode_uint_y(data));
+	return printf("(%u, %u) ", decode_uint_x(data) ,decode_uint_y(data));
 }
 
 int print_i32x2(t_i32x2 data)
@@ -222,6 +223,35 @@ int test06()
 	return (0);
 }
 
+
+
+static bool is_space(char c)
+{
+	return (c == ' ');
+}
+
+int test07()
+{
+	char *testcase00 = "hello world";
+	char *testcase01 = "hello world     ";
+	char *testcase02 = " hello  world     ";
+	char *testcase03 = "  s  hello world    ";
+	char *testcase04 = "     ";
+
+
+	if (count_word(testcase00, is_space) != 2)
+		return (1);
+	if (count_word(testcase01, is_space) != 2)
+		return (1);
+	if (count_word(testcase02, is_space) != 2)
+		return (1);
+	if (count_word(testcase03, is_space) != 3)
+		return (1);
+	if (count_word(testcase04, is_space) != 0)
+		return (1);
+	return (0);
+}
+
 int main()
 {
 	int (*test[TESTLENGTH])() = {
@@ -232,6 +262,7 @@ int main()
 		test04,
 		test05,
 		test06,
+		test07,
 	};
 	for (int i = 0; i < TESTLENGTH; i++)
 	{
