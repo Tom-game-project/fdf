@@ -22,24 +22,20 @@ uint32_t count_word(char *str, bool (*is_delimiter)(char))
 	uint32_t i;
 	uint32_t w;
 	bool flag;
+	bool delim;
 
 	i = 0;
 	w = 0;
 	flag = false;
 	while (str[i] != '\0')
 	{
-		if (is_delimiter(str[i]))
+		delim = is_delimiter(str[i]);
+		if (delim && flag)
+			flag = false;
+		else if (!delim && !flag)
 		{
-			if (flag)
-				flag = false;
-		}
-		else
-		{
-			if (!flag)
-			{
-				w += 1;
-				flag = true;
-			}
+			w += 1;
+			flag = true;
 		}
 		i += 1;
 	}
