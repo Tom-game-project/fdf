@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
-
+#include "../error/result.h"
 
 #define DATA_PADDING 1
 #define SHARP 0
@@ -34,7 +34,7 @@ t_64_elem get_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y)
 }
 
 /// data[y][x] = i;
-int set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i)
+enum e_result set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i)
 {
 	uint32_t width;
 	uint32_t height;
@@ -44,6 +44,6 @@ int set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i)
 	if (x < width && y < height)
 		data[width * y + x + DATA_PADDING] = i;
 	else
-		return (1);
-	return (0);
+		return (e_result_index_out_of_range_err);
+	return (e_result_ok);
 }

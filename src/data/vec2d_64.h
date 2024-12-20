@@ -4,6 +4,7 @@
 #include "i32u32.h"
 #include "i32x2.h"
 #include "u32x2.h"
+#include "../error/result.h"
 
 typedef union u_64_elem t_64_elem;
 typedef t_64_elem *vec2d_64;
@@ -18,6 +19,6 @@ union u_64_elem {
 
 vec2d_64 init_vec2d_64(uint32_t width, uint32_t height);
 t_64_elem get_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y);
-int set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i);
+enum e_result set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i);
 
 #endif

@@ -1,8 +1,10 @@
 #include "gnl/get_next_line.h"
+
 #include "../error/result.h"
 
-#include <fcntl.h>
+#include "../data/i32x2.h"
 
+#include <fcntl.h>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -23,10 +25,17 @@ bool is_space(char c)
 	);
 }
 
-/// wordの個数を判別する
-uint32_t count_word(char *str, bool (*is_delimiter)(char))
+bool is_comma(char c)
 {
-	uint32_t w;
+	return (
+			c == ','
+	);
+}
+
+/// wordの個数を判別する
+int32_t count_word(char *str, bool (*is_delimiter)(char))
+{
+	int32_t w;
 	bool flag;
 	bool delim;
 
@@ -81,8 +90,6 @@ enum e_result get_z_color_word(\
 	return (e_result_ok);
 }
 
-
-
 enum e_result load_map(char *filename)
 {
 	int fd;
@@ -111,4 +118,33 @@ enum e_result load_map(char *filename)
 	close(fd);
 	return (0);
 }
+
+
+t_i32x2 get_mapsize(char *filename)
+{	
+	int fd;
+	char	*buf;
+	t_i32x2 counter; // (x, y)
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (encode_i32x2(-1, e_result_io_err));
+	counter = encode_i32x2(0, 0);
+	while (true)
+	{
+		buf = get_next_line(fd);
+		if (buf == NULL)
+			break ;
+		if (decode_int_x(counter) != 0 && \
+		decode_int_x(counter) != count_word(buf,is_space))
+			return (free(buf), encode_i32x2(-1, e_result_load_err));
+		else if (count_word(buf,is_space) != 0)
+			counter = encode_i32x2(count_word(buf,is_space), decode_int_y(counter));
+		counter = encode_i32x2(decode_int_x(counter), decode_int_y(counter) + 1);
+		free(buf);
+	}
+	return (close(fd), counter);
+}
+
+
 

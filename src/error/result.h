@@ -10,7 +10,7 @@ enum e_result
 	// error
 	e_result_allocation_err, // メモリの割当に失敗したときのエラー
 	e_result_load_err, // 不正なファイルを読み込んだ際のエラー
-	e_result_index_out_of_range_err,
+	e_result_index_out_of_range_err, //　配列に不正なアクセスをしようとしたとき
 	e_result_io_err,
 };
 

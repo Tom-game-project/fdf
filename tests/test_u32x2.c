@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define TESTLENGTH 9
+#define TESTLENGTH 10
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -272,6 +272,28 @@ int test08()
 	return (0);
 }
 
+
+int test09()
+{
+	t_i32x2 map_size;
+	printf(
+			CYANSTR
+			"get_mapsizeの確認\n"
+			RESETSTR
+	);
+	map_size = get_mapsize("./maps/test_maps/42.fdf");
+	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	map_size = get_mapsize("./maps/test_maps/10-2.fdf");
+	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	map_size = get_mapsize("./maps/test_maps/10-70.fdf");
+	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	map_size = get_mapsize("./maps/test_maps/100-6.fdf");
+	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	map_size = get_mapsize("./maps/test_maps/20-60.fdf");
+	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	return (0);
+}
+
 int main()
 {
 	int (*test[TESTLENGTH])() = {
@@ -284,11 +306,11 @@ int main()
 		test06,
 		test07,
 		test08,
+		test09,
 
 	};
-	int code;
+	int code = 0;
 
-	code = 0;
 	for (int i = 0; i < TESTLENGTH; i++)
 	{
 		printf("=========== start test %d ===========\n", i);
