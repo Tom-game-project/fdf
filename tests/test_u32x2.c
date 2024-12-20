@@ -10,8 +10,9 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
-#define TESTLENGTH 8
+#define TESTLENGTH 9
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -119,6 +120,7 @@ int test01()
 		}
 		printf("\n");
 	}
+	free(a);
 	return (0);
 }
 
@@ -133,12 +135,9 @@ int test02()
 	t_u32x2 a = encode_u32x2(2, 3);
 	t_u32x2 b = encode_u32x2(5, 7);
 
-	if (t_u32x2_add(a, b) != encode_u32x2(7, 10)) // assert
-		return (1);
-	if (t_u32x2_sub(b, a) != encode_u32x2(3, 4)) // assert
-		return (1);
-	if (t_u32x2_mul(a, b) != encode_u32x2(10, 21)) //assert
-		return (1);
+	if (t_u32x2_add(a, b) != encode_u32x2(7, 10)) return (1);
+	if (t_u32x2_sub(b, a) != encode_u32x2(3, 4)) return (1);
+	if (t_u32x2_mul(a, b) != encode_u32x2(10, 21)) return (1);
 	return (0);
 }
 
@@ -153,12 +152,9 @@ int test03()
 	t_i32x2 a = encode_i32x2(-2, 3);
 	t_i32x2 b = encode_i32x2(5, -7);
 
-	if (t_i32x2_add(a, b) != encode_i32x2(3, -4)) // assert
-		return (1);
-	if (t_i32x2_sub(a, b) != encode_i32x2(-7, 10)) // assert
-		return (1);
-	if (t_i32x2_mul(a, b) != encode_i32x2(-10, -21)) // assert
-		return (1);
+	if (t_i32x2_add(a, b) != encode_i32x2(3, -4)) return (1);
+	if (t_i32x2_sub(a, b) != encode_i32x2(-7, 10)) return (1);
+	if (t_i32x2_mul(a, b) != encode_i32x2(-10, -21)) return (1);
 	return (0);
 }
 
@@ -220,6 +216,7 @@ int test06()
 		}
 		printf("\n");
 	}
+	free(a);
 	return (0);
 }
 
@@ -230,25 +227,48 @@ static bool is_space(char c)
 	return (c == ' ');
 }
 
+static bool is_comma(char c)
+{
+	return (c == ',');
+}
+
 int test07()
 {
+	printf(
+			CYANSTR
+			"単語数カウンターのテスト\n"
+			RESETSTR
+	);
 	char *testcase00 = "hello world";
 	char *testcase01 = "hello world     ";
 	char *testcase02 = " hello  world     ";
 	char *testcase03 = "  s  hello world    ";
 	char *testcase04 = "     ";
+	char *testcase05 = "0,0xff";
+	char *testcase06 = "123";
 
 
-	if (count_word(testcase00, is_space) != 2)
-		return (1);
-	if (count_word(testcase01, is_space) != 2)
-		return (1);
-	if (count_word(testcase02, is_space) != 2)
-		return (1);
-	if (count_word(testcase03, is_space) != 3)
-		return (1);
-	if (count_word(testcase04, is_space) != 0)
-		return (1);
+	if (count_word(testcase00, is_space) != 2) return (1);
+	if (count_word(testcase01, is_space) != 2) return (1);
+	if (count_word(testcase02, is_space) != 2) return (1);
+	if (count_word(testcase03, is_space) != 3) return (1);
+	if (count_word(testcase04, is_space) != 0) return (1);
+	if (count_word(testcase05, is_comma) != 2) return (1);
+	if (count_word(testcase06, is_comma) != 1) return (1);
+	return (0);
+}
+
+
+int test08()
+{
+	printf(
+			CYANSTR
+			"gnlのテスト＆動作確認\n"
+			RESETSTR
+	);
+	load_map("./maps/test_maps/42.fdf");
+	printf("\n--- --- --- ---\n");
+	load_map("./maps/test_maps/10-2.fdf");
 	return (0);
 }
 
@@ -263,17 +283,25 @@ int main()
 		test05,
 		test06,
 		test07,
+		test08,
+
 	};
+	int code;
+
+	code = 0;
 	for (int i = 0; i < TESTLENGTH; i++)
 	{
 		printf("=========== start test %d ===========\n", i);
 		if (test[i]())
+		{
 			printf(
 				REDSTR
 				"^^^^^^^^^^^ test %d done  ^^^^^^^^^^^\n"
 				RESETSTR
 				, i
 			);
+			code = 1;
+		}
 		else
 			printf(
 				GREENSTR
@@ -282,5 +310,5 @@ int main()
 				, i
 			);
 	}
-	return (0);
+	return (code);
 }
