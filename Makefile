@@ -11,7 +11,7 @@ SRCS		=	src/draw/draw_line.c\
 			src/fdf_loader/gnl/get_next_line_utils.c
 
 # for test
-TEST		=	test
+TEST		=	test_run
 TEST_SRCS	=	tests/test_u32x2.c
 
 # mlx tools
@@ -29,10 +29,20 @@ CFLAGS		=	-Wextra -Werror -Wall -g
 LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
 RM_FLAGS	=	-rf
 
+
+# Debug
+
+VALGRIND	=	valgrind
+VFLAGS		=	--leak-check=full  -q
+SHA		=	sha256sum
+
+
 # Rules
 all: $(NAME)
 
 test: $(TEST)
+	@ $(SHA) $(TEST)
+	@ $(VALGRIND) $(VFLAGS) ./$(TEST)
 
 $(TEST): $(TEST_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(TEST_OBJS) $(OBJS) $(LIBX_FLAGS) -o $(TEST)
