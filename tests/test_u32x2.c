@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define TESTLENGTH 10
+#define TESTLENGTH 12
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -266,9 +266,9 @@ int test08()
 			"gnlのテスト＆動作確認\n"
 			RESETSTR
 	);
-	load_map("./maps/test_maps/42.fdf");
+	//load_map("./maps/test_maps/42.fdf");
 	printf("\n--- --- --- ---\n");
-	load_map("./maps/test_maps/10-2.fdf");
+	//load_map("./maps/test_maps/10-2.fdf");
 	return (0);
 }
 
@@ -294,6 +294,34 @@ int test09()
 	return (0);
 }
 
+
+int test10()
+{
+	printf(
+			CYANSTR
+			"カラーコードを整数データに変換する\n"
+			RESETSTR
+	);
+	char str[111] = "0x00ff00ff\0";
+	t_u32x2 a = color_code2_uint32(str);
+	printf("%d %d\n", decode_uint_x(a) , decode_uint_y(a));
+	return (0);
+}
+
+
+int test11()
+{
+	char str[32] = "10,0xffee";
+	t_i32u32 a = z_color2t_i32u32(str);
+
+	printf(
+		"%d %d\n",
+		decode_iu_x(a),
+		decode_iu_y(a)
+	);
+	return (0);
+}
+
 int main()
 {
 	int (*test[TESTLENGTH])() = {
@@ -307,7 +335,8 @@ int main()
 		test07,
 		test08,
 		test09,
-
+		test10,
+		test11,
 	};
 	int code = 0;
 
