@@ -303,7 +303,7 @@ int test10()
 			RESETSTR
 	);
 	char str[111] = "0x00ff00ff\0";
-	t_u32x2 a = color_code2_uint32(str);
+	t_u32x2 a = colorcode2uint32(str);
 	printf("%d %d\n", decode_uint_x(a) , decode_uint_y(a));
 	return (0);
 }
@@ -311,7 +311,7 @@ int test10()
 
 int test11()
 {
-	char str[32] = "10,0xffee";
+	char str[32] = "-1234,0xffee";
 	t_i32u32 a = z_color2t_i32u32(str);
 
 	printf(

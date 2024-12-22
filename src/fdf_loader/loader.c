@@ -1,5 +1,6 @@
 #include "gnl/get_next_line.h"
 #include "../error/result.h"
+
 // data
 #include "../data/i32x2.h"
 #include "../data/i32u32.h"
@@ -22,7 +23,8 @@ typedef char t_z_color_word[Z_COLOR_WORD_MAX_LENGTH];
 #define HEX_CHAR_TABLE "0123456789abcdef"
 
 
-t_u32x2 color_code2_uint32(char *str);
+t_u32x2 colorcode2uint32(char *str);
+int32_t str2int(char *str);
 
 bool is_space(char c)
 {
@@ -146,15 +148,16 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 	t_u32x2 color;
 
 	countofwords = count_word(zcolor ,is_comma);
+	get_z_color_word(zcolor, word, 0, is_comma);
 	r = encode_i32u32(
-		0,        // TODO
+		str2int(word),
 		0x00ffffff
 	);
 	if (countofwords == 2)
 	{
 
 		get_z_color_word(zcolor, word, 1,is_comma);
-		color = color_code2_uint32(word);
+		color = colorcode2uint32(word);
 		if (decode_uint_x(color) == e_result_ok)
 			r = encode_i32u32(
 				decode_iu_x(r),
@@ -167,7 +170,10 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 		}
 	}
 	else
+	{
+		// error TODO
 		return (e_result_load_err);
+	}
 	return (r);
 }
 
@@ -176,11 +182,17 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 bool is_hexchar(char c)
 {
 	return (
-			'0' <= c || c <= '9' || 
-			'a' <= c || c <= 'f'
+		'0' <= c || c <= '9' || 
+		'a' <= c || c <= 'f'
 	);
 }
 
+bool is_decimalchar(char c)
+{
+	return (
+		'0' <= c || c <= '9'
+	);
+}
 
 /// unsafe 
 /// この関数では必ずdstのサイズを認識した上で実行してください
@@ -219,7 +231,7 @@ uint32_t get_hex_index(char c)
 /// ```
 ///
 /// return t_u32x2(error_code, data)
-t_u32x2 color_code2_uint32(char *str)
+t_u32x2 colorcode2uint32(char *str)
 {
 	uint32_t r;
 
@@ -238,6 +250,28 @@ t_u32x2 color_code2_uint32(char *str)
 	}
 	return (encode_u32x2(e_result_ok, r));
 }
+
+
+int32_t str2int(char *str)
+{
+	int32_t sign;
+	int32_t r;
+
+	sign = 1;
+	if (*str++ == '-')
+		sign = -1;
+	r = 0;
+	while (*str != '\0')
+	{
+		if (is_decimalchar(*str))
+			r = 10 * r + (*str - '0');
+		else
+			printf("str2int Error!\n"); // TODO
+		str++;
+	}
+	return (sign * r);
+}
+
 
 /// @param uint32_t y      y座標
 /// @param t_i32x2 mapsize (width, height)
