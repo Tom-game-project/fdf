@@ -8,6 +8,10 @@
 #define DATA_PADDING 1
 #define SHARP 0
 
+
+// test functions
+#include <stdio.h>
+
 /// `vec<vec<t_64_elem>>`
 ///
 /// 実態は(width * height + 1)の長さのu64を格納した配列
@@ -17,6 +21,7 @@ vec2d_64 init_vec2d_64(uint32_t width, uint32_t height)
 {
 	vec2d_64 r;
 
+	//printf("try to allocate %lu sizeof(t_64_elem) * (width * height + DATA_PADDING)byte memory",sizeof(t_64_elem) * (width * height + DATA_PADDING) );
 	r = (t_64_elem*) malloc (sizeof(t_64_elem) * (width * height + DATA_PADDING));
 	if (r == NULL)
 		return (NULL);

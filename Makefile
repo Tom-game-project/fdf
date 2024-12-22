@@ -33,7 +33,7 @@ RM_FLAGS	=	-rf
 # Debug
 
 VALGRIND	=	valgrind
-VFLAGS		=	--leak-check=full  -q
+VFLAGS		=	--leak-check=full -q
 SHA		=	sha256sum
 
 

@@ -113,7 +113,11 @@ t_i32x2 get_mapsize(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
+	{
+		// TODO
+		printf("failed to open file\n");
 		return (encode_i32x2(-1, e_result_io_err));
+	}
 	counter = encode_i32x2(0, 0);
 	while (true)
 	{
@@ -256,6 +260,7 @@ t_u32x2 colorcode2uint32(char *str)
 }
 
 
+/// 数字文字列をin32_t型に変換する
 int32_t str2int(char *str)
 {
 	int32_t sign;
@@ -301,6 +306,7 @@ int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
 	return (0);
 }
 
+/// マップを読み込んで、配列にデータをセットする
  enum e_result load_map(vec2d_64 arr, char *filename)
  {
  	int fd;
@@ -323,7 +329,7 @@ int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
  	return (close(fd), e_result_ok);
  }
 
-///
+/// 配列用のデータを格納するための領域を確保してメモリに読み込んだデータをセットする
 enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
 {
 	t_u32x2 mapsize;

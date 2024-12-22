@@ -20,6 +20,32 @@
 #define CYANSTR "\x1b[34m"
 #define RESETSTR "\x1b[39m"
 
+#define MAPFILELENGTH 21
+char *map_files[MAPFILELENGTH] = 
+{
+	 "maps/test_maps/10-2.fdf"
+	,"maps/test_maps/20-60.fdf"
+	,"maps/test_maps/50-4.fdf"
+	,"maps/test_maps/basictest.fdf"
+	,"maps/test_maps/elem-fract.fdf"
+	,"maps/test_maps/elem2.fdf"
+	,"maps/test_maps/mars.fdf"
+	,"maps/test_maps/plat.fdf"
+	,"maps/test_maps/pylone.fdf"
+	,"maps/test_maps/pyramide.fdf"
+	,"maps/test_maps/t2.fdf "
+	,"maps/test_maps/10-70.fdf"
+	,"maps/test_maps/42.fdf"
+	,"maps/test_maps/100-6.fdf"
+	,"maps/test_maps/elem-col.fdf"
+	,"maps/test_maps/elem.fdf"
+	,"maps/test_maps/julia.fdf"
+	,"maps/test_maps/pentenegpos.fdf"
+	,"maps/test_maps/pnp_flat.fdf"
+	,"maps/test_maps/pyra.fdf"
+	,"maps/test_maps/t1.fdf"
+};
+
 // 表示のための関数郡
 int print_u32x2(t_u32x2 data)
 {
@@ -328,6 +354,11 @@ int test10()
 
 int test11()
 {
+	printf(
+			CYANSTR
+			"zとカラーコードのセットの情報を読み込めるかどうかを確かめる\n"
+			RESETSTR
+	);
 	char str[32] = "-1234,0xffee";
 	char str01[32] = "10";
 	t_i32u32 a = z_color2t_i32u32(str);
@@ -337,6 +368,7 @@ int test11()
 		decode_iu_x(a),
 		decode_iu_y(a)
 	);
+
 	a = z_color2t_i32u32(str01);
 
 	printf(
@@ -350,6 +382,11 @@ int test11()
 
 int test12 ()
 {
+	printf(
+			CYANSTR
+			"読み込んだデータを整形して表示する\n"
+			RESETSTR
+	);
 	vec2d_64 arr;
 
 	arr = NULL;
@@ -359,6 +396,31 @@ int test12 ()
 
 	print_vec2d_elem_i32u64(arr);
 	free(arr);
+	return (0);
+}
+
+
+int test13()
+{
+	printf(
+			CYANSTR
+			"色々なファイルに形式に対応させられているかテスト"
+			RESETSTR
+	);
+	vec2d_64 arr;
+
+	for (int i = 0; i < MAPFILELENGTH; i++)
+	{
+
+		arr = NULL;
+		printf("file name:%s\n", map_files[i]);
+		alocate_memory_for_map(&arr, map_files[i]);
+		printf("pointer %p\n", arr);
+		printf("%d %d\n" ,decode_uint_y(get_shape(arr)), decode_uint_x(get_shape(arr)));
+
+		print_vec2d_elem_i32u64(arr);
+		free(arr);
+	}
 	return (0);
 }
 
@@ -378,7 +440,7 @@ int main()
 		test09,
 		test10,
 		test11,
-		test12,
+		test13,
 	};
 	int code = 0;
 
