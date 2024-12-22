@@ -47,3 +47,9 @@ enum e_result set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i)
 		return (e_result_index_out_of_range_err);
 	return (e_result_ok);
 }
+
+/// 二次元配列の形状を取得
+t_u32x2 get_shape(vec2d_64 arr)
+{
+	return (arr[0].u32x2);
+}

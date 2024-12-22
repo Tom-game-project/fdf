@@ -12,7 +12,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define TESTLENGTH 12
+#define TESTLENGTH 13
 
 // 文字色
 #define REDSTR "\x1b[31m"
@@ -34,6 +34,23 @@ int print_i32x2(t_i32x2 data)
 int print_i32u32(t_i32u32 data)
 {
 	return printf("(%d, %u) ", decode_iu_x(data), decode_iu_y(data));
+}
+
+/// i32u32を格納した二次元配列を表示します
+int print_vec2d_elem_i32u64(vec2d_64 arr)
+{
+	t_64_elem tmp;
+
+	for (uint32_t y = 0; y < decode_uint_y(get_shape(arr)); y++)
+	{
+		for (uint32_t x = 0; x < decode_uint_x(get_shape(arr)); x++)
+		{
+			tmp.i32u32 = get_vec2d_elem(arr, x, y).i32u32;
+			print_i32u32(tmp.i32u32);
+		}
+		printf("\n");
+	}
+	return (0);
 }
 
 // #[test]
@@ -312,7 +329,15 @@ int test10()
 int test11()
 {
 	char str[32] = "-1234,0xffee";
+	char str01[32] = "10";
 	t_i32u32 a = z_color2t_i32u32(str);
+
+	printf(
+		"%d %d\n",
+		decode_iu_x(a),
+		decode_iu_y(a)
+	);
+	a = z_color2t_i32u32(str01);
 
 	printf(
 		"%d %d\n",
@@ -321,6 +346,22 @@ int test11()
 	);
 	return (0);
 }
+
+
+int test12 ()
+{
+	vec2d_64 arr;
+
+	arr = NULL;
+	alocate_memory_for_map(&arr, "./maps/test_maps/42.fdf");
+	printf("pointer %p\n", arr);
+	printf("%d %d\n" ,decode_uint_y(get_shape(arr)), decode_uint_x(get_shape(arr)));
+
+	print_vec2d_elem_i32u64(arr);
+	free(arr);
+	return (0);
+}
+
 
 int main()
 {
@@ -337,6 +378,7 @@ int main()
 		test09,
 		test10,
 		test11,
+		test12,
 	};
 	int code = 0;
 

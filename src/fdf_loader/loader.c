@@ -169,6 +169,10 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 			printf("error in  z_color2t_i32u32\n");
 		}
 	}
+	else if (countofwords == 1)
+	{
+		// pass
+	}
 	else
 	{
 		// error TODO
@@ -258,8 +262,11 @@ int32_t str2int(char *str)
 	int32_t r;
 
 	sign = 1;
-	if (*str++ == '-')
+	if (*str == '-')
+	{
 		sign = -1;
+		str += 1;
+	}
 	r = 0;
 	while (*str != '\0')
 	{
@@ -277,44 +284,58 @@ int32_t str2int(char *str)
 /// @param t_i32x2 mapsize (width, height)
 /// @param char *buf       一行のデータ
 /// @param vec2d_64 arr    整形後のデータを格納する部分
-int set_raw(uint32_t y, t_i32x2 mapsize, char *buf, vec2d_64 arr)
+int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
 {
-	int32_t x;
+	uint32_t x;
 	union u_64_elem a;
 	t_z_color_word word;
 
 	x = 0;
-	while (x < decode_int_x(mapsize))
+	while (x < decode_uint_x(mapsize))
 	{
-		a.i32u32 = encode_i32u32(x, y);
 		get_z_color_word(buf, word, x, is_space);
-		set_vec2d_elem(arr, y, x, a);
+		a.i32u32 = z_color2t_i32u32(word);
+		set_vec2d_elem(arr, x, y, a);
+		x += 1;
 	}
 	return (0);
 }
 
+ enum e_result load_map(vec2d_64 arr, char *filename)
+ {
+ 	int fd;
+ 	char	*buf;
+ 	t_u32x2 counter; // (dx, dy)
 
-//
-// enum e_result load_map(vec2d_64 arr, char *filename)
-// {
-// 	int fd;
-// 	char	*buf;
-// 	t_i32x2 counter; // (dx, dy)
-// 	t_i32x2 mapsize; // (width, height)
-// 
-// 	mapsize = get_mapsize(filename);
-// 	fd = open(filename, O_RDONLY);
-// 	if (fd == -1)
-// 		return (e_result_io_err);
-// 	counter = encode_i32x2(0, 0);
-// 	while (decode_int_y(counter) < decode_int_y(mapsize))
-// 	{
-// 		buf = get_next_line(fd);
-// 		if (buf == NULL)
-// 			break ;
-// 		free(buf);
-// 		counter = t_i32x2_add(counter, encode_i32x2(0, 1));
-// 	}
-// 	return (close(fd), e_result_ok);
-// }
+ 	fd = open(filename, O_RDONLY);
+ 	if (fd == -1)
+ 		return (e_result_io_err);
+ 	counter = encode_u32x2(0, 0);
+ 	while (decode_uint_y(counter) < decode_uint_y(get_shape(arr)))
+ 	{
+ 		buf = get_next_line(fd);
+ 		if (buf == NULL)
+ 			break ;
+		set_row(decode_uint_y(counter), get_shape(arr), buf, arr);
+ 		free(buf);
+ 		counter = t_u32x2_add(counter, encode_u32x2(0, 1));
+ 	}
+ 	return (close(fd), e_result_ok);
+ }
 
+///
+enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
+{
+	t_u32x2 mapsize;
+
+	mapsize = get_mapsize(filename);
+        *arr = init_vec2d_64(decode_uint_x(mapsize), decode_uint_y(mapsize)); // allocation occureda
+												
+	printf("memory allocated\n");
+	load_map(*arr, filename);
+
+	printf("loaded\n");
+	if (*arr == NULL)
+		printf("Error!");
+	return (e_result_ok);
+}
