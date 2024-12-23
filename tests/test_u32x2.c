@@ -408,17 +408,25 @@ int test13()
 			RESETSTR
 	);
 	vec2d_64 arr;
+	enum e_result err_code;
 
 	for (int i = 0; i < MAPFILELENGTH; i++)
 	{
 
 		arr = NULL;
 		printf("file name:%s\n", map_files[i]);
-		alocate_memory_for_map(&arr, map_files[i]);
+		err_code = alocate_memory_for_map(&arr, map_files[i]);
 		printf("pointer %p\n", arr);
-		printf("%d %d\n" ,decode_uint_y(get_shape(arr)), decode_uint_x(get_shape(arr)));
 
-		print_vec2d_elem_i32u64(arr);
+		if (err_code == e_result_ok)
+		{
+			printf("%d %d\n" ,decode_uint_y(get_shape(arr)), decode_uint_x(get_shape(arr)));
+			print_vec2d_elem_i32u64(arr);
+		}
+		else
+		{
+			printf("some error occured in alocate_memory_for_map\n");
+		}
 		free(arr);
 	}
 	return (0);
@@ -467,3 +475,10 @@ int main()
 	}
 	return (code);
 }
+
+/*
+int main()
+{
+	return test14();
+}
+*/

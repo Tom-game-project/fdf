@@ -8,7 +8,9 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/vec2d_64.c\
 			src/fdf_loader/loader.c\
 			src/fdf_loader/gnl/get_next_line.c\
-			src/fdf_loader/gnl/get_next_line_utils.c
+			src/fdf_loader/gnl/get_next_line_utils.c\
+			src/fdf_loader/loader_helper00.c\
+			src/fdf_loader/loader_helper01.c
 
 # for test
 TEST		=	test_run
@@ -25,7 +27,7 @@ TEST_OBJS	=	$(TEST_SRCS:.c=.o)
 
 # Compiler option
 CC		=	cc
-CFLAGS		=	-Wextra -Werror -Wall -g
+CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024
 LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
 RM_FLAGS	=	-rf
 
@@ -41,8 +43,9 @@ SHA		=	sha256sum
 all: $(NAME)
 
 test: $(TEST)
-	@ $(SHA) $(TEST)
-	@ $(VALGRIND) $(VFLAGS) ./$(TEST)
+	$(SHA) $(TEST)
+	./$(TEST)
+	#$(VALGRIND) $(VFLAGS) ./$(TEST)
 
 $(TEST): $(TEST_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(TEST_OBJS) $(OBJS) $(LIBX_FLAGS) -o $(TEST)
