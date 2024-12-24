@@ -3,8 +3,8 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-#define VECTOR_X encode_i32x2(-17, 10)
-#define VECTOR_Y encode_i32x2(17, 10)
+#define VECTOR_X encode_i32x2(17, 10)
+#define VECTOR_Y encode_i32x2(-17, 10)
 #define VECTOR_Z encode_i32x2(0, -20)
 
 // 等角図法

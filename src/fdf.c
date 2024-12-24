@@ -2,9 +2,11 @@
 #include <X11/keysym.h>
 #include <stdint.h>
 #include <stdlib.h>
+
 #include "../minilibx-linux/mlx.h"
 #include "data/i32x2.h"
 #include "draw/draw.h"
+#include "fdf_loader/loader.h"
 
 // test modules 
 #include <stdio.h>
@@ -15,10 +17,6 @@
 #define GREEN  0x0000FF00
 #define BLUE   0x000000FF
 
-#define X_VEC 2
-#define Y_VEC -1
-#define Z_VEC 1
-
 int event_handler(int key, void *mlx)
 {
 	(void) mlx;
@@ -26,7 +24,7 @@ int event_handler(int key, void *mlx)
 	return (0);
 }
 
-int print_vec2d_elem_i32x2(void *mlx_ptr, void *win_ptr, vec2d_64 arr)
+int put_vec2d_elem_i32x2(void *mlx_ptr, void *win_ptr, vec2d_64 arr)
 {
 	t_64_elem tmp;
 
@@ -36,7 +34,7 @@ int print_vec2d_elem_i32x2(void *mlx_ptr, void *win_ptr, vec2d_64 arr)
 		{
 			tmp.i32x2 = get_vec2d_elem(arr, x, y).i32x2;
 			// print_i32x2(tmp.i32x2);
-			mlx_pixel_put(mlx_ptr, win_ptr, decode_int_x(tmp.i32x2), decode_int_y(tmp.i32x2), RED);
+			mlx_pixel_put(mlx_ptr, win_ptr, decode_int_x(tmp.i32x2) + 300, decode_int_y(tmp.i32x2) + 300, RED);
 		}
 		printf("\n");
 	}
@@ -47,20 +45,30 @@ int main(int argc, char *argv[])
 {
 	void *mlx_ptr;
 	void *mlx_win; // canvas的な
+	vec2d_64 a;
+	vec2d_64 map;
 
 	if (argc == 2)
 	{
 		mlx_ptr = mlx_init(); // 一番最初に必要
 		mlx_win = mlx_new_window(mlx_ptr, 600, 600, argv[1]);
 		mlx_clear_window(mlx_ptr, mlx_win);
-		for (int i = 0; i< 10; i++){
-			mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
-		}
-		for (int i = 0; i< 10; i++){
-			mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
-		}
-		mlx_pixel_put(mlx_ptr, mlx_win, 10, 10000, RED);
-		draw_line(mlx_ptr, mlx_win, 10,10, 100, 100);
+		// for (int i = 0; i< 10; i++){
+		// 	mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
+		// }
+		// for (int i = 0; i< 10; i++){
+		// 	mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
+		// }
+		// mlx_pixel_put(mlx_ptr, mlx_win, 10, 10000, RED);
+
+		alocate_memory_for_map(&map, "maps/test_maps/42.fdf");
+		a = calc_map(map);
+		put_vec2d_elem_i32x2(mlx_ptr, mlx_win, a);
+		free(a);
+		free(map);
+
+		//draw_line(mlx_ptr, mlx_win, 10,10, 100, 100);
+
 		mlx_hook(mlx_win, KeyPress, KeyPressMask, event_handler, mlx_ptr);
 		mlx_loop(mlx_ptr);
 	}else {
