@@ -24,7 +24,6 @@
 #define Z_COLOR_WORD_MAX_LENGTH 23
 typedef char t_z_color_word[Z_COLOR_WORD_MAX_LENGTH];
 
-
 /// 返り値はエラーコード
 /// 
 /// char *str           一行分のデータ
@@ -198,6 +197,9 @@ enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
         *arr = init_vec2d_64(decode_uint_x(mapsize), decode_uint_y(mapsize)); // allocation occureda
 	load_map(*arr, filename);
 	if (*arr == NULL)
-		printf("Error!");
+	{
+		printf("Error!\n");
+		return (e_result_allocation_err);
+	}
 	return (e_result_ok);
 }

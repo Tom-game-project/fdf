@@ -51,3 +51,8 @@ int32_t t_i32x2_dot(t_i32x2 a,t_i32x2 b)
 	);
 }
 
+/// 定数倍
+t_i32x2 t_i32x2_scalar(int32_t a, t_i32x2 b)
+{
+	return (encode_i32x2(a * decode_int_x(b), a * decode_int_y(b)));
+}

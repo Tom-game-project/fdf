@@ -2,6 +2,7 @@
 NAME		=	fdf
 MAIN_SRC	=	src/fdf.c
 SRCS		=	src/draw/draw_line.c\
+			src/draw/draw_map.c\
 			src/data/i32u32.c\
 			src/data/u32x2.c\
 			src/data/i32x2.c\
@@ -44,8 +45,8 @@ all: $(NAME)
 
 test: $(TEST)
 	$(SHA) $(TEST)
-	./$(TEST)
-	#$(VALGRIND) $(VFLAGS) ./$(TEST)
+	#./$(TEST)
+	$(VALGRIND) $(VFLAGS) ./$(TEST)
 
 $(TEST): $(TEST_OBJS) $(OBJS)
 	$(CC) $(CFLAGS) $(TEST_OBJS) $(OBJS) $(LIBX_FLAGS) -o $(TEST)

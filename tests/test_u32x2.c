@@ -6,6 +6,12 @@
 // fdf loader
 #include "../src/fdf_loader/loader.h"
 
+
+// draw
+//
+
+#include "../src/draw/draw.h"
+
 #include <stdint.h>
 #include <stdio.h>
 #include <limits.h>
@@ -78,6 +84,23 @@ int print_vec2d_elem_i32u64(vec2d_64 arr)
 	}
 	return (0);
 }
+
+int print_vec2d_elem_i32x2(vec2d_64 arr)
+{
+	t_64_elem tmp;
+
+	for (uint32_t y = 0; y < decode_uint_y(get_shape(arr)); y++)
+	{
+		for (uint32_t x = 0; x < decode_uint_x(get_shape(arr)); x++)
+		{
+			tmp.i32x2 = get_vec2d_elem(arr, x, y).i32x2;
+			print_i32x2(tmp.i32x2);
+		}
+		printf("\n");
+	}
+	return (0);
+}
+
 
 // #[test]
 int test00()
@@ -403,9 +426,9 @@ int test12 ()
 int test13()
 {
 	printf(
-			CYANSTR
-			"色々なファイルに形式に対応させられているかテスト"
-			RESETSTR
+		CYANSTR
+		"色々なファイルに形式に対応させられているかテスト"
+		RESETSTR
 	);
 	vec2d_64 arr;
 	enum e_result err_code;
@@ -432,7 +455,25 @@ int test13()
 	return (0);
 }
 
+int test14()
+{
+	printf(
+		CYANSTR
+		"スクリーン座標変換テスト\n"
+		RESETSTR
+	);
+	vec2d_64 a;
+	vec2d_64 map;
 
+	alocate_memory_for_map(&map, "maps/test_maps/42.fdf");
+	a = calc_map(map);
+	print_vec2d_elem_i32x2(a);
+	free(a);
+	free(map);
+	return (0);
+}
+
+/*
 int main()
 {
 	int (*test[TESTLENGTH])() = {
@@ -475,10 +516,9 @@ int main()
 	}
 	return (code);
 }
+*/
 
-/*
 int main()
 {
 	return test14();
 }
-*/

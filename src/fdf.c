@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "../minilibx-linux/mlx.h"
+#include "data/i32x2.h"
 #include "draw/draw.h"
 
 // test modules 
@@ -25,6 +26,23 @@ int event_handler(int key, void *mlx)
 	return (0);
 }
 
+int print_vec2d_elem_i32x2(void *mlx_ptr, void *win_ptr, vec2d_64 arr)
+{
+	t_64_elem tmp;
+
+	for (uint32_t y = 0; y < decode_uint_y(get_shape(arr)); y++)
+	{
+		for (uint32_t x = 0; x < decode_uint_x(get_shape(arr)); x++)
+		{
+			tmp.i32x2 = get_vec2d_elem(arr, x, y).i32x2;
+			// print_i32x2(tmp.i32x2);
+			mlx_pixel_put(mlx_ptr, win_ptr, decode_int_x(tmp.i32x2), decode_int_y(tmp.i32x2), RED);
+		}
+		printf("\n");
+	}
+	return (0);
+}
+
 int main(int argc, char *argv[])
 {
 	void *mlx_ptr;
@@ -33,7 +51,7 @@ int main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		mlx_ptr = mlx_init(); // 一番最初に必要
-		mlx_win = mlx_new_window(mlx_ptr, 300, 300, argv[1]);
+		mlx_win = mlx_new_window(mlx_ptr, 600, 600, argv[1]);
 		mlx_clear_window(mlx_ptr, mlx_win);
 		for (int i = 0; i< 10; i++){
 			mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
