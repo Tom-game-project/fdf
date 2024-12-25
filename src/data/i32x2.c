@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 #include <limits.h>
 #include "i32x2.h"
 
@@ -50,6 +51,16 @@ int32_t t_i32x2_dot(t_i32x2 a,t_i32x2 b)
 		decode_int_y(a) * decode_int_y(b)
 	);
 }
+
+bool t_i32x2_eq(t_i32x2 a,t_i32x2 b)
+{
+	return (
+		decode_int_x(a) == decode_int_x(b) &&
+		decode_int_y(a) == decode_int_y(b)
+	);
+}
+
+
 
 /// 定数倍
 t_i32x2 t_i32x2_scalar(int32_t a, t_i32x2 b)

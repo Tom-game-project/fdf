@@ -66,8 +66,7 @@ void draw_line2(t_mlx_ptr_win data, t_line line)
 		       	RED
 		);
 		if (
-				decode_int_x(line.start) == decode_int_x(line.end) &&
-				decode_int_y(line.start) == decode_int_y(line.end)
+			t_i32x2_eq(line.start, line.end)
 		)
 			break;
 		if (2 * err > -decode_int_y(d)) {

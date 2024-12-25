@@ -2,6 +2,7 @@
 #define I32X2_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 // # t_i32x2
 /// |-------64bit-------|
@@ -19,5 +20,6 @@ t_i32x2 t_i32x2_sub(t_i32x2 a, t_i32x2 b);
 t_i32x2 t_i32x2_mul(t_i32x2 a, t_i32x2 b);
 int32_t t_i32x2_dot(t_i32x2 a,t_i32x2 b);
 t_i32x2 t_i32x2_scalar(int32_t a, t_i32x2 b);
+bool t_i32x2_eq(t_i32x2 a,t_i32x2 b);
 
 #endif
