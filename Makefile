@@ -8,6 +8,7 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/i32x2.c\
 			src/data/u8x4.c\
 			src/data/u16x4.c\
+			src/data/print_data.c\
 			src/data/vec2d_64.c\
 			src/fdf_loader/loader.c\
 			src/fdf_loader/gnl/get_next_line.c\

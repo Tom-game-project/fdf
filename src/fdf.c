@@ -5,6 +5,8 @@
 
 #include "../minilibx-linux/mlx.h"
 #include "data/i32x2.h"
+#include "data/u16x4.h"
+#include "data/u32x2.h"
 #include "draw/draw.h"
 #include "fdf_loader/loader.h"
 
@@ -78,6 +80,10 @@ int main(int argc, char *argv[])
 			(t_line) {
 				encode_i32x2(0,0),	
 				encode_i32x2(100,50)
+			},
+			(t_colordiff) {
+				conv_u8x4_to_u16x4(RED),
+				conv_u8x4_to_u16x4(BLUE)
 			}
 		);
 
