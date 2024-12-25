@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include "../../minilibx-linux/mlx.h"
@@ -57,7 +58,8 @@ void draw_line2(t_mlx_ptr_win data, t_line line)
 	);
 	int err = decode_int_x(d) - decode_int_y(d);
 
-	while (true) {
+	while (true)
+	{
 		mlx_pixel_put(
 			data.mlx_ptr,
 		       	data.mlx_win,
@@ -65,18 +67,19 @@ void draw_line2(t_mlx_ptr_win data, t_line line)
 		       	decode_int_y(line.start),
 		       	RED
 		);
-		if (
-			t_i32x2_eq(line.start, line.end)
-		)
+		if (t_i32x2_eq(line.start, line.end))
+		{
+			printf("loop in draw_line2 %d %d\n",decode_int_x(d), decode_int_y(d));
 			break;
-		if (2 * err > -decode_int_y(d)) {
+		}
+		if (2 * err > -decode_int_y(d))
+		{
 		    err -= decode_int_y(d);
-		    //x0 += sx;
 		    line.start = t_i32x2_add(line.start, encode_i32x2(decode_int_x(s), 0));
 		}
-		if (2 * err < decode_int_x(d)) {
+		if (2 * err < decode_int_x(d))
+		{
 		    err += decode_int_x(d);
-		    // y0 += sy;
 		    line.start = t_i32x2_add(line.start, encode_i32x2(0, decode_int_y(s)));
 		}
 	}

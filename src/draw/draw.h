@@ -27,6 +27,7 @@ struct s_line
 	t_i32x2 end;
 };
 
+
 void draw_line(void *mlx_ptr, void *mlx_win, int x0, int y0, int x1, int y1);
 vec2d_64 calc_map(vec2d_64 map);
 void draw_line2(t_mlx_ptr_win data, t_line line);

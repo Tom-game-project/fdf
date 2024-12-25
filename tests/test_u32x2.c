@@ -1,11 +1,12 @@
 #include "../src/data/i32u32.h"
 #include "../src/data/u32x2.h"
 #include "../src/data/i32x2.h"
+#include "../src/data/u8x4.h"
+#include "../src/data/u16x4.h"
 #include "../src/data/vec2d_64.h"
 
 // fdf loader
 #include "../src/fdf_loader/loader.h"
-
 
 // draw
 //
@@ -66,6 +67,26 @@ int print_i32x2(t_i32x2 data)
 int print_i32u32(t_i32u32 data)
 {
 	return printf("(%d, %u) ", decode_iu_x(data), decode_iu_y(data));
+}
+
+int print_u16x4(t_u16x4 data)
+{
+	return printf("t_u16x4(%d %d %d %d)\n", 
+		decode_u16x4_a(data),
+		decode_u16x4_b(data),
+		decode_u16x4_c(data),
+		decode_u16x4_d(data)
+	);
+}
+
+int print_u8x4(t_u8x4 data)
+{
+	return printf("t_u8x4(%d %d %d %d)\n", 
+		decode_u8x4_a(data),
+		decode_u8x4_b(data),
+		decode_u8x4_c(data),
+		decode_u8x4_d(data)
+	);
 }
 
 /// i32u32を格納した二次元配列を表示します
@@ -473,6 +494,43 @@ int test14()
 	return (0);
 }
 
+
+int test15()
+{
+	t_u8x4 a;
+	t_u8x4 b;
+	t_u8x4 c;
+
+	a = encode_u8x4(1,2,3,4);
+	b = encode_u8x4(1,2,3,4);
+	c = encode_u8x4(4,3,2,1);
+	print_u8x4(a);
+	a = t_u8x4_add(
+		a,
+		t_u8x4_mul(b, c)
+	);
+	print_u8x4(a);
+	return (0);
+}
+
+int test16()
+{
+	t_u16x4 a;
+	t_u16x4 b;
+	t_u16x4 c;
+
+	a = encode_u16x4(1,2,3,4);
+	b = encode_u16x4(1,2,3,4);
+	c = encode_u16x4(4,3,2,1);
+	print_u16x4(a);
+	a = t_u16x4_add(
+		a,
+		t_u16x4_mul(b, c)
+	);
+	print_u16x4(a);
+	return (0);
+}
+
 /*
 int main()
 {
@@ -520,5 +578,5 @@ int main()
 
 int main()
 {
-	return test14();
+	return test16();
 }

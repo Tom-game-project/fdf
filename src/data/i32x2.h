@@ -20,6 +20,7 @@ t_i32x2 t_i32x2_sub(t_i32x2 a, t_i32x2 b);
 t_i32x2 t_i32x2_mul(t_i32x2 a, t_i32x2 b);
 int32_t t_i32x2_dot(t_i32x2 a,t_i32x2 b);
 t_i32x2 t_i32x2_scalar(int32_t a, t_i32x2 b);
+int32_t t_i32x2_max(t_i32x2 a);
 bool t_i32x2_eq(t_i32x2 a,t_i32x2 b);
 
 #endif

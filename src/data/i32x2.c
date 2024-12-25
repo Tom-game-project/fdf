@@ -52,6 +52,15 @@ int32_t t_i32x2_dot(t_i32x2 a,t_i32x2 b)
 	);
 }
 
+int32_t t_i32x2_max(t_i32x2 a)
+{
+	if (decode_int_x(a) < decode_int_y(a))
+		return (decode_int_y(a));
+	else
+		return (decode_int_x(a));
+}
+
+
 bool t_i32x2_eq(t_i32x2 a,t_i32x2 b)
 {
 	return (
