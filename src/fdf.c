@@ -37,11 +37,15 @@ int put_vec2d_elem_i32x2(void *mlx_ptr, void *win_ptr, vec2d_64 arr)
 		while (x < decode_uint_x(get_shape(arr)))
 		{
 			tmp.i32x2 = get_vec2d_elem(arr, x, y).i32x2;
-			// print_i32x2(tmp.i32x2);
-			mlx_pixel_put(mlx_ptr, win_ptr, decode_int_x(tmp.i32x2) + 300, decode_int_y(tmp.i32x2) + 300, RED);
+			mlx_pixel_put(
+				mlx_ptr,
+				win_ptr, 
+				decode_int_x(tmp.i32x2) + 300,
+			       	decode_int_y(tmp.i32x2) + 300,
+			       	RED
+				);
 			x += 1;
 		}
-		printf("\n");
 		y += 1;
 	}
 	return (0);
@@ -59,34 +63,28 @@ int main(int argc, char *argv[])
 		mlx_ptr = mlx_init(); // 一番最初に必要
 		mlx_win = mlx_new_window(mlx_ptr, 600, 600, argv[1]);
 		mlx_clear_window(mlx_ptr, mlx_win);
-		// for (int i = 0; i< 10; i++){
-		// 	mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
-		// }
-		// for (int i = 0; i< 10; i++){
-		// 	mlx_pixel_put(mlx_ptr, mlx_win, 10, i, RED);
-		// }
-		// mlx_pixel_put(mlx_ptr, mlx_win, 10, 10000, RED);
-
+		// 描画に必要な処理
 		alocate_memory_for_map(&map, "maps/test_maps/42.fdf");
 		a = calc_map(map);
 		put_vec2d_elem_i32x2(mlx_ptr, mlx_win, a);
 		free(a);
 		free(map);
 
-		//draw_line(mlx_ptr, mlx_win, 10,10, 100, 100);
 		draw_line2(
 			(t_mlx_ptr_win) {
 				mlx_ptr,
 				mlx_win
 			},
-			encode_i32x2(0,0),	
-			encode_i32x2(100,50)
+			(t_line) {
+				encode_i32x2(0,0),	
+				encode_i32x2(100,50)
+			}
 		);
 
 		mlx_hook(mlx_win, KeyPress, KeyPressMask, event_handler, mlx_ptr);
 		mlx_loop(mlx_ptr);
 	}else {
-		exit(1);
+		return (1);
 	}
 }
 
