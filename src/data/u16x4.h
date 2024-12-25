@@ -2,7 +2,7 @@
 #define  U16X4_H
 
 #include <stdint.h>
-
+#include "u8x4.h"
 
 /// # t_u8x4
 /// |------------ 64bit ------------|
@@ -23,6 +23,10 @@ uint16_t decode_u16x4_b(t_u16x4 data);
 uint16_t decode_u16x4_c(t_u16x4 data);
 uint16_t decode_u16x4_d(t_u16x4 data);
 
+
+// conv
+t_u8x4 conv_u16x4_to_u8x4(t_u16x4 data);
+t_u16x4 conv_u8x4_to_u16x4(t_u8x4 data);
 //
 
 t_u16x4 t_u16x4_add(t_u16x4 a, t_u16x4 b);

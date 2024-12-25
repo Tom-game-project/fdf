@@ -518,6 +518,7 @@ int test16()
 	t_u16x4 a;
 	t_u16x4 b;
 	t_u16x4 c;
+	t_u8x4 a8;
 
 	a = encode_u16x4(1,2,3,4);
 	b = encode_u16x4(1,2,3,4);
@@ -528,6 +529,14 @@ int test16()
 		t_u16x4_mul(b, c)
 	);
 	print_u16x4(a);
+	a = t_u16x4_mul(a, encode_u16x4(
+				256,
+				256,
+				256,
+				256));
+	a8 = conv_u16x4_to_u8x4(a);
+	print_u8x4(a8);
+	printf("hex: %x\n", a8);
 	return (0);
 }
 
