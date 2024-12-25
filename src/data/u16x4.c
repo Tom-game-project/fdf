@@ -158,15 +158,6 @@ t_u16x4 t_u16x4_cal_color(t_u16x4 a, t_u16x4 b, t_u8x4 map)
 
 	func[0] = int16_add;
 	func[1] = int16_sub;
-	print_u16x4(
-		encode_u16x4(
-			func[decode_u8x4_a(map)](decode_u16x4_a(a), decode_u16x4_a(b)),
-			func[decode_u8x4_b(map)](decode_u16x4_b(a), decode_u16x4_b(b)),
-			func[decode_u8x4_c(map)](decode_u16x4_c(a), decode_u16x4_c(b)),
-			func[decode_u8x4_d(map)](decode_u16x4_d(a), decode_u16x4_d(b))
-		)
-
-			);
 	return (
 		encode_u16x4(
 			func[decode_u8x4_a(map)](decode_u16x4_a(a), decode_u16x4_a(b)),

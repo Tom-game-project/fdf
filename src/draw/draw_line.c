@@ -1,11 +1,9 @@
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include "../../minilibx-linux/mlx.h"
 #include "../data/u16x4.h"
-#include "../data/print_data.h"
 #include "draw.h"
 
 /*
@@ -13,10 +11,6 @@
  *
  */
 
-int draw_line_segment()
-{
-	return (0);
-}
 
 static int abs(int a)
 {
