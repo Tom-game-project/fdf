@@ -27,16 +27,22 @@ int event_handler(int key, void *mlx)
 int put_vec2d_elem_i32x2(void *mlx_ptr, void *win_ptr, vec2d_64 arr)
 {
 	t_64_elem tmp;
+	uint32_t y;
+	uint32_t x;
 
-	for (uint32_t y = 0; y < decode_uint_y(get_shape(arr)); y++)
+	y = 0;
+	while (y < decode_uint_y(get_shape(arr)))
 	{
-		for (uint32_t x = 0; x < decode_uint_x(get_shape(arr)); x++)
+		x = 0;
+		while (x < decode_uint_x(get_shape(arr)))
 		{
 			tmp.i32x2 = get_vec2d_elem(arr, x, y).i32x2;
 			// print_i32x2(tmp.i32x2);
 			mlx_pixel_put(mlx_ptr, win_ptr, decode_int_x(tmp.i32x2) + 300, decode_int_y(tmp.i32x2) + 300, RED);
+			x += 1;
 		}
 		printf("\n");
+		y += 1;
 	}
 	return (0);
 }
@@ -68,6 +74,14 @@ int main(int argc, char *argv[])
 		free(map);
 
 		//draw_line(mlx_ptr, mlx_win, 10,10, 100, 100);
+		draw_line2(
+			(t_mlx_ptr_win) {
+				mlx_ptr,
+				mlx_win
+			},
+			encode_i32x2(0,0),	
+			encode_i32x2(100,50)
+		);
 
 		mlx_hook(mlx_win, KeyPress, KeyPressMask, event_handler, mlx_ptr);
 		mlx_loop(mlx_ptr);

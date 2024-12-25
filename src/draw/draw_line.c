@@ -12,14 +12,6 @@
  */
 
 
-typedef struct s_mlx_ptr_win t_mlx_ptr_win;
-struct s_mlx_ptr_win
-{
-	void *mlx_ptr;
-	void *mlx_win;
-};
-
-
 int draw_line_segment()
 {
 	return (0);
