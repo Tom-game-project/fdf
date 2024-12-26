@@ -80,9 +80,3 @@ vec2d_64 calc_map(vec2d_64 map)
 	}
 	return (rarr);
 }
-
-int draw_map(vec2d_64 map)
-{
-	(void) map;
-	return (0);
-}
