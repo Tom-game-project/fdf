@@ -194,7 +194,7 @@ enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
 	mapsize = get_mapsize(filename);
 	if (decode_int_x(mapsize) == -1)
 		return (e_result_load_err);
-        *arr = init_vec2d_64(decode_uint_x(mapsize), decode_uint_y(mapsize)); // allocation occureda
+        *arr = init_vec2d_64(decode_uint_x(mapsize), decode_uint_y(mapsize));
 	load_map(*arr, filename);
 	if (*arr == NULL)
 	{

@@ -8,6 +8,7 @@
 
 #define HEX_CHAR_TABLE_LENGTH 16
 #define HEX_CHAR_TABLE "0123456789abcdef"
+#define LHEX_CHAR_TABLE "0123456789ABCDEF"
 
 /// # loader_helper01
 /// 
@@ -32,6 +33,14 @@ uint32_t get_hex_index(char c)
 	int i;
 
 	set_str(hex_table, HEX_CHAR_TABLE);
+	i = 0;
+	while (i < HEX_CHAR_TABLE_LENGTH)
+	{
+		if (c == hex_table[i])
+			return (i);
+		i += 1;
+	}
+	set_str(hex_table, LHEX_CHAR_TABLE);
 	i = 0;
 	while (i < HEX_CHAR_TABLE_LENGTH)
 	{

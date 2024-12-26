@@ -2,11 +2,16 @@
 #include <stdint.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
+#include <stdio.h>
 #include "../../minilibx-linux/mlx.h"
 #include "../data/u16x4.h"
 #include "draw.h"
 
 #include "../data/print_data.h"
+
+
+#define RED 0xFF0000
+
 
 /*
  * 線を描画するための関数です。
@@ -118,11 +123,13 @@ void draw_line2(t_mlx_ptr_win data, t_line line, t_colordiff color_pair)
 
 
 
-void draw_line3(void *mlx_ptr, void *mlx_win, t_line line)
+void draw_line3(void *mlx_ptr, void *mlx_win, t_line line, t_colordiff color_pair)
 {
 	t_i32x2 d;
 	t_i32x2 s;
 	int32_t err;
+	t_u16x4 color_step;
+	t_u8x4 color_map;
 
 	d = encode_i32x2(
 		//abs(x0 - x1),
@@ -130,7 +137,6 @@ void draw_line3(void *mlx_ptr, void *mlx_win, t_line line)
 		//abs(y0 - y1) 
 		abs(decode_int_y(line.start) - decode_int_y(line.end))
 	);
-
 	s = encode_i32x2(
 		// 2 * (x0 < x1) - 1,
 		2 * (decode_int_x(line.start) < decode_int_x(line.end)) - 1,
@@ -138,10 +144,22 @@ void draw_line3(void *mlx_ptr, void *mlx_win, t_line line)
 		2 * (decode_int_y(line.start) < decode_int_y(line.end)) - 1
 	);
 	err = decode_int_x(d) - decode_int_y(d);
+	color_step = t_u16x4_map(
+		t_u16x4_div_scalar(
+			t_u16x4_map(color_pair.start, color_pair.end, int16_my_func)
+			,
+			(int16_t) t_i32x2_max(d) // キャスト変換とエラーの処理が必要
+		), 
+		0,
+	       shift8_func
+	);
+	color_map = create_u16x4_bool_map(color_pair.start, color_pair.end, int16_lt);
 	while (true) 
 	{
-		mlx_pixel_put(mlx_ptr, mlx_win, decode_int_x(line.start), decode_int_y(line.start), 0xff);
-		if (decode_int_x(line.start) == decode_int_x(line.end) && decode_int_y(line.start) == decode_int_y(line.end)) break;
+		mlx_pixel_put(mlx_ptr, mlx_win, decode_int_x(line.start), decode_int_y(line.start), conv_u16x4_to_u8x4(color_pair.start));
+		color_pair.start = t_u16x4_cal_color(color_pair.start, color_step, color_map);
+		if (decode_int_x(line.start) == decode_int_x(line.end) && decode_int_y(line.start) == decode_int_y(line.end))
+			break;
 		int e2 = 2 * err;
 		if (e2 > -decode_int_y(d)) {
 			err -= decode_int_y(d);
