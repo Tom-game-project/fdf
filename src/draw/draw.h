@@ -24,15 +24,15 @@ struct s_mlx_ptr_win
 typedef struct s_line t_line;
 struct s_line
 {
-	t_i32x2 start;
-	t_i32x2 end;
+	t_i32x2 s; // start
+	t_i32x2 e; // end
 };
 
 typedef struct s_colordiff t_colordiff;
 struct s_colordiff
 {
-	t_u16x4 start;
-	t_u16x4 end;
+	t_u16x4 s; // start
+	t_u16x4 e; // end
 };
 
 vec2d_64 calc_map(vec2d_64 map);

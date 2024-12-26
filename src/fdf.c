@@ -39,8 +39,8 @@ int put_line(void *mlx_ptr, void *win_ptr, vec2d_64 arr, vec2d_64 zcolor)
 			(
 				mlx_ptr, win_ptr,
 				(t_line) {
-					t_i32x2_add(get_vec2d_elem(arr, x, y).i32x2, encode_i32x2(300, 300)),
-					t_i32x2_add(get_vec2d_elem(arr, x + 1, y).i32x2, encode_i32x2(300, 300))
+					t_i32x2_add(get_vec2d_elem(arr, x, y).i32x2, en_i32x2(300, 300)),
+					t_i32x2_add(get_vec2d_elem(arr, x + 1, y).i32x2, en_i32x2(300, 300))
 				},
 				(t_colordiff) {	
 					conv_u8x4_to_u16x4(
@@ -53,8 +53,8 @@ int put_line(void *mlx_ptr, void *win_ptr, vec2d_64 arr, vec2d_64 zcolor)
 			(
 				mlx_ptr, win_ptr,
 				(t_line) {
-					t_i32x2_add(get_vec2d_elem(arr, x, y).i32x2, encode_i32x2(300, 300)),
-					t_i32x2_add(get_vec2d_elem(arr, x, y + 1).i32x2, encode_i32x2(300, 300))
+					t_i32x2_add(get_vec2d_elem(arr, x, y).i32x2, en_i32x2(300, 300)),
+					t_i32x2_add(get_vec2d_elem(arr, x, y + 1).i32x2, en_i32x2(300, 300))
 				},
 				(t_colordiff) {	
 					conv_u8x4_to_u16x4(

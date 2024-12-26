@@ -2,26 +2,15 @@
 #include <stdint.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
-#include <stdio.h>
 #include "../../minilibx-linux/mlx.h"
 #include "../data/u16x4.h"
 #include "draw.h"
-
-#include "../data/print_data.h"
-
-
-#define RED 0xFF0000
-
+#include "draw_line_helper.h"
 
 /*
  * 線を描画するための関数です。
  *
  */
-
-static int abs(int a)
-{
-	return (a * (((0 < a) << 1) - 1));
-}
 
 //void draw_line(void *mlx_ptr, void *mlx_win, int x0, int y0, int x1, int y1) 
 //{
@@ -47,25 +36,6 @@ static int abs(int a)
 //    }
 //}
 
-static bool int16_lt(int16_t a, int16_t b)
-{
-	return (a < b);
-}
-
-static int16_t int16_my_func(int16_t a, int16_t b)
-{
-	//if (a < b)
-	//	return (b - a);
-	//else
-	//	return (a - b);
-	return (abs(a - b));
-}
-
-static int16_t shift8_func(int16_t a, int16_t b)
-{
-	(void) b;
-	return (a << 8);
-}
 
 typedef struct s_color_info t_color_info;
 struct s_color_info
@@ -74,31 +44,42 @@ struct s_color_info
 	t_u8x4 m;
 };
 
-///
-void draw_line(void *mlx_ptr, void *mlx_win, t_line l, t_colordiff cp)
+/// de_int_x
+static int32_t x(t_i32x2 a)
 {
-	t_i32x2 d,s,e;
-	t_color_info ci;
+	return (de_int_x(a));
+}
 
-	d = encode_i32x2( abs(decode_int_x(l.start) - decode_int_x(l.end)),
-		abs(decode_int_y(l.start) - decode_int_y(l.end)));
-	s = encode_i32x2( 2 * (decode_int_x(l.start) < decode_int_x(l.end)) - 1,
-		2 * (decode_int_y(l.start) < decode_int_y(l.end)) - 1);
-	e = encode_i32x2(decode_int_x(d) - decode_int_y(d), 0);
-	ci.s = t_u16x4_map(t_u16x4_div_scalar(t_u16x4_map(cp.start, cp.end, int16_my_func),
-		(int16_t) t_i32x2_max(d)), 0, shift8_func);
-	ci.m = create_u16x4_bool_map(cp.start, cp.end, int16_lt);
+/// de_int_y
+static int32_t y(t_i32x2 a)
+{
+	return (de_int_y(a));
+}
+
+///
+void	draw_line(void *mlx_ptr, void *mlx_win, t_line l, t_colordiff cp)
+{
+	t_color_info	ci;
+
+	t_i32x2 *(dummy), d, s, e;
+	(void) dummy;
+	d = en_i32x2(abs(x(l.s) - x(l.e)), abs(y(l.s) - y(l.e)));
+	s = en_i32x2(2 * (x(l.s) < x(l.e)) - 1, 2 * (y(l.s) < y(l.e)) - 1);
+	e = en_i32x2(x(d) - y(d), 0);
+	ci.s = t_u16x4_map(t_u16x4_div_scalar(t_u16x4_map(cp.s, cp.e, int16mf), \
+	(int16_t) t_i32x2_max(d)), 0, shift8_func);
+	ci.m = create_u16x4_bool_map(cp.s, cp.e, int16_lt);
 	while (true)
 	{
-		mlx_pixel_put(mlx_ptr, mlx_win, decode_int_x(l.start),
-			decode_int_y(l.start), conv_u16x4_to_u8x4(cp.start));
-		cp.start = t_u16x4_cal_color(cp.start, ci.s, ci.m);
-		if (t_i32x2_eq(l.start, l.end))
-			break;
-		e = encode_i32x2(decode_int_x(e), 2 * decode_int_x(e));
-		e = t_i32x2_sub(e, encode_i32x2(decode_int_y(d) * (decode_int_y(e) > -decode_int_y(d)),0));
-		l.start = t_i32x2_add(l.start, encode_i32x2(decode_int_x(s) * (decode_int_y(e) > -decode_int_y(d)), 0));
-		e = t_i32x2_add(e, encode_i32x2(decode_int_x(d) * (decode_int_y(e) < decode_int_x(d)),0));
-		l.start = t_i32x2_add(l.start, encode_i32x2(0, decode_int_y(s) * (decode_int_y(e) < decode_int_x(d))));
+		mlx_pixel_put(mlx_ptr, mlx_win, x(l.s),
+			y(l.s), conv_u16x4_to_u8x4(cp.s));
+		cp.s = t_u16x4_cal_color(cp.s, ci.s, ci.m);
+		if (t_i32x2_eq(l.s, l.e))
+			break ;
+		e = en_i32x2(x(e), 2 * x(e));
+		e = t_i32x2_sub(e, en_i32x2(y(d) * (y(e) > -y(d)), 0));
+		l.s = t_i32x2_add(l.s, en_i32x2(x(s) * (y(e) > -y(d)), 0));
+		e = t_i32x2_add(e, en_i32x2(x(d) * (y(e) < x(d)), 0));
+		l.s = t_i32x2_add(l.s, en_i32x2(0, y(s) * (y(e) < x(d))));
 	}
 }

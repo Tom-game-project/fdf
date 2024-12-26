@@ -87,21 +87,21 @@ int test00()
 	printf("u_l(%u, %u)\n", decode_uint_x(u_l), decode_uint_y(u_l));
 	printf("u_ll(%u, %u)\n", decode_uint_x(u_ll), decode_uint_y(u_ll));
 
-	t_i32x2 i_a = encode_i32x2(0, -20);
-	t_i32x2 i_b = encode_i32x2(-12, -42);
+	t_i32x2 i_a = en_i32x2(0, -20);
+	t_i32x2 i_b = en_i32x2(-12, -42);
 	t_i32x2 i_c;
 
-	printf("i_a(%d, %d)\n", decode_int_x(i_a), decode_int_y(i_a));
-	printf("i_b(%d, %d)\n", decode_int_x(i_b), decode_int_y(i_b));
+	printf("i_a(%d, %d)\n", de_int_x(i_a), de_int_y(i_a));
+	printf("i_b(%d, %d)\n", de_int_x(i_b), de_int_y(i_b));
 	// 期待通りに動かない例
 	i_c = i_a + i_b;
-	printf("i_c(%d, %d) = i_a + i_b\n", decode_int_x(i_c), decode_int_y(i_c));
+	printf("i_c(%d, %d) = i_a + i_b\n", de_int_x(i_c), de_int_y(i_c));
 
 	i_c = i_a - i_b;
-	printf("i_c(%d, %d) = i_a - i_b\n", decode_int_x(i_c), decode_int_y(i_c));
+	printf("i_c(%d, %d) = i_a - i_b\n", de_int_x(i_c), de_int_y(i_c));
 
 	i_c = i_a * -3;
-	printf("i_c(%d, %d) = i_a * -3\n", decode_int_x(i_c), decode_int_y(i_c));
+	printf("i_c(%d, %d) = i_a * -3\n", de_int_x(i_c), de_int_y(i_c));
 
 	return (0);
 }
@@ -168,12 +168,12 @@ int test03()
 			"t_i32x2の演算の動作チェック\n"
 			RESETSTR
 	);
-	t_i32x2 a = encode_i32x2(-2, 3);
-	t_i32x2 b = encode_i32x2(5, -7);
+	t_i32x2 a = en_i32x2(-2, 3);
+	t_i32x2 b = en_i32x2(5, -7);
 
-	if (t_i32x2_add(a, b) != encode_i32x2(3, -4)) return (1);
-	if (t_i32x2_sub(a, b) != encode_i32x2(-7, 10)) return (1);
-	if (t_i32x2_mul(a, b) != encode_i32x2(-10, -21)) return (1);
+	if (t_i32x2_add(a, b) != en_i32x2(3, -4)) return (1);
+	if (t_i32x2_sub(a, b) != en_i32x2(-7, 10)) return (1);
+	if (t_i32x2_mul(a, b) != en_i32x2(-10, -21)) return (1);
 	return (0);
 }
 
@@ -301,15 +301,15 @@ int test09()
 			RESETSTR
 	);
 	map_size = get_mapsize("./maps/test_maps/42.fdf");
-	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	printf("width, height = %d, %d\n", de_int_x(map_size), de_int_y(map_size));
 	map_size = get_mapsize("./maps/test_maps/10-2.fdf");
-	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	printf("width, height = %d, %d\n", de_int_x(map_size), de_int_y(map_size));
 	map_size = get_mapsize("./maps/test_maps/10-70.fdf");
-	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	printf("width, height = %d, %d\n", de_int_x(map_size), de_int_y(map_size));
 	map_size = get_mapsize("./maps/test_maps/100-6.fdf");
-	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	printf("width, height = %d, %d\n", de_int_x(map_size), de_int_y(map_size));
 	map_size = get_mapsize("./maps/test_maps/20-60.fdf");
-	printf("width, height = %d, %d\n", decode_int_x(map_size), decode_int_y(map_size));
+	printf("width, height = %d, %d\n", de_int_x(map_size), de_int_y(map_size));
 	return (0);
 }
 

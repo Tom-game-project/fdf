@@ -14,7 +14,7 @@ int print_u32x2(t_u32x2 data)
 
 int print_i32x2(t_i32x2 data)
 {
-	return printf("(%d, %d) ", decode_int_x(data) ,decode_int_y(data));
+	return printf("(%d, %d) ", de_int_x(data) ,de_int_y(data));
 }
 
 int print_i32u32(t_i32u32 data)

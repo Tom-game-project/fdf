@@ -74,21 +74,21 @@ t_i32x2 get_mapsize(char *filename)
 	{
 		// TODO
 		printf("failed to open file\n");
-		return (encode_i32x2(-1, e_result_io_err));
+		return (en_i32x2(-1, e_result_io_err));
 	}
-	counter = encode_i32x2(0, 0);
+	counter = en_i32x2(0, 0);
 	while (true)
 	{
 		// printf("buffer size%d\n", BUFFER_SIZE);
 		buf = get_next_line(fd);
 		if (buf == NULL)
 			break ;
-		if (decode_int_x(counter) != 0 && \
-		decode_int_x(counter) != count_word(buf,is_space))
-			return (free(buf), close(fd), encode_i32x2(-1, e_result_load_err));
+		if (de_int_x(counter) != 0 && \
+		de_int_x(counter) != count_word(buf,is_space))
+			return (free(buf), close(fd), en_i32x2(-1, e_result_load_err));
 		else if (count_word(buf,is_space) != 0)
-			counter = encode_i32x2(count_word(buf,is_space), decode_int_y(counter));
-		counter = t_i32x2_add(counter, encode_i32x2(0, 1));
+			counter = en_i32x2(count_word(buf,is_space), de_int_y(counter));
+		counter = t_i32x2_add(counter, en_i32x2(0, 1));
 		free(buf);
 	}
 	return (close(fd), counter);
@@ -192,7 +192,7 @@ enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
 	t_u32x2 mapsize;
 
 	mapsize = get_mapsize(filename);
-	if (decode_int_x(mapsize) == -1)
+	if (de_int_x(mapsize) == -1)
 		return (e_result_load_err);
         *arr = init_vec2d_64(decode_uint_x(mapsize), decode_uint_y(mapsize));
 	load_map(*arr, filename);
