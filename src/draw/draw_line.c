@@ -118,7 +118,7 @@ void draw_line2(t_mlx_ptr_win data, t_line line, t_colordiff color_pair)
 
 
 
-void draw_line3(void *mlx_ptr, void *mlx_win, t_i32x2 p0, t_i32x2 p1) 
+void draw_line3(void *mlx_ptr, void *mlx_win, t_line line)
 {
 	t_i32x2 d;
 	t_i32x2 s;
@@ -126,32 +126,32 @@ void draw_line3(void *mlx_ptr, void *mlx_win, t_i32x2 p0, t_i32x2 p1)
 
 	d = encode_i32x2(
 		//abs(x0 - x1),
-		abs(decode_int_x(p0) - decode_int_x(p1)),
+		abs(decode_int_x(line.start) - decode_int_x(line.end)),
 		//abs(y0 - y1) 
-		abs(decode_int_y(p0) - decode_int_y(p1))
+		abs(decode_int_y(line.start) - decode_int_y(line.end))
 	);
 
 	s = encode_i32x2(
 		// 2 * (x0 < x1) - 1,
-		2 * (decode_int_x(p0) < decode_int_x(p1)) - 1,
+		2 * (decode_int_x(line.start) < decode_int_x(line.end)) - 1,
 		//2 * (y0 < y1) - 1
-		2 * (decode_int_y(p0) < decode_int_y(p1)) - 1
+		2 * (decode_int_y(line.start) < decode_int_y(line.end)) - 1
 	);
 	err = decode_int_x(d) - decode_int_y(d);
 	while (true) 
 	{
-	mlx_pixel_put(mlx_ptr, mlx_win, decode_int_x(p0), decode_int_y(p0), 0xff);
-	if (decode_int_x(p0) == decode_int_x(p1) && decode_int_y(p0) == decode_int_y(p1)) break;
-	int e2 = 2 * err;
-	if (e2 > -decode_int_y(d)) {
-		err -= decode_int_y(d);
-		//x0 += decode_int_x(s);
-		p0 = t_i32x2_add(p0, encode_i32x2(decode_int_x(s), 0));
-	}
-	if (e2 < decode_int_x(d)) {
-		err += decode_int_x(d);
-		//y0 += decode_int_y(s);
-		p0 = t_i32x2_add(p0, encode_i32x2(0, decode_int_y(s)));
-	}
+		mlx_pixel_put(mlx_ptr, mlx_win, decode_int_x(line.start), decode_int_y(line.start), 0xff);
+		if (decode_int_x(line.start) == decode_int_x(line.end) && decode_int_y(line.start) == decode_int_y(line.end)) break;
+		int e2 = 2 * err;
+		if (e2 > -decode_int_y(d)) {
+			err -= decode_int_y(d);
+			//x0 += decode_int_x(s);
+			line.start = t_i32x2_add(line.start, encode_i32x2(decode_int_x(s), 0));
+		}
+		if (e2 < decode_int_x(d)) {
+			err += decode_int_x(d);
+			//y0 += decode_int_y(s);
+			line.start = t_i32x2_add(line.start, encode_i32x2(0, decode_int_y(s)));
+		}
 	}
 }

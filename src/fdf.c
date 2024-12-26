@@ -172,9 +172,11 @@ int main(int argc, char *argv[])
 		draw_line3(
 				mlx_ptr,
 				mlx_win,
-
+				(t_line)
+				{
 				encode_i32x2(200, 200),
 				encode_i32x2(32, 54)
+				}
 		);
 		print_u16x4(
 				conv_u8x4_to_u16x4(RED)
