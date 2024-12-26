@@ -57,3 +57,19 @@ t_u32x2 get_shape(vec2d_64 arr)
 {
 	return (arr[0].u32x2);
 }
+
+
+enum e_result vec2d_map(vec2d_64 arr, t_64_elem (*func)(t_64_elem a))
+{
+	t_u32x2 shape;
+	uint32_t i;
+
+	i = DATA_PADDING;
+	shape = get_shape(arr);
+	while (i <= decode_uint_x(shape) * decode_uint_y(shape))
+	{
+		arr[i] = func(arr[i]);
+		i += 1;
+	}
+	return (e_result_ok);
+}

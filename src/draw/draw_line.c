@@ -6,11 +6,12 @@
 #include "../data/u16x4.h"
 #include "draw.h"
 
+#include "../data/print_data.h"
+
 /*
  * 線を描画するための関数です。
  *
  */
-
 
 static int abs(int a)
 {
@@ -62,18 +63,17 @@ static int16_t shift8_func(int16_t a, int16_t b)
 	return (a << 8);
 }
 
-
 void draw_line2(t_mlx_ptr_win data, t_line line, t_colordiff color_pair)
 {
 	t_i32x2 d;
 	t_i32x2 s;
-	int err;
+	int32_t err;
 	t_u16x4 color_step;
 	t_u8x4 color_map;
 
 	d = encode_i32x2(
-		abs(decode_int_x(t_i32x2_sub(line.start,line.end))),
-		abs(decode_int_y(t_i32x2_sub(line.start,line.end)))
+		abs(decode_int_x(t_i32x2_sub(line.end,line.start))),
+		abs(decode_int_y(t_i32x2_sub(line.end,line.start)))
 	);
 	s = encode_i32x2(
 		2 * (decode_int_x(line.start) < decode_int_x(line.end)) - 1,
@@ -116,3 +116,42 @@ void draw_line2(t_mlx_ptr_win data, t_line line, t_colordiff color_pair)
 	}
 }
 
+
+
+void draw_line3(void *mlx_ptr, void *mlx_win, t_i32x2 p0, t_i32x2 p1) 
+{
+	t_i32x2 d;
+	t_i32x2 s;
+	int32_t err;
+
+	d = encode_i32x2(
+		//abs(x0 - x1),
+		abs(decode_int_x(p0) - decode_int_x(p1)),
+		//abs(y0 - y1) 
+		abs(decode_int_y(p0) - decode_int_y(p1))
+	);
+
+	s = encode_i32x2(
+		// 2 * (x0 < x1) - 1,
+		2 * (decode_int_x(p0) < decode_int_x(p1)) - 1,
+		//2 * (y0 < y1) - 1
+		2 * (decode_int_y(p0) < decode_int_y(p1)) - 1
+	);
+	err = decode_int_x(d) - decode_int_y(d);
+	while (true) 
+	{
+	mlx_pixel_put(mlx_ptr, mlx_win, decode_int_x(p0), decode_int_y(p0), 0xff);
+	if (decode_int_x(p0) == decode_int_x(p1) && decode_int_y(p0) == decode_int_y(p1)) break;
+	int e2 = 2 * err;
+	if (e2 > -decode_int_y(d)) {
+		err -= decode_int_y(d);
+		//x0 += decode_int_x(s);
+		p0 = t_i32x2_add(p0, encode_i32x2(decode_int_x(s), 0));
+	}
+	if (e2 < decode_int_x(d)) {
+		err += decode_int_x(d);
+		//y0 += decode_int_y(s);
+		p0 = t_i32x2_add(p0, encode_i32x2(0, decode_int_y(s)));
+	}
+	}
+}
