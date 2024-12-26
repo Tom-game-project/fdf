@@ -35,9 +35,7 @@ struct s_colordiff
 	t_u16x4 end;
 };
 
-void draw_line(void *mlx_ptr, void *mlx_win, int x0, int y0, int x1, int y1);
 vec2d_64 calc_map(vec2d_64 map);
-void draw_line2(t_mlx_ptr_win data, t_line line, t_colordiff color_pair);
+void draw_line(void *mlx_ptr, void *mlx_win, t_line line, t_colordiff color_pair);
 
-void draw_line3(void *mlx_ptr, void *mlx_win, t_line line, t_colordiff color_pair);
 #endif
