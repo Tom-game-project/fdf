@@ -35,10 +35,10 @@ int print_u16x4(t_u16x4 data)
 int print_u8x4(t_u8x4 data)
 {
 	return printf("t_u8x4(%d %d %d %d)\n", 
-		decode_u8x4_a(data),
-		decode_u8x4_b(data),
-		decode_u8x4_c(data),
-		decode_u8x4_d(data)
+		de_u8x4_a(data),
+		de_u8x4_b(data),
+		de_u8x4_c(data),
+		de_u8x4_d(data)
 	);
 }
 

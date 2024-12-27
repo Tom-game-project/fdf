@@ -433,9 +433,9 @@ int test15()
 	t_u8x4 b;
 	t_u8x4 c;
 
-	a = encode_u8x4(1,2,3,4);
-	b = encode_u8x4(1,2,3,4);
-	c = encode_u8x4(4,3,2,1);
+	a = en_u8x4(1,2,3,4);
+	b = en_u8x4(1,2,3,4);
+	c = en_u8x4(4,3,2,1);
 	print_u8x4(a);
 	a = t_u8x4_add(
 		a,
