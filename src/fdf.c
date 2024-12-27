@@ -44,9 +44,9 @@ int put_line(void *mlx_ptr, void *win_ptr, vec2d_64 arr, vec2d_64 zcolor)
 				},
 				(t_colordiff) {	
 					conv_u8x4_to_u16x4(
-							decode_iu_y(get_vec2d_elem(zcolor, x, y).i32u32)),
+							de_iu_y(get_vec2d_elem(zcolor, x, y).i32u32)),
 					conv_u8x4_to_u16x4(
-							decode_iu_y(get_vec2d_elem(zcolor, x + 1, y).i32u32))
+							de_iu_y(get_vec2d_elem(zcolor, x + 1, y).i32u32))
 				}
 			);
 			draw_line
@@ -58,9 +58,9 @@ int put_line(void *mlx_ptr, void *win_ptr, vec2d_64 arr, vec2d_64 zcolor)
 				},
 				(t_colordiff) {	
 					conv_u8x4_to_u16x4(
-							decode_iu_y(get_vec2d_elem(zcolor, x, y).i32u32)),
+							de_iu_y(get_vec2d_elem(zcolor, x, y).i32u32)),
 					conv_u8x4_to_u16x4(
-							decode_iu_y(get_vec2d_elem(zcolor, x, y + 1).i32u32))
+							de_iu_y(get_vec2d_elem(zcolor, x, y + 1).i32u32))
 				}
 			);
 			x += 1;

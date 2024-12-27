@@ -36,7 +36,6 @@
 //    }
 //}
 
-
 typedef struct s_color_info t_color_info;
 struct s_color_info
 {
@@ -56,7 +55,7 @@ static int32_t y(t_i32x2 a)
 	return (de_int_y(a));
 }
 
-///
+/// 
 void	draw_line(void *mlx_ptr, void *mlx_win, t_line l, t_colordiff cp)
 {
 	t_color_info	ci;

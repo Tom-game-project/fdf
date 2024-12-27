@@ -195,8 +195,8 @@ int test05()
 			"t_i32u32の演算の動作チェック\n"
 			RESETSTR
 	);
-	t_i32u32 a = encode_i32u32(-10, 0xFFFFFFFF);
-	t_i32u32 b = encode_i32u32(42, 0);
+	t_i32u32 a = en_i32u32(-10, 0xFFFFFFFF);
+	t_i32u32 b = en_i32u32(42, 0);
 
 	print_i32u32(a);
 	print_i32u32(b);
@@ -221,7 +221,7 @@ int test06()
 	{
 		for (uint32_t x = 0; x < width;x++)
 		{
-			r.i32u32 = encode_i32u32(0 - x, 0xFFFFFFFF);
+			r.i32u32 = en_i32u32(0 - x, 0xFFFFFFFF);
 			set_vec2d_elem(a, x, y, r);
 		}
 	}
@@ -341,16 +341,16 @@ int test11()
 
 	printf(
 		"%d %d\n",
-		decode_iu_x(a),
-		decode_iu_y(a)
+		de_iu_x(a),
+		de_iu_y(a)
 	);
 
 	a = z_color2t_i32u32(str01);
 
 	printf(
 		"%d %d\n",
-		decode_iu_x(a),
-		decode_iu_y(a)
+		de_iu_x(a),
+		de_iu_y(a)
 	);
 	return (0);
 }

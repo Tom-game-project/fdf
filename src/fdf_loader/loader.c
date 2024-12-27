@@ -112,7 +112,7 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 
 	countofwords = count_word(zcolor ,is_comma);
 	get_z_color_word(zcolor, word, 0, is_comma);
-	r = encode_i32u32(
+	r = en_i32u32(
 		str2int(word),
 		0x00ffffff
 	);
@@ -122,8 +122,8 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 		get_z_color_word(zcolor, word, 1,is_comma);
 		color = colorcode2uint32(word);
 		if (decode_uint_x(color) == e_result_ok)
-			r = encode_i32u32(
-				decode_iu_x(r),
+			r = en_i32u32(
+				de_iu_x(r),
 				decode_uint_y(color)
 			);
 		else

@@ -19,7 +19,7 @@ int print_i32x2(t_i32x2 data)
 
 int print_i32u32(t_i32u32 data)
 {
-	return printf("(%d, %x) ", decode_iu_x(data), decode_iu_y(data));
+	return printf("(%d, %x) ", de_iu_x(data), de_iu_y(data));
 }
 
 int print_u16x4(t_u16x4 data)

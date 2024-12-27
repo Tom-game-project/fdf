@@ -31,7 +31,7 @@ t_64_elem core_expr(vec2d_64 map, t_u32x2 counter)
 			)
 		),
 		t_i32x2_scalar(
-			decode_iu_x(
+			de_iu_x(
 				get_vec2d_elem(
 					map,
 					decode_uint_x(counter),
