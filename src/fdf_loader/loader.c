@@ -121,10 +121,10 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 
 		get_z_color_word(zcolor, word, 1,is_comma);
 		color = colorcode2uint32(word);
-		if (decode_uint_x(color) == e_result_ok)
+		if (de_uint_x(color) == e_result_ok)
 			r = en_i32u32(
 				de_iu_x(r),
-				decode_uint_y(color)
+				de_uint_y(color)
 			);
 		else
 		{
@@ -153,7 +153,7 @@ int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
 	t_z_color_word word;
 
 	x = 0;
-	while (x < decode_uint_x(mapsize))
+	while (x < de_uint_x(mapsize))
 	{
 		get_z_color_word(buf, word, x, is_space);
 		a.i32u32 = z_color2t_i32u32(word);
@@ -173,15 +173,15 @@ int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
  	fd = open(filename, O_RDONLY);
  	if (fd == -1)
  		return (e_result_io_err);
- 	counter = encode_u32x2(0, 0);
- 	while (decode_uint_y(counter) < decode_uint_y(get_shape(arr)))
+ 	counter = en_u32x2(0, 0);
+ 	while (de_uint_y(counter) < de_uint_y(get_shape(arr)))
  	{
  		buf = get_next_line(fd);
  		if (buf == NULL)
  			break ;
-		set_row(decode_uint_y(counter), get_shape(arr), buf, arr);
+		set_row(de_uint_y(counter), get_shape(arr), buf, arr);
  		free(buf);
- 		counter = t_u32x2_add(counter, encode_u32x2(0, 1));
+ 		counter = t_u32x2_add(counter, en_u32x2(0, 1));
  	}
  	return (close(fd), e_result_ok);
  }
@@ -194,7 +194,7 @@ enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
 	mapsize = get_mapsize(filename);
 	if (de_int_x(mapsize) == -1)
 		return (e_result_load_err);
-        *arr = init_vec2d_64(decode_uint_x(mapsize), decode_uint_y(mapsize));
+        *arr = init_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
 	load_map(*arr, filename);
 	if (*arr == NULL)
 	{

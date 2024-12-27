@@ -65,19 +65,19 @@ t_u32x2 colorcode2uint32(char *str)
 	uint32_t r;
 
 	if (*str++ != '0')
-		return (encode_u32x2(e_result_load_err, 0));
+		return (en_u32x2(e_result_load_err, 0));
 	if (*str++ != 'x')
-		return (encode_u32x2(e_result_load_err, 0));
+		return (en_u32x2(e_result_load_err, 0));
 	r = 0;
 	while (*str != '\0')
 	{
 		if (is_hexchar(*str))
 			r = 0x10 * r + get_hex_index(*str);
 		else
-			return (encode_u32x2(e_result_load_err, 0));
+			return (en_u32x2(e_result_load_err, 0));
 		str++;
 	}
-	return (encode_u32x2(e_result_ok, r));
+	return (en_u32x2(e_result_ok, r));
 }
 
 /// 数字文字列をin32_t型に変換する

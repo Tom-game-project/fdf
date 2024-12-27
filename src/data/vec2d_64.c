@@ -24,7 +24,7 @@ vec2d_64 init_vec2d_64(uint32_t width, uint32_t height)
 	r = (t_64_elem*) malloc (sizeof(t_64_elem) * (width * height + DATA_PADDING));
 	if (r == NULL)
 		return (NULL);
-	r[SHARP].u32x2 = encode_u32x2(width, height);
+	r[SHARP].u32x2 = en_u32x2(width, height);
 	return (r);
 }
 
@@ -33,7 +33,7 @@ t_64_elem get_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y)
 {
 	uint32_t width;
 
-	width = decode_uint_x(data[SHARP].u32x2);
+	width = de_uint_x(data[SHARP].u32x2);
 	return (data[width * y + x + DATA_PADDING]);
 }
 
@@ -43,8 +43,8 @@ enum e_result set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i)
 	uint32_t width;
 	uint32_t height;
 
-	width = decode_uint_x(data[SHARP].u32x2);
-	height = decode_uint_y(data[SHARP].u32x2);
+	width = de_uint_x(data[SHARP].u32x2);
+	height = de_uint_y(data[SHARP].u32x2);
 	if (x < width && y < height)
 		data[width * y + x + DATA_PADDING] = i;
 	else
@@ -66,7 +66,7 @@ enum e_result vec2d_map(vec2d_64 arr, t_64_elem (*func)(t_64_elem a))
 
 	i = DATA_PADDING;
 	shape = get_shape(arr);
-	while (i <= decode_uint_x(shape) * decode_uint_y(shape))
+	while (i <= de_uint_x(shape) * de_uint_y(shape))
 	{
 		arr[i] = func(arr[i]);
 		i += 1;

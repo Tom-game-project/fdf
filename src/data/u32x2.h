@@ -12,9 +12,9 @@
 /// |  uint x |  uint y |
 typedef uint64_t t_u32x2;
 
-t_u32x2 encode_u32x2(uint32_t x, uint32_t y);
-uint32_t decode_uint_x(t_u32x2 data);
-uint32_t decode_uint_y(t_u32x2 data);
+t_u32x2 en_u32x2(uint32_t x, uint32_t y);
+uint32_t de_uint_x(t_u32x2 data);
+uint32_t de_uint_y(t_u32x2 data);
 
 // 演算
 t_u32x2 t_u32x2_add(t_u32x2 a, t_u32x2 b);

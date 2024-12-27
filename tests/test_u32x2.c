@@ -66,26 +66,26 @@ int test00()
 			RESETSTR
 	);
 
-	t_u32x2 u_a = encode_u32x2(10, 20);
-	t_u32x2 u_b = encode_u32x2(30, 40);
+	t_u32x2 u_a = en_u32x2(10, 20);
+	t_u32x2 u_b = en_u32x2(30, 40);
 	t_u32x2 u_c;
 
-	printf("u_a(%u, %u)\n", decode_uint_x(u_a), decode_uint_y(u_a));
-	printf("u_b(%u, %u)\n", decode_uint_x(u_b), decode_uint_y(u_b));
+	printf("u_a(%u, %u)\n", de_uint_x(u_a), de_uint_y(u_a));
+	printf("u_b(%u, %u)\n", de_uint_x(u_b), de_uint_y(u_b));
 
 	u_c = u_b - u_a;
-	printf("u_c(%u, %u) = b - a\n", decode_uint_x(u_c), decode_uint_y(u_c));
+	printf("u_c(%u, %u) = b - a\n", de_uint_x(u_c), de_uint_y(u_c));
 
 	u_c = u_a + u_b;
-	printf("u_c(%u, %u) = a + b\n", decode_uint_x(u_c), decode_uint_y(u_c));
+	printf("u_c(%u, %u) = a + b\n", de_uint_x(u_c), de_uint_y(u_c));
 
 	u_c = u_a * 3;
-	printf("u_c(%u, %u) = a * 3\n", decode_uint_x(u_c), decode_uint_y(u_c));
+	printf("u_c(%u, %u) = a * 3\n", de_uint_x(u_c), de_uint_y(u_c));
 
-	t_u32x2 u_l = encode_u32x2(UINT_MAX, 0);
-	t_u32x2 u_ll = encode_u32x2(0, UINT_MAX);
-	printf("u_l(%u, %u)\n", decode_uint_x(u_l), decode_uint_y(u_l));
-	printf("u_ll(%u, %u)\n", decode_uint_x(u_ll), decode_uint_y(u_ll));
+	t_u32x2 u_l = en_u32x2(UINT_MAX, 0);
+	t_u32x2 u_ll = en_u32x2(0, UINT_MAX);
+	printf("u_l(%u, %u)\n", de_uint_x(u_l), de_uint_y(u_l));
+	printf("u_ll(%u, %u)\n", de_uint_x(u_ll), de_uint_y(u_ll));
 
 	t_i32x2 i_a = en_i32x2(0, -20);
 	t_i32x2 i_b = en_i32x2(-12, -42);
@@ -124,7 +124,7 @@ int test01()
 	{
 		for (uint32_t x = 0; x < width;x++)
 		{
-			r.u32x2 = encode_u32x2(x, y);
+			r.u32x2 = en_u32x2(x, y);
 			set_vec2d_elem(a, x, y, r);
 		}
 	}
@@ -151,12 +151,12 @@ int test02()
 			"t_u32x2の演算の動作チェック\n"
 			RESETSTR
 	);
-	t_u32x2 a = encode_u32x2(2, 3);
-	t_u32x2 b = encode_u32x2(5, 7);
+	t_u32x2 a = en_u32x2(2, 3);
+	t_u32x2 b = en_u32x2(5, 7);
 
-	if (t_u32x2_add(a, b) != encode_u32x2(7, 10)) return (1);
-	if (t_u32x2_sub(b, a) != encode_u32x2(3, 4)) return (1);
-	if (t_u32x2_mul(a, b) != encode_u32x2(10, 21)) return (1);
+	if (t_u32x2_add(a, b) != en_u32x2(7, 10)) return (1);
+	if (t_u32x2_sub(b, a) != en_u32x2(3, 4)) return (1);
+	if (t_u32x2_mul(a, b) != en_u32x2(10, 21)) return (1);
 	return (0);
 }
 
@@ -323,7 +323,7 @@ int test10()
 	);
 	char str[111] = "0x00ff00ff\0";
 	t_u32x2 a = colorcode2uint32(str);
-	printf("%d %d\n", decode_uint_x(a) , decode_uint_y(a));
+	printf("%d %d\n", de_uint_x(a) , de_uint_y(a));
 	return (0);
 }
 
@@ -368,7 +368,7 @@ int test12 ()
 	arr = NULL;
 	alocate_memory_for_map(&arr, "./maps/test_maps/42.fdf");
 	printf("pointer %p\n", arr);
-	printf("%d %d\n" ,decode_uint_y(get_shape(arr)), decode_uint_x(get_shape(arr)));
+	printf("%d %d\n" ,de_uint_y(get_shape(arr)), de_uint_x(get_shape(arr)));
 
 	print_vec2d_elem_i32u64(arr);
 	free(arr);
@@ -396,7 +396,7 @@ int test13()
 
 		if (err_code == e_result_ok)
 		{
-			printf("%d %d\n" ,decode_uint_y(get_shape(arr)), decode_uint_x(get_shape(arr)));
+			printf("%d %d\n" ,de_uint_y(get_shape(arr)), de_uint_x(get_shape(arr)));
 			print_vec2d_elem_i32u64(arr);
 		}
 		else
@@ -452,16 +452,16 @@ int test16()
 	t_u16x4 c;
 	t_u8x4 a8;
 
-	a = encode_u16x4(1,2,3,4);
-	b = encode_u16x4(1,2,3,4);
-	c = encode_u16x4(4,3,2,1);
+	a = en_u16x4(1,2,3,4);
+	b = en_u16x4(1,2,3,4);
+	c = en_u16x4(4,3,2,1);
 	print_u16x4(a);
 	a = t_u16x4_add(
 		a,
 		t_u16x4_mul(b, c)
 	);
 	print_u16x4(a);
-	a = t_u16x4_mul(a, encode_u16x4(
+	a = t_u16x4_mul(a, en_u16x4(
 				256,
 				256,
 				256,

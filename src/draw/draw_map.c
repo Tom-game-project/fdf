@@ -22,11 +22,11 @@ t_64_elem core_expr(vec2d_64 map, t_u32x2 counter)
 	p.i32x2 = t_i32x2_add(
 		t_i32x2_add(
 			t_i32x2_scalar(
-				(int) decode_uint_x(counter),
+				(int) de_uint_x(counter),
 			       	VECTOR_X
 			),
 			t_i32x2_scalar(
-				(int) decode_uint_y(counter),
+				(int) de_uint_y(counter),
 				VECTOR_Y
 			)
 		),
@@ -34,8 +34,8 @@ t_64_elem core_expr(vec2d_64 map, t_u32x2 counter)
 			de_iu_x(
 				get_vec2d_elem(
 					map,
-					decode_uint_x(counter),
-					decode_uint_y(counter)
+					de_uint_x(counter),
+					de_uint_y(counter)
 				).i32u32
 			),
 			VECTOR_Z
@@ -61,22 +61,22 @@ vec2d_64 calc_map(vec2d_64 map)
 	vec2d_64 rarr;
 	t_u32x2 counter;
 
-	counter = encode_u32x2(0, 0);
+	counter = en_u32x2(0, 0);
 	rarr = init_vec2d_64(
-		decode_uint_x(get_shape(map)),
-		decode_uint_y(get_shape(map))
+		de_uint_x(get_shape(map)),
+		de_uint_y(get_shape(map))
 	);
 	if (rarr == NULL)
 		return (NULL);
-	while (decode_uint_y(counter) < decode_uint_y(get_shape(rarr)))
+	while (de_uint_y(counter) < de_uint_y(get_shape(rarr)))
 	{
-		counter = encode_u32x2(0, decode_uint_y(counter));
-		while (decode_uint_x(counter) < decode_uint_x(get_shape(rarr)))
+		counter = en_u32x2(0, de_uint_y(counter));
+		while (de_uint_x(counter) < de_uint_x(get_shape(rarr)))
 		{
-			set_vec2d_elem(rarr, decode_uint_x(counter), decode_uint_y(counter), core_expr(map, counter));
-			counter = t_u32x2_add(counter, encode_u32x2(1, 0));
+			set_vec2d_elem(rarr, de_uint_x(counter), de_uint_y(counter), core_expr(map, counter));
+			counter = t_u32x2_add(counter, en_u32x2(1, 0));
 		}
-		counter = t_u32x2_add(counter, encode_u32x2(0, 1));
+		counter = t_u32x2_add(counter, en_u32x2(0, 1));
 	}
 	return (rarr);
 }

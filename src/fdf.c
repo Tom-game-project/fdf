@@ -30,10 +30,10 @@ int put_line(void *mlx_ptr, void *win_ptr, vec2d_64 arr, vec2d_64 zcolor)
 	uint32_t x;
 
 	y = 0;
-	while (y < decode_uint_y(get_shape(zcolor)) - 1)
+	while (y < de_uint_y(get_shape(zcolor)) - 1)
 	{
 		x = 0;
-		while (x < decode_uint_x(get_shape(zcolor)) - 1)
+		while (x < de_uint_x(get_shape(zcolor)) - 1)
 		{
 			draw_line
 			(
