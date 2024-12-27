@@ -13,14 +13,20 @@
 #include "draw/draw.h"
 #include "fdf_loader/loader.h"
 
+#include "args/args_structs.h"
+
 // test modules 
 #include <stdio.h>
 #include <unistd.h>
 
-int event_handler(int key, void *mlx)
+int event_handler(int key, t_mlx_ptr_win *mlx_ptr_win)
 {
-	(void) mlx;
 	printf("called %d \n", key);
+	if (key == 113) // if q_key pressed
+	{
+		mlx_destroy_window(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_win);
+		mlx_loop_end(mlx_ptr_win->mlx_ptr);
+	}
 	return (0);
 }
 
@@ -85,12 +91,16 @@ int main(int argc, char *argv[])
 		// 描画に必要な処理
 		alocate_memory_for_map(&map, argv[1]);
 		a = calc_map(map);
-		// print_vec2d_elem_i32u64(map);
 		put_line(mlx_ptr, mlx_win, a, map);
 		free(a);
 		free(map);
-		mlx_hook(mlx_win, KeyPress, KeyPressMask, event_handler, mlx_ptr);
+		mlx_hook(mlx_win, KeyPress, KeyPressMask, event_handler, &(t_mlx_ptr_win) {
+				mlx_ptr,
+				mlx_win
+		});
 		mlx_loop(mlx_ptr);
+		mlx_destroy_display(mlx_ptr);
+		free(mlx_ptr);
 	} else
 		return (1);
 }
