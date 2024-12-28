@@ -25,5 +25,6 @@ typedef struct s_position t_position;
 vec2d_64 calc_map(vec2d_64 map);
 void draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp);
 int put_lines(t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor);
+void put_point(t_mlx_ptr_win data,t_i32x2 p, t_u8x4 color);
 
 #endif

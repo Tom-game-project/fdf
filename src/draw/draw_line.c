@@ -63,7 +63,6 @@ struct s_colordiff
 	t_u16x4	e;
 };
 
-
 /// de_int_x
 static int32_t	x(t_i32x2 a)
 {
@@ -91,8 +90,7 @@ t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp)
 	ci.m = create_u16x4_bool_map(cp.s, cp.e, int16_lt);
 	while (true)
 	{
-		mlx_pixel_put(mlx_ptr_win.mlx_ptr, mlx_ptr_win.mlx_win, \
-			x(l.s), y(l.s), conv_u16x4_to_u8x4(cp.s));
+		put_point(mlx_ptr_win, l.s, conv_u16x4_to_u8x4(cp.s));
 		cp.s = t_u16x4_cal_color(cp.s, ci.s, ci.m);
 		if (t_i32x2_eq(l.s, l.e))
 			break ;

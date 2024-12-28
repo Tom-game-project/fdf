@@ -23,6 +23,8 @@ struct s_mlx_ptr_win
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
+	void	*mlx_img;
+	int	*mlx_addr;
 };
 
 typedef struct s_line			t_line;

@@ -5,6 +5,7 @@ SRCS		=	src/draw/draw_line.c\
 			src/draw/draw_line_helper.c\
 			src/draw/draw_lines.c\
 			src/draw/draw_map.c\
+			src/draw/draw_point.c\
 			src/data/i32u32.c\
 			src/data/u32x2.c\
 			src/data/i32x2.c\
