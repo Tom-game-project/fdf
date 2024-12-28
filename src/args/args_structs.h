@@ -20,11 +20,11 @@ struct s_line
 };
 
 
-typedef struct s_colordiff t_colordiff;
-struct s_colordiff
+typedef struct s_colorpair t_colorpair;
+struct s_colorpair
 {
-	t_u16x4 s; // start
-	t_u16x4 e; // end
+	t_u8x4 s; // start
+	t_u8x4 e; // end
 };
 
 #endif

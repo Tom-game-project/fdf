@@ -10,12 +10,8 @@
 
 typedef struct s_position t_position;
 
-struct s_position{
-	int x;
-	int y;
-};
-
 vec2d_64 calc_map(vec2d_64 map);
-void draw_line(void *mlx_ptr, void *mlx_win, t_line line, t_colordiff color_pair);
+void draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp);
+int put_lines(t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor);
 
 #endif

@@ -44,6 +44,14 @@ struct s_color_info
 	t_u8x4 m;
 };
 
+typedef struct s_colordiff t_colordiff;
+struct s_colordiff
+{
+	t_u16x4 s; // start
+	t_u16x4 e; // end
+};
+
+
 /// de_int_x
 static int32_t x(t_i32x2 a)
 {
@@ -56,8 +64,7 @@ static int32_t y(t_i32x2 a)
 	return (de_int_y(a));
 }
 
-/// 
-void	draw_line(void *mlx_ptr, void *mlx_win, t_line l, t_colordiff cp)
+static void	draw_line_helper(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp)
 {
 	t_color_info	ci;
 
@@ -71,8 +78,8 @@ void	draw_line(void *mlx_ptr, void *mlx_win, t_line l, t_colordiff cp)
 	ci.m = create_u16x4_bool_map(cp.s, cp.e, int16_lt);
 	while (true)
 	{
-		mlx_pixel_put(mlx_ptr, mlx_win, x(l.s),
-			y(l.s), conv_u16x4_to_u8x4(cp.s));
+		mlx_pixel_put(mlx_ptr_win.mlx_ptr, mlx_ptr_win.mlx_win, 
+			x(l.s), y(l.s), conv_u16x4_to_u8x4(cp.s));
 		cp.s = t_u16x4_cal_color(cp.s, ci.s, ci.m);
 		if (t_i32x2_eq(l.s, l.e))
 			break ;
@@ -83,3 +90,17 @@ void	draw_line(void *mlx_ptr, void *mlx_win, t_line l, t_colordiff cp)
 		l.s = t_i32x2_add(l.s, en_i32x2(0, y(s) * (y(e) < x(d))));
 	}
 }
+
+void draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp)
+{
+	draw_line_helper
+	(
+		mlx_ptr_win,
+		l,
+		(t_colordiff) {
+			conv_u8x4_to_u16x4(cp.s),
+			conv_u8x4_to_u16x4(cp.e)
+		}
+	);
+}
+
