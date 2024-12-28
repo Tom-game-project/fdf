@@ -1,32 +1,43 @@
-#ifndef U16X4_H
-#define  U16X4_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   u16x4.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 16:27:36 by tmuranak          #+#    #+#             */
+/*   Updated: 2024/12/28 16:41:02 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdint.h>
-#include "u8x4.h"
+#ifndef U16X4_H
+# define  U16X4_H
+
+# include <stdint.h>
+# include "u8x4.h"
 
 /// # t_u8x4
 /// |------------ 64bit ------------|
 /// | 16bit | 16bit | 16bit | 16bit |
-typedef uint64_t t_u16x4;
+typedef uint64_t	t_u16x4;
 
 // encode
-t_u16x4 en_u16x4(
-	uint16_t a,
-	uint16_t b,
-	uint16_t c,
-	uint16_t d
-);
+t_u16x4	en_u16x4(\
+uint16_t	a, \
+uint16_t	b, \
+uint16_t	c, \
+uint16_t	d);
 
 // decode
-uint16_t de_u16x4_a(t_u16x4 data);
-uint16_t de_u16x4_b(t_u16x4 data);
-uint16_t de_u16x4_c(t_u16x4 data);
-uint16_t de_u16x4_d(t_u16x4 data);
+uint16_t	de_u16x4_a(t_u16x4 data);
+uint16_t	de_u16x4_b(t_u16x4 data);
+uint16_t	de_u16x4_c(t_u16x4 data);
+uint16_t	de_u16x4_d(t_u16x4 data);
 
 // conv
-t_u8x4 conv_u16x4_to_u8x4(t_u16x4 data);
-t_u16x4 conv_u8x4_to_u16x4(t_u8x4 data);
-//
+t_u8x4		conv_u16x4_to_u8x4(t_u16x4 data);
+t_u16x4		conv_u8x4_to_u16x4(t_u8x4 data);
+
 
 t_u16x4 t_u16x4_add(t_u16x4 a, t_u16x4 b);
 t_u16x4 t_u16x4_sub(t_u16x4 a, t_u16x4 b);
