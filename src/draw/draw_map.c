@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:22 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:28:22 by tmuranak         ###   ########.fr       */
+/*   Updated: 2024/12/28 17:37:56 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 // ```
 // x * Vec(x) + y * Vec(y) + z * Vec(z)
 // ```
-t_64_elem core_expr(vec2d_64 map, t_u32x2 counter)
+t_64_elem	core_expr(vec2d_64 map, t_u32x2 counter)
 {
-	t_64_elem p;
+	t_64_elem	p;
 
 	p.i32x2 = t_i32x2_add(
 		t_i32x2_add(

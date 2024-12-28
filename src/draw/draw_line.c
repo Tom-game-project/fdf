@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:02 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:28:02 by tmuranak         ###   ########.fr       */
+/*   Updated: 2024/12/28 17:32:16 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,35 @@
 //    }
 //}
 
-typedef struct s_color_info t_color_info;
+typedef struct s_color_info	t_color_info;
 struct s_color_info
 {
-	t_u16x4 s;
-	t_u8x4 m;
+	t_u16x4	s;
+	t_u8x4	m;
 };
 
-typedef struct s_colordiff t_colordiff;
+typedef struct s_colordiff	t_colordiff;
 struct s_colordiff
 {
-	t_u16x4 s; // start
-	t_u16x4 e; // end
+	t_u16x4	s;
+	t_u16x4	e;
 };
 
 
 /// de_int_x
-static int32_t x(t_i32x2 a)
+static int32_t	x(t_i32x2 a)
 {
 	return (de_int_x(a));
 }
 
 /// de_int_y
-static int32_t y(t_i32x2 a)
+static int32_t	y(t_i32x2 a)
 {
 	return (de_int_y(a));
 }
 
-static void	draw_line_helper(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp)
+static void	draw_line_helper(\
+t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp)
 {
 	t_color_info	ci;
 
@@ -90,7 +91,7 @@ static void	draw_line_helper(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp
 	ci.m = create_u16x4_bool_map(cp.s, cp.e, int16_lt);
 	while (true)
 	{
-		mlx_pixel_put(mlx_ptr_win.mlx_ptr, mlx_ptr_win.mlx_win, 
+		mlx_pixel_put(mlx_ptr_win.mlx_ptr, mlx_ptr_win.mlx_win, \
 			x(l.s), y(l.s), conv_u16x4_to_u8x4(cp.s));
 		cp.s = t_u16x4_cal_color(cp.s, ci.s, ci.m);
 		if (t_i32x2_eq(l.s, l.e))
@@ -103,16 +104,15 @@ static void	draw_line_helper(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp
 	}
 }
 
-void draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp)
+void	draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp)
 {
 	draw_line_helper
 	(
 		mlx_ptr_win,
 		l,
-		(t_colordiff) {
+		(t_colordiff){
 			conv_u8x4_to_u16x4(cp.s),
 			conv_u8x4_to_u16x4(cp.e)
 		}
 	);
 }
-

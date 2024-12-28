@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:27:39 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:27:39 by tmuranak         ###   ########.fr       */
+/*   Updated: 2024/12/28 17:12:13 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,49 @@
 
 // ======================= unsigned int =======================
 
-t_u32x2 en_u32x2(uint32_t x, uint32_t y)
+t_u32x2	en_u32x2(uint32_t x, uint32_t y)
 {
-	return ((t_u32x2) ((uint64_t) x << 32) + y);
+	return ((t_u32x2)((uint64_t) x << 32) + y);
 }
 
-uint32_t de_uint_x(t_u32x2 data)
+uint32_t	de_uint_x(t_u32x2 data)
 {
-	return ((uint32_t) (data >> 32));
+	return ((uint32_t)(data >> 32));
 }
 
-uint32_t de_uint_y(t_u32x2 data)
+uint32_t	de_uint_y(t_u32x2 data)
 {
-	return ((uint32_t) ((data << 32) >> 32));
+	return ((uint32_t)((data << 32) >> 32));
 }
 
-t_u32x2 t_u32x2_add(t_u32x2 a, t_u32x2 b)
+t_u32x2	t_u32x2_add(t_u32x2 a, t_u32x2 b)
 {
-	return (en_u32x2(
-		de_uint_x(a) + de_uint_x(b),
-		de_uint_y(a) + de_uint_y(b)
-	));
+	return (
+		en_u32x2(
+			de_uint_x(a) + de_uint_x(b),
+			de_uint_y(a) + de_uint_y(b)
+		)
+	);
 }
 
-t_u32x2 t_u32x2_sub(t_u32x2 a, t_u32x2 b)
+t_u32x2	t_u32x2_sub(t_u32x2 a, t_u32x2 b)
 {
-	return (en_u32x2(
-		de_uint_x(a) - de_uint_x(b),
-		de_uint_y(a) - de_uint_y(b)
-	));
+	return (
+		en_u32x2(
+			de_uint_x(a) - de_uint_x(b),
+			de_uint_y(a) - de_uint_y(b)
+		)
+	);
 }
 
-t_u32x2 t_u32x2_mul(t_u32x2 a, t_u32x2 b)
+t_u32x2	t_u32x2_mul(t_u32x2 a, t_u32x2 b)
 {
-	return (en_u32x2(
-		de_uint_x(a) * de_uint_x(b),
-		de_uint_y(a) * de_uint_y(b)
-	));
+	return (
+		en_u32x2(
+			de_uint_x(a) * de_uint_x(b),
+			de_uint_y(a) * de_uint_y(b)
+		)
+	);
 }
 
 int32_t t_u32x2_dot(t_u32x2 a, t_u32x2 b)
