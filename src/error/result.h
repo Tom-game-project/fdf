@@ -15,15 +15,17 @@
 
 // typedef enum e_result t_result;
 
+
 enum e_result
 {
 	// ok
-	e_result_ok,
+	e_result_ok = 0,
 	// error
-	e_result_allocation_err, // メモリの割当に失敗したときのエラー
-	e_result_load_err, // 不正なファイルを読み込んだ際のエラー
-	e_result_index_out_of_range_err, //　配列に不正なアクセスをしようとしたとき
-	e_result_io_err,
+	e_result_allocation_err = 1, // メモリの割当に失敗したときのエラー
+	e_result_load_err = 2, // 不正なファイルを読み込んだ際のエラー
+	e_result_index_out_of_range_err = 3, //　配列に不正なアクセスをしようとしたとき
+	e_result_io_err = 4,
+	e_result_arg_err = 5,
 };
 
 #endif

@@ -13,7 +13,6 @@
 #include "args/args_structs.h"
 
 // test modules 
-#include <stdio.h>
 #include <unistd.h>
 
 typedef struct s_mlx_data	t_mlx_data;
@@ -31,12 +30,20 @@ struct s_mlx_data
 
 int event_handler(int key, t_mlx_ptr_win *mlx_ptr_win)
 {
-	printf("called %d \n", key);
 	if (key == XK_Escape) // if q_key pressed
 	{
 		mlx_destroy_window(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_win);
+		mlx_destroy_image(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_img);
 		mlx_loop_end(mlx_ptr_win->mlx_ptr);
 	}
+	return (0);
+}
+
+static int	cross_hook(t_mlx_ptr_win *mlx_ptr_win)
+{
+	mlx_destroy_window(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_win);
+	mlx_destroy_image(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_img);
+	mlx_loop_end(mlx_ptr_win->mlx_ptr);
 	return (0);
 }
 
@@ -49,25 +56,22 @@ int main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		data.mlx_ptr = mlx_init();
-		data.mlx_win = mlx_new_window(data.mlx_ptr, 600, 600, argv[1]);
-		data.mlx_img = mlx_new_image(data.mlx_ptr, 600,  600);
+		data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, argv[1]);
+		data.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,  WINDOW_HEIGHT);
 		data.mlx_addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.size_l, &data.endian);
 		mlx_clear_window(data.mlx_ptr, data.mlx_win);
 		alocate_memory_for_map(&map, argv[1]);
 		a = calc_map(map);
-		put_lines((t_mlx_ptr_win){
-			data.mlx_ptr, 
-			data.mlx_win,
-			data.mlx_img,
-			data.mlx_addr
-		},a, map);
+		put_lines((t_mlx_ptr_win){ data.mlx_ptr, 
+		data.mlx_win, data.mlx_img, data.mlx_addr },a, map);
 		free(a);
 		free(map);
 		mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.mlx_img, 0, 0);
+		// hook
+		mlx_hook(data.mlx_win, DestroyNotify, NoEventMask, cross_hook, &(t_mlx_ptr_win) {data.mlx_ptr, data.mlx_win ,data.mlx_img,data.mlx_addr});
 		mlx_hook(data.mlx_win, KeyPress, KeyPressMask, event_handler, &(t_mlx_ptr_win) {data.mlx_ptr, data.mlx_win ,data.mlx_img,data.mlx_addr});
 		mlx_loop(data.mlx_ptr);
 		return (mlx_destroy_display(data.mlx_ptr), free(data.mlx_ptr), 0);
 	}
 	return (1);
 }
-

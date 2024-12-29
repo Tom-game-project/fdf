@@ -20,6 +20,14 @@
 #include "../data/u16x4.h"
 #include "../args/args_structs.h"
 
+#ifndef WINDOW_WIDTH
+# define WINDOW_WIDTH 600
+#endif
+
+#ifndef WINDOW_HEIGHT
+# define WINDOW_HEIGHT 600
+#endif
+
 typedef struct s_position t_position;
 
 vec2d_64 calc_map(vec2d_64 map);

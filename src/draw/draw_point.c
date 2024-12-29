@@ -1,11 +1,9 @@
-
 #include "../data/i32x2.h"
 #include "../args/args_structs.h"
 #include "stdint.h"
 #include <stdint.h>
 
-#define WINDOW_WIDTH 600
-#define WINDOW_HEIGHT 600
+#include "draw.h"
 
 void put_point(t_mlx_ptr_win data,t_i32x2 p, t_u8x4 color)
 {

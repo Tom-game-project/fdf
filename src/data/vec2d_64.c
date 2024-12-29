@@ -71,7 +71,6 @@ t_u32x2	get_shape(vec2d_64 arr)
 	return (arr[0].u32x2);
 }
 
-
 enum e_result	vec2d_map(vec2d_64 arr, t_64_elem (*func)(t_64_elem a))
 {
 	t_u32x2		shape;
