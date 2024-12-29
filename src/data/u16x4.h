@@ -14,6 +14,7 @@
 # define  U16X4_H
 
 # include <stdint.h>
+# include <stdbool.h>
 # include "u8x4.h"
 
 /// # t_u8x4

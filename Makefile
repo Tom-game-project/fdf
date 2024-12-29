@@ -1,16 +1,30 @@
 # minilibx_test
 NAME		=	fdf
 MAIN_SRC	=	src/fdf.c
+
 SRCS		=	src/draw/draw_line.c\
 			src/draw/draw_line_helper.c\
 			src/draw/draw_lines.c\
 			src/draw/draw_map.c\
 			src/draw/draw_point.c\
 			src/data/i32u32.c\
+			src/data/i32u32_encode.c\
+			src/data/i32u32_decode.c\
 			src/data/u32x2.c\
-			src/data/i32x2.c\
+			src/data/u32x2_encode.c\
+			src/data/u32x2_decode.c\
+			src/data/i32x2_encode.c\
+			src/data/i32x2_decode.c\
+			src/data/i32x2_ope_basic.c\
+			src/data/i32x2_ope_extra.c\
 			src/data/u8x4.c\
-			src/data/u16x4.c\
+			src/data/u8x4_encode.c\
+			src/data/u8x4_decode.c\
+			src/data/u16x4_encode.c\
+			src/data/u16x4_decode.c\
+			src/data/u16x4_ope_basic.c\
+			src/data/u16x4_ope_extra.c\
+			src/data/u16x4_ope_color.c\
 			src/data/print_data.c\
 			src/data/vec2d_64.c\
 			src/fdf_loader/loader.c\

@@ -17,20 +17,6 @@
 
 // ======================= signed int =======================
 
-t_i32x2 en_i32x2(int32_t x, int32_t y)
-{
-	return ((t_i32x2) ((uint64_t) x << 32) | (uint32_t)y);
-}
-
-int32_t de_int_x(t_i32x2 data)
-{
-	return ((int32_t) (data >> 32));
-}
-
-int32_t de_int_y(t_i32x2 data)
-{
-	return ((int32_t) (data & 0xFFFFFFFF));
-}
 
 t_i32x2 t_i32x2_add(t_i32x2 a,t_i32x2 b)
 {
