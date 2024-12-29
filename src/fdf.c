@@ -1,5 +1,4 @@
 #include <X11/X.h>
-//
 #include <X11/keysym.h>
 #include <X11/keysymdef.h>
 #include <stdint.h>

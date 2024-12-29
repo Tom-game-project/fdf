@@ -7,19 +7,18 @@ SRCS		=	src/draw/draw_line.c\
 			src/draw/draw_lines.c\
 			src/draw/draw_map.c\
 			src/draw/draw_point.c\
-			src/data/i32u32.c\
 			src/data/i32u32_encode.c\
 			src/data/i32u32_decode.c\
-			src/data/u32x2.c\
+			src/data/u32x2_ope_basic.c\
 			src/data/u32x2_encode.c\
 			src/data/u32x2_decode.c\
 			src/data/i32x2_encode.c\
 			src/data/i32x2_decode.c\
 			src/data/i32x2_ope_basic.c\
 			src/data/i32x2_ope_extra.c\
-			src/data/u8x4.c\
 			src/data/u8x4_encode.c\
 			src/data/u8x4_decode.c\
+			src/data/u8x4_ope_basic.c\
 			src/data/u16x4_encode.c\
 			src/data/u16x4_decode.c\
 			src/data/u16x4_ope_basic.c\
@@ -87,14 +86,14 @@ $(MLX):
 	$(MAKE) -C minilibx-linux
 
 clean:
+	$(RM) $(RM_FLAGS) $(MAIN_OBJ)
 	$(RM) $(RM_FLAGS) minilibx-linux/
 	$(RM) $(RM_FLAGS) $(OBJS)
 	mkdir minilibx-linux/
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(RM_FLAGS) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re test
-
