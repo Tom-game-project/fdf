@@ -28,9 +28,17 @@
 # define WINDOW_HEIGHT 600
 #endif
 
+typedef struct s_vector_directions t_vector_directions;
+struct s_vector_directions
+{
+	t_i32x2 vector_x;
+	t_i32x2 vector_y;
+	t_i32x2 vector_z;
+};
+
 typedef struct s_position t_position;
 
-vec2d_64 calc_map(vec2d_64 map);
+vec2d_64 calc_map(vec2d_64 map, t_vector_directions vd);
 void draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp);
 int put_lines(t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor);
 void put_point(t_mlx_ptr_win data,t_i32x2 p, t_u8x4 color);

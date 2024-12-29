@@ -29,6 +29,17 @@ struct s_mlx_data
 	int size_l;
 };
 
+static int	cross_hook(t_mlx_ptr_win *mlx_ptr_win)
+{
+	mlx_destroy_window(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_win);
+	mlx_destroy_image(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_img);
+	mlx_loop_end(mlx_ptr_win->mlx_ptr);
+	exit(
+		(mlx_destroy_display(mlx_ptr_win->mlx_ptr), free(mlx_ptr_win->mlx_ptr), 0)
+	);
+	return (0);
+}
+
 int event_handler(int key, t_mlx_ptr_win *mlx_ptr_win)
 {
 	if (key == XK_Escape) // if q_key pressed
@@ -37,14 +48,6 @@ int event_handler(int key, t_mlx_ptr_win *mlx_ptr_win)
 		mlx_destroy_image(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_img);
 		mlx_loop_end(mlx_ptr_win->mlx_ptr);
 	}
-	return (0);
-}
-
-static int	cross_hook(t_mlx_ptr_win *mlx_ptr_win)
-{
-	mlx_destroy_window(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_win);
-	mlx_destroy_image(mlx_ptr_win->mlx_ptr, mlx_ptr_win->mlx_img);
-	mlx_loop_end(mlx_ptr_win->mlx_ptr);
 	return (0);
 }
 
@@ -63,7 +66,12 @@ int main(int argc, char *argv[])
 		data.mlx_addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.size_l, &data.endian);
 		mlx_clear_window(data.mlx_ptr, data.mlx_win);
 		alocate_memory_for_map(&map, argv[1]);
-		a = calc_map(map);
+		a = calc_map(map, (t_vector_directions) {
+				en_i32x2(17, 10),
+				en_i32x2(-17, 10),
+				en_i32x2(0, -20),
+			}
+		);
 		add_vec_i32x2(a, en_i32x2(300, 300));
 		put_lines((t_mlx_ptr_win){ data.mlx_ptr, 
 		data.mlx_win, data.mlx_img, data.mlx_addr },a, map);
