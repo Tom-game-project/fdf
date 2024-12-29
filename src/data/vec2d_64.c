@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "i32x2.h"
 #include "u32x2.h"
 #include "vec2d_64.h"
 
@@ -84,4 +85,25 @@ enum e_result	vec2d_map(vec2d_64 arr, t_64_elem (*func)(t_64_elem a))
 		i += 1;
 	}
 	return (e_result_ok);
+}
+
+enum e_result add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
+{
+	uint32_t x;
+	uint32_t y;
+	t_64_elem i;
+
+	y = 0;
+	while (y < de_uint_y(get_shape(arr)))
+	{
+		x = 0;
+		while (x < de_uint_x(get_shape(arr)))
+		{
+			i.i32x2 = t_i32x2_add(get_vec2d_elem(arr, x, y).i32x2, a);
+			set_vec2d_elem(arr, x, y, i);
+			x += 1;
+		}
+		y += 1;
+	}
+	return (e_result_ok); 
 }

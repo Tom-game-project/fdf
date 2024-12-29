@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "../minilibx-linux/mlx.h"
+#include "data/i32x2.h"
 #include "data/vec2d_64.h"
 #include "draw/draw.h"
 #include "fdf_loader/loader.h"
@@ -47,6 +48,7 @@ static int	cross_hook(t_mlx_ptr_win *mlx_ptr_win)
 	return (0);
 }
 
+
 int main(int argc, char *argv[])
 {
 	t_mlx_data data;
@@ -62,6 +64,7 @@ int main(int argc, char *argv[])
 		mlx_clear_window(data.mlx_ptr, data.mlx_win);
 		alocate_memory_for_map(&map, argv[1]);
 		a = calc_map(map);
+		add_vec_i32x2(a, en_i32x2(300, 300));
 		put_lines((t_mlx_ptr_win){ data.mlx_ptr, 
 		data.mlx_win, data.mlx_img, data.mlx_addr },a, map);
 		free(a);

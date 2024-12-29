@@ -35,4 +35,5 @@ enum e_result	set_vec2d_elem(\
 vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i);
 t_u32x2			get_shape(vec2d_64 arr);
 
+enum e_result add_vec_i32x2 (vec2d_64 arr, t_i32x2 a);
 #endif
