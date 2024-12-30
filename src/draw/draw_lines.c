@@ -53,3 +53,24 @@ t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor)
 	}
 	return (0);
 }
+
+int				put_back_lines(\
+t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr)
+{
+	uint32_t	y;
+	uint32_t	x;
+
+	y = 0;
+	while (y < de_uint_y(get_shape(arr)) - 1)
+	{
+		x = 0;
+		while (x < de_uint_x(get_shape(arr)) - 1)
+		{
+			draw_back_line(mlx_ptr_win, (t_line){f(arr, x, y), f(arr, x + 1, y)});
+			draw_back_line(mlx_ptr_win, (t_line){f(arr, x, y), f(arr, x, y + 1)});
+			x += 1;
+		}
+		y += 1;
+	}
+	return (0);
+}

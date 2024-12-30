@@ -102,6 +102,27 @@ t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp)
 	}
 }
 
+static void	draw_back_line_helper(\
+t_mlx_ptr_win mlx_ptr_win, t_line l)
+{
+	t_i32x2 *(dummy), d, s, e;
+	(void) dummy;
+	d = en_i32x2(abs(x(l.s) - x(l.e)), abs(y(l.s) - y(l.e)));
+	s = en_i32x2(((x(l.s) < x(l.e)) << 1) - 1, ((y(l.s) < y(l.e)) << 1) - 1);
+	e = en_i32x2(x(d) - y(d), 0);
+	while (true)
+	{
+		put_point(mlx_ptr_win, l.s, 0x0);
+		if (t_i32x2_eq(l.s, l.e))
+			break ;
+		e = en_i32x2(x(e), x(e) << 1);
+		e = t_i32x2_sub(e, en_i32x2(y(d) * (y(e) > -y(d)), 0));
+		l.s = t_i32x2_add(l.s, en_i32x2(x(s) * (y(e) > -y(d)), 0));
+		e = t_i32x2_add(e, en_i32x2(x(d) * (y(e) < x(d)), 0));
+		l.s = t_i32x2_add(l.s, en_i32x2(0, y(s) * (y(e) < x(d))));
+	}
+}
+
 void	draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp)
 {
 	draw_line_helper
@@ -112,5 +133,14 @@ void	draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp)
 			conv_u8x4_to_u16x4(cp.s),
 			conv_u8x4_to_u16x4(cp.e)
 		}
+	);
+}
+
+void	draw_back_line(t_mlx_ptr_win mlx_ptr_win, t_line l)
+{
+	draw_back_line_helper
+	(
+		mlx_ptr_win,
+		l
 	);
 }

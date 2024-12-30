@@ -57,6 +57,18 @@ t_64_elem	core_expr(vec2d_64 map, t_u32x2 counter, t_vector_directions vd)
 	return (p);
 }
 
+
+/// malloc 
+vec2d_64 create_point_map(vec2d_64 map)
+{
+	return (
+			init_vec2d_64(
+				de_uint_x(get_shape(map)),
+				de_uint_y(get_shape(map))
+			)
+	);
+}
+
 /// mapは、i32u32を格納した二次元配列
 /// map i32u32(z, color)
 /// 帰り値は、それぞれの点の描画位置を表した座標列
@@ -93,3 +105,22 @@ vec2d_64 calc_map(vec2d_64 map, t_vector_directions vd)
 	}
 	return (rarr);
 }
+
+enum e_result set_map(vec2d_64 point_map, vec2d_64 map, t_vector_directions vd)
+{
+	t_u32x2 counter;
+
+	counter = en_u32x2(0, 0);
+	while (de_uint_y(counter) < de_uint_y(get_shape(point_map)))
+	{
+		counter = en_u32x2(0, de_uint_y(counter));
+		while (de_uint_x(counter) < de_uint_x(get_shape(point_map)))
+		{
+			set_vec2d_elem(point_map, de_uint_x(counter), de_uint_y(counter), core_expr(map, counter, vd));
+			counter = t_u32x2_add(counter, en_u32x2(1, 0));
+		}
+		counter = t_u32x2_add(counter, en_u32x2(0, 1));
+	}
+	return (e_result_ok);
+}
+

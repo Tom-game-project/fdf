@@ -40,7 +40,12 @@ typedef struct s_position t_position;
 
 vec2d_64 calc_map(vec2d_64 map, t_vector_directions vd);
 void draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp);
+void	draw_back_line(t_mlx_ptr_win mlx_ptr_win, t_line l);
 int put_lines(t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor);
+
+int				put_back_lines(\
+t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr);
 void put_point(t_mlx_ptr_win data,t_i32x2 p, t_u8x4 color);
 
+enum e_result set_map(vec2d_64 point_map, vec2d_64 map, t_vector_directions vd);
 #endif

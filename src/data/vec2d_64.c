@@ -107,3 +107,4 @@ enum e_result add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
 	}
 	return (e_result_ok); 
 }
+
