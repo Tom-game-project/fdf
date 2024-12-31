@@ -32,7 +32,8 @@ SRCS		=	src/draw/draw_line.c\
 			src/fdf_loader/gnl/get_next_line.c\
 			src/fdf_loader/gnl/get_next_line_utils.c\
 			src/fdf_loader/loader_helper00.c\
-			src/fdf_loader/loader_helper01.c
+			src/fdf_loader/loader_helper01.c\
+			src/error/result.c
 
 # for test
 TEST		=	test_run
@@ -49,7 +50,7 @@ TEST_OBJS	=	$(TEST_SRCS:.c=.o)
 
 # Compiler option
 CC		=	cc
-CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024 -O2
+CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024
 LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
 RM_FLAGS	=	-rf
 

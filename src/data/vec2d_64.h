@@ -16,7 +16,8 @@
 # include "i32u32.h"
 # include "i32x2.h"
 # include "u32x2.h"
-# include "../error/result.h"
+
+#include "../error/result.h"
 
 #define DATA_PADDING 1
 #define SHARP 0

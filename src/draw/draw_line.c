@@ -140,9 +140,5 @@ void	draw_line(t_mlx_ptr_win mlx_ptr_win, t_line l, t_colorpair cp)
 
 void	draw_back_line(t_mlx_ptr_win mlx_ptr_win, t_line l)
 {
-	draw_back_line_helper
-	(
-		mlx_ptr_win,
-		l
-	);
+	draw_back_line_helper(mlx_ptr_win, l);
 }

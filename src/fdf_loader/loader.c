@@ -75,23 +75,24 @@ enum e_result get_z_color_word(\
 	return (e_result_ok);
 }
 
-t_i32x2 get_mapsize(char *filename)
+t_i32x2 get_mapsize(char *filename, int *err)
 {	
 	int fd;
 	char	*buf;
 	t_i32x2 counter; // (x, y)
 
 	fd = open(filename, O_RDONLY);
+	*err = 0;
 	if (fd == -1)
 	{
 		// TODO
 		printf("failed to open file\n");
+		*err = 1;
 		return (en_i32x2(-1, e_result_io_err));
 	}
 	counter = en_i32x2(0, 0);
 	while (true)
 	{
-		// printf("buffer size%d\n", BUFFER_SIZE);
 		buf = get_next_line(fd);
 		if (buf == NULL)
 			break ;
@@ -115,7 +116,7 @@ t_i32x2 get_mapsize(char *filename)
 /// t_i32u32(-123, 0);
 /// ```
 /// を返すような関数
-t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
+t_i32u32 z_color2t_i32u32(t_z_color_word zcolor, int *err)
 {
 	t_i32u32 r;
 	int32_t countofwords;
@@ -124,24 +125,19 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 
 	countofwords = count_word(zcolor ,is_comma);
 	get_z_color_word(zcolor, word, 0, is_comma);
-	r = en_i32u32(
-		str2int(word),
-		0x00ffffff
-	);
+	r = en_i32u32(str2int(word), 0x00ffffff);
+	*err = 0;
 	if (countofwords == 2)
 	{
-
 		get_z_color_word(zcolor, word, 1,is_comma);
 		color = colorcode2uint32(word);
 		if (de_uint_x(color) == e_result_ok)
-			r = en_i32u32(
-				de_iu_x(r),
-				de_uint_y(color)
-			);
+			r = en_i32u32(de_iu_x(r), de_uint_y(color));
 		else
 		{
 			// error TODO
 			printf("error in  z_color2t_i32u32\n");
+			*err = 1;
 		}
 	}
 	else if (countofwords == 1)
@@ -158,21 +154,24 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor)
 /// @param t_i32x2 mapsize (width, height)
 /// @param char *buf       一行のデータ
 /// @param vec2d_64 arr    整形後のデータを格納する部分
-int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
+enum e_result set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
 {
 	uint32_t x;
 	union u_64_elem a;
 	t_z_color_word word;
+	int err;
 
 	x = 0;
 	while (x < de_uint_x(mapsize))
 	{
 		get_z_color_word(buf, word, x, is_space);
-		a.i32u32 = z_color2t_i32u32(word);
+		a.i32u32 = z_color2t_i32u32(word, &err);
+		if (err)
+			return (e_result_load_err);
 		set_vec2d_elem(arr, x, y, a);
 		x += 1;
 	}
-	return (0);
+	return (e_result_ok);
 }
 
 /// マップを読み込んで、配列にデータをセットする
@@ -181,37 +180,39 @@ int set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
  	int fd;
  	char	*buf;
  	t_u32x2 counter; // (dx, dy)
+	enum e_result err;
 
  	fd = open(filename, O_RDONLY);
  	if (fd == -1)
  		return (e_result_io_err);
  	counter = en_u32x2(0, 0);
+	err = e_result_ok;
  	while (de_uint_y(counter) < de_uint_y(get_shape(arr)))
  	{
  		buf = get_next_line(fd);
  		if (buf == NULL)
  			break ;
-		set_row(de_uint_y(counter), get_shape(arr), buf, arr);
+		if (set_row(de_uint_y(counter), get_shape(arr), buf, arr) == e_result_load_err)
+		err = e_result_load_err;
  		free(buf);
  		counter = t_u32x2_add(counter, en_u32x2(0, 1));
  	}
- 	return (close(fd), e_result_ok);
+ 	return (close(fd), err);
  }
 
 /// 配列用のデータを格納するための領域を確保してメモリに読み込んだデータをセットする
 enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
 {
 	t_u32x2 mapsize;
+	int err;
 
-	mapsize = get_mapsize(filename);
+	mapsize = get_mapsize(filename, &err);
+	if (err)
+		return (e_result_io_err);
 	if (de_int_x(mapsize) == -1)
 		return (e_result_load_err);
         *arr = init_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
-	load_map(*arr, filename);
 	if (*arr == NULL)
-	{
-		printf("Error!\n");
 		return (e_result_allocation_err);
-	}
-	return (e_result_ok);
+	return (load_map(*arr, filename));
 }

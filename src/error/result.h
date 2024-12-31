@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef result_h
-#define result_h
+#ifndef RESULT_H
+#define RESULT_H
 
 // typedef enum e_result t_result;
-
 
 enum e_result
 {
@@ -27,5 +26,7 @@ enum e_result
 	e_result_io_err = 4,
 	e_result_arg_err = 5,
 };
+
+int print_error_msg(enum e_result err_code);
 
 #endif

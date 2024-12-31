@@ -3,23 +3,22 @@
 #include <X11/keysym.h>
 #include <X11/keysymdef.h>
 
-// 
+// std
 #include <stdint.h>
-#include "data/print_data.h"
 #include <stdlib.h>
-#include <math.h>
+#include <unistd.h>
 
+// mlx
 #include "../minilibx-linux/mlx.h"
+
 #include "data/i32x2.h"
 #include "data/vec2d_64.h"
 #include "draw/draw.h"
+#include "error/result.h"
 #include "fdf_loader/loader.h"
-
 #include "fdf.h"
 
-
-// test modules 
-#include <unistd.h>
+// test 
 #include <stdio.h>
 
 static int	cross_hook(t_mlx_data *data)
@@ -41,18 +40,16 @@ static int	cross_hook(t_mlx_data *data)
 static t_i32x2 div100(t_i32x2 a, t_mlx_data data)
 {
 	t_i32x2 r;
-	
+
 	r = t_i32x2_add(a, data.position);
 	return (en_i32x2(de_int_x(r) / data.zoom, de_int_y(r) / data.zoom));
 }
 
 int event_handler(int key, t_mlx_data *data)
 {
-	if (key == XK_Escape) // if q_key pressed
+	if (key == XK_Escape)
 	{
-		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
-		mlx_destroy_image(data->mlx_ptr, data->mlx_img);
-		mlx_loop_end(data->mlx_ptr);
+		cross_hook(data);
 		return (0);
 	}
 	else if (key == XK_w)
@@ -78,9 +75,6 @@ int event_handler(int key, t_mlx_data *data)
 		put_back_lines(*data, data->point_map, div100);
 		data->position = t_i32x2_add(data->position,en_i32x2(0, 10000));
 		put_lines(*data, data->point_map, data->map, div100);
-	}
-	else if (key == XK_Up)
-	{
 	}
 	else if (key == XK_Right)
 	{
@@ -124,9 +118,6 @@ int event_handler(int key, t_mlx_data *data)
 		});
 		put_lines(*data, data->point_map, data->map, div100);
 	}
-	else if (key == XK_Down)
-	{
-	}
 	else if (key == XK_n){
 		put_back_lines(*data, data->point_map, div100);
 		data->zoom += 10;
@@ -155,13 +146,17 @@ int main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
+		if (print_error_msg(alocate_memory_for_map(&data.map, argv[1])))
+		{
+			printf("some error occured\n");
+			return (1);
+		}
+		printf("Ok\n");
 		data.mlx_ptr = mlx_init();
 		data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, argv[1]);
 		data.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,  WINDOW_HEIGHT);
 		data.mlx_addr = mlx_get_data_addr(data.mlx_img, &data.bpp, &data.size_l, &data.endian);
 		mlx_clear_window(data.mlx_ptr, data.mlx_win);
-		alocate_memory_for_map(&data.map, argv[1]);
-
 		data.x_vector = en_i32x2(1732, 1000);
 		data.y_vector = en_i32x2(-1732, 1000);
 		data.z_vector = en_i32x2(0, -2000);
