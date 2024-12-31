@@ -147,11 +147,7 @@ int main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		if (print_error_msg(alocate_memory_for_map(&data.map, argv[1])))
-		{
-			printf("some error occured\n");
 			return (1);
-		}
-		printf("Ok\n");
 		data.mlx_ptr = mlx_init();
 		data.mlx_win = mlx_new_window(data.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, argv[1]);
 		data.mlx_img = mlx_new_image(data.mlx_ptr, WINDOW_WIDTH,  WINDOW_HEIGHT);

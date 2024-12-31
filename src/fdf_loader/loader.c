@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 
 // for test
 #include <stdio.h>
@@ -136,7 +137,7 @@ t_i32u32 z_color2t_i32u32(t_z_color_word zcolor, int *err)
 		else
 		{
 			// error TODO
-			printf("error in  z_color2t_i32u32\n");
+			//printf("error in  z_color2t_i32u32\n");
 			*err = 1;
 		}
 	}
@@ -189,13 +190,13 @@ enum e_result set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
 	err = e_result_ok;
  	while (de_uint_y(counter) < de_uint_y(get_shape(arr)))
  	{
- 		buf = get_next_line(fd);
- 		if (buf == NULL)
- 			break ;
+		buf = get_next_line(fd);
+		if (buf == NULL)
+			break ;
 		if (set_row(de_uint_y(counter), get_shape(arr), buf, arr) == e_result_load_err)
-		err = e_result_load_err;
- 		free(buf);
- 		counter = t_u32x2_add(counter, en_u32x2(0, 1));
+			err = e_result_load_err;
+		free(buf);
+		counter = t_u32x2_add(counter, en_u32x2(0, 1));
  	}
  	return (close(fd), err);
  }
@@ -207,8 +208,10 @@ enum e_result alocate_memory_for_map(vec2d_64 *arr, char *filename)
 	int err;
 
 	mapsize = get_mapsize(filename, &err);
-	if (err)
+	if (err == 1)
 		return (e_result_io_err);
+	if (mapsize == en_u32x2(0, 0))
+		return (e_result_load_err);
 	if (de_int_x(mapsize) == -1)
 		return (e_result_load_err);
         *arr = init_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
