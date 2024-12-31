@@ -21,8 +21,6 @@
 // test functions
 #include <stdio.h>
 
-#define DATA_PADDING 1
-#define SHARP 0
 
 /// `vec<vec<t_64_elem>>`
 ///

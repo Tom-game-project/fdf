@@ -85,6 +85,8 @@ t_mlx_ptr_win mlx_ptr_win, t_line l, t_colordiff cp)
 	d = en_i32x2(abs(x(l.s) - x(l.e)), abs(y(l.s) - y(l.e)));
 	s = en_i32x2(((x(l.s) < x(l.e)) << 1) - 1, ((y(l.s) < y(l.e)) << 1) - 1);
 	e = en_i32x2(x(d) - y(d), 0);
+	if (t_i32x2_max(d) == 0)
+		return ;
 	ci.s = t_u16x4_map(t_u16x4_div_scalar(t_u16x4_map(cp.s, cp.e, int16mf), \
 	(int16_t) t_i32x2_max(d)), 0, shift8_func);
 	ci.m = create_u16x4_bool_map(cp.s, cp.e, int16_lt);

@@ -18,6 +18,9 @@
 # include "u32x2.h"
 # include "../error/result.h"
 
+#define DATA_PADDING 1
+#define SHARP 0
+
 typedef union u_64_elem	t_64_elem;
 typedef t_64_elem		*vec2d_64;
 
@@ -36,4 +39,8 @@ vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i);
 t_u32x2			get_shape(vec2d_64 arr);
 
 enum e_result add_vec_i32x2 (vec2d_64 arr, t_i32x2 a);
+
+t_i32x2 get_we(vec2d_64 arr);
+t_i32x2 get_ns(vec2d_64 arr);
+
 #endif

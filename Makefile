@@ -16,6 +16,7 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/i32x2_decode.c\
 			src/data/i32x2_ope_basic.c\
 			src/data/i32x2_ope_extra.c\
+			src/data/i32x2_complex.c\
 			src/data/u8x4_encode.c\
 			src/data/u8x4_decode.c\
 			src/data/u8x4_ope_basic.c\
@@ -26,6 +27,7 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/u16x4_ope_color.c\
 			src/data/print_data.c\
 			src/data/vec2d_64.c\
+			src/data/vec2d_64_ope_basic.c\
 			src/fdf_loader/loader.c\
 			src/fdf_loader/gnl/get_next_line.c\
 			src/fdf_loader/gnl/get_next_line_utils.c\
@@ -47,7 +49,7 @@ TEST_OBJS	=	$(TEST_SRCS:.c=.o)
 
 # Compiler option
 CC		=	cc
-CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024
+CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024 -O2
 LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
 RM_FLAGS	=	-rf
 

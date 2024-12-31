@@ -15,6 +15,7 @@
 #include "../data/vec2d_64.h"
 #include "../data/u32x2.h"
 #include "../args/args_structs.h"
+#include "../fdf.h"
 #include "draw.h"
 #include <stdint.h>
 
@@ -30,7 +31,7 @@ static t_i32u32	g(vec2d_64 arr, uint32_t x, uint32_t y)
 }
 
 int				put_lines(\
-t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor)
+ t_mlx_data data, vec2d_64 arr, vec2d_64 zcolor, t_i32x2 (*func)(t_i32x2, t_mlx_data))
 {
 	uint32_t	y;
 	uint32_t	x;
@@ -41,11 +42,25 @@ t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor)
 		x = 0;
 		while (x < de_uint_x(get_shape(zcolor)) - 1)
 		{
-			draw_line(mlx_ptr_win, (t_line){f(arr, x, y), f(arr, x + 1, y)},
-				(t_colorpair){de_iu_y((g(zcolor, x, y))),
+			draw_line(
+					(t_mlx_ptr_win){data.mlx_ptr,data.mlx_win,data.mlx_img,data.mlx_addr},
+				       	(t_line){
+						func(f(arr, x, y), data),
+						func(f(arr, x + 1, y), data)
+					},
+				(t_colorpair){
+				de_iu_y(
+						(g(zcolor, x, y)
+				)),
 				de_iu_y(g(zcolor, x + 1, y))});
-			draw_line(mlx_ptr_win, (t_line){f(arr, x, y), f(arr, x, y + 1)},
-				(t_colorpair){de_iu_y((g(zcolor, x, y))),
+			draw_line(
+					(t_mlx_ptr_win){data.mlx_ptr,data.mlx_win,data.mlx_img,data.mlx_addr},
+				       	(t_line){
+						func(f(arr, x, y), data),
+						func(f(arr, x, y + 1), data)
+					},
+				(t_colorpair){
+				de_iu_y((g(zcolor, x, y))),
 				de_iu_y(g(zcolor, x, y + 1))});
 			x += 1;
 		}
@@ -55,7 +70,7 @@ t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr, vec2d_64 zcolor)
 }
 
 int				put_back_lines(\
-t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr)
+ t_mlx_data data, vec2d_64 arr, t_i32x2 (*func)(t_i32x2, t_mlx_data))
 {
 	uint32_t	y;
 	uint32_t	x;
@@ -66,8 +81,18 @@ t_mlx_ptr_win mlx_ptr_win, vec2d_64 arr)
 		x = 0;
 		while (x < de_uint_x(get_shape(arr)) - 1)
 		{
-			draw_back_line(mlx_ptr_win, (t_line){f(arr, x, y), f(arr, x + 1, y)});
-			draw_back_line(mlx_ptr_win, (t_line){f(arr, x, y), f(arr, x, y + 1)});
+			draw_back_line(
+					(t_mlx_ptr_win){data.mlx_ptr,data.mlx_win,data.mlx_img,data.mlx_addr},
+				       	(t_line){
+					func(f(arr, x, y), data),
+				       	func(f(arr, x + 1, y), data)
+					});
+			draw_back_line(
+					(t_mlx_ptr_win){data.mlx_ptr,data.mlx_win,data.mlx_img,data.mlx_addr},
+					(t_line){
+					func(f(arr, x, y), data), 
+					func(f(arr, x, y + 1), data)
+					});
 			x += 1;
 		}
 		y += 1;
