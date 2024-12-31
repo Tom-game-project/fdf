@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:27:46 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 17:23:54 by tmuranak         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:32:31 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ enum e_result	vec2d_map(vec2d_64 arr, t_64_elem (*func)(t_64_elem a))
 	return (e_result_ok);
 }
 
-enum e_result add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
+enum e_result	add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
 {
-	uint32_t x;
-	uint32_t y;
-	t_64_elem i;
+	uint32_t	x;
+	uint32_t	y;
+	t_64_elem	i;
 
 	y = 0;
 	while (y < de_uint_y(get_shape(arr)))
@@ -103,6 +103,6 @@ enum e_result add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
 		}
 		y += 1;
 	}
-	return (e_result_ok); 
+	return (e_result_ok);
 }
 

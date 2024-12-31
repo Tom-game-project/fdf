@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:27:50 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 17:26:33 by tmuranak         ###   ########.fr       */
+/*   Updated: 2024/12/31 19:32:50 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include "i32u32.h"
 # include "i32x2.h"
 # include "u32x2.h"
-
-#include "../error/result.h"
+# include "../error/result.h"
 
 #define DATA_PADDING 1
 #define SHARP 0

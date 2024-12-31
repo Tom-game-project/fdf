@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   u16x4_ope_color.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 18:24:20 by tmuranak          #+#    #+#             */
+/*   Updated: 2024/12/31 19:29:50 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -5,12 +17,12 @@
 #include "print_data.h"
 #include "u8x4.h"
 
-static int16_t int16_add(int16_t a, int16_t b)
+static int16_t	int16_add(int16_t a, int16_t b)
 {
 	return (a + b);
 }
 
-static int16_t int16_sub(int16_t a, int16_t b)
+static int16_t	int16_sub(int16_t a, int16_t b)
 {
 	return (a - b);
 }
@@ -18,7 +30,7 @@ static int16_t int16_sub(int16_t a, int16_t b)
 // TODO
 // color tools
 
-t_u16x4 t_u16x4_map(t_u16x4 a, t_u16x4 b, int16_t (*func)(int16_t a, int16_t b))
+t_u16x4	t_u16x4_map(t_u16x4 a, t_u16x4 b, int16_t (*func)(int16_t a, int16_t b))
 {
 	return (
 		en_u16x4(
@@ -30,9 +42,11 @@ t_u16x4 t_u16x4_map(t_u16x4 a, t_u16x4 b, int16_t (*func)(int16_t a, int16_t b))
 	);
 }
 
-t_u16x4 t_u16x4_cal_color(t_u16x4 a, t_u16x4 b, t_u8x4 map)
+typedef int16_t	(*t_magma[2])(int16_t, int16_t);
+
+t_u16x4	t_u16x4_cal_color(t_u16x4 a, t_u16x4 b, t_u8x4 map)
 {
-	int16_t		(*func[2])(int16_t a, int16_t b);
+	t_magma	func;
 
 	func[0] = int16_add;
 	func[1] = int16_sub;
@@ -46,7 +60,10 @@ t_u16x4 t_u16x4_cal_color(t_u16x4 a, t_u16x4 b, t_u8x4 map)
 	);
 }
 
-t_u8x4 create_u16x4_bool_map(t_u16x4 a,t_u16x4 b, bool (*func)(int16_t a, int16_t b))
+t_u8x4	create_u16x4_bool_map(
+	t_u16x4 a,
+	t_u16x4 b,
+	bool (*func)(int16_t a, int16_t b))
 {
 	return (
 		en_u8x4(

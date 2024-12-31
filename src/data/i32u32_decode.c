@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   i32u32_decode.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 18:23:20 by tmuranak          #+#    #+#             */
+/*   Updated: 2024/12/31 19:10:01 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "i32u32.h"
 
-int32_t de_iu_x(t_i32u32 data)
+int32_t	de_iu_x(t_i32u32 data)
 {
-	return ((int32_t) (data >> 32));
+	return ((int32_t)(data >> 32));
 }
 
-uint32_t de_iu_y(t_i32u32 data)
+uint32_t	de_iu_y(t_i32u32 data)
 {
-	return ((uint32_t) (data & 0xFFFFFFFF));
+	return ((uint32_t)(data & 0xFFFFFFFF));
 }

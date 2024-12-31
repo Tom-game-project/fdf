@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   u16x4_ope_basic.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 18:24:15 by tmuranak          #+#    #+#             */
+/*   Updated: 2024/12/31 19:21:49 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "u16x4.h"
 
-t_u16x4 t_u16x4_add(t_u16x4 a, t_u16x4 b)
+t_u16x4	t_u16x4_add(t_u16x4 a, t_u16x4 b)
 {
 	return (
 		en_u16x4(
@@ -12,7 +24,7 @@ t_u16x4 t_u16x4_add(t_u16x4 a, t_u16x4 b)
 	);
 }
 
-t_u16x4 t_u16x4_sub(t_u16x4 a, t_u16x4 b)
+t_u16x4	t_u16x4_sub(t_u16x4 a, t_u16x4 b)
 {
 	return (
 		en_u16x4(
@@ -24,7 +36,7 @@ t_u16x4 t_u16x4_sub(t_u16x4 a, t_u16x4 b)
 	);
 }
 
-t_u16x4 t_u16x4_mul(t_u16x4 a, t_u16x4 b)
+t_u16x4	t_u16x4_mul(t_u16x4 a, t_u16x4 b)
 {
 	return (
 		en_u16x4(
@@ -36,8 +48,7 @@ t_u16x4 t_u16x4_mul(t_u16x4 a, t_u16x4 b)
 	);
 }
 
-
-t_u16x4 t_u16x4_div(t_u16x4 a, t_u16x4 b)
+t_u16x4	t_u16x4_div(t_u16x4 a, t_u16x4 b)
 {
 	return (
 		en_u16x4(
@@ -49,7 +60,7 @@ t_u16x4 t_u16x4_div(t_u16x4 a, t_u16x4 b)
 	);
 }
 
-t_u16x4 t_u16x4_div_scalar(t_u16x4 a, int16_t b)
+t_u16x4	t_u16x4_div_scalar(t_u16x4 a, int16_t b)
 {
 	return (
 		en_u16x4(

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   u8x4_ope_basic.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 18:24:00 by tmuranak          #+#    #+#             */
+/*   Updated: 2024/12/31 19:26:51 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "u8x4.h"
 #include <stdint.h>
@@ -5,7 +17,7 @@
 
 //typedef uint32_t t_u8x4;
 
-t_u8x4 t_u8x4_add(t_u8x4 a, t_u8x4 b)
+t_u8x4	t_u8x4_add(t_u8x4 a, t_u8x4 b)
 {
 	return (
 		en_u8x4(
@@ -17,7 +29,7 @@ t_u8x4 t_u8x4_add(t_u8x4 a, t_u8x4 b)
 	);
 }
 
-t_u8x4 t_u8x4_sub(t_u8x4 a, t_u8x4 b)
+t_u8x4	t_u8x4_sub(t_u8x4 a, t_u8x4 b)
 {
 	return (
 		en_u8x4(
@@ -29,7 +41,7 @@ t_u8x4 t_u8x4_sub(t_u8x4 a, t_u8x4 b)
 	);
 }
 
-t_u8x4 t_u8x4_mul(t_u8x4 a, t_u8x4 b)
+t_u8x4	t_u8x4_mul(t_u8x4 a, t_u8x4 b)
 {
 	return (
 		en_u8x4(
@@ -41,7 +53,7 @@ t_u8x4 t_u8x4_mul(t_u8x4 a, t_u8x4 b)
 	);
 }
 
-t_u8x4 t_u8x4_div(t_u8x4 a, t_u8x4 b)
+t_u8x4	t_u8x4_div(t_u8x4 a, t_u8x4 b)
 {
 	return (
 		en_u8x4(
@@ -52,5 +64,3 @@ t_u8x4 t_u8x4_div(t_u8x4 a, t_u8x4 b)
 		)
 	);
 }
-
-

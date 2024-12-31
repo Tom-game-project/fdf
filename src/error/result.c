@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   result.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/31 18:25:56 by tmuranak          #+#    #+#             */
+/*   Updated: 2024/12/31 19:11:04 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "result.h"
 #include "unistd.h"
 
@@ -11,32 +23,26 @@ static int f_nop()
 int f_alocation_error_msg()
 {
 	return ((void) write(STDERR_FILENO, "allocation error occured\n", 25), 1);
-	// return (1);
 }
 
 int f_load_error_msg()
 {
 	return ((void) write(STDERR_FILENO, "load error occured\n", 19), 1);
-	// return (1);
 }
 
 int f_index_out_of_range_error_msg()
 {
 	return ((void) write(STDERR_FILENO, "index out of range error msg\n", 29), 1);
-	// return (1);
 }
 
 int f_io_error_msg()
 {
 	return ((void) write(STDERR_FILENO, "io error\n", 10), 1);
-
-	// return (1);
 }
 
 int f_arg_error_msg()
 {
 	return ((void) write(STDERR_FILENO, "args error\n", 12), 1);
-	//return (1);
 }
 
 int set_error_msg_function(
