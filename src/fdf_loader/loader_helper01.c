@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:50 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:28:51 by tmuranak         ###   ########.fr       */
+/*   Updated: 2024/12/31 20:03:25 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /// unsafe 
 /// この関数では必ずdstのサイズを認識した上で実行してください
 /// また、この関数では最後は'\0'文字で埋められません
-static bool set_str(char *dst, char *fr)
+static bool	set_str(char *dst, char *fr)
 {
 	while (*fr != '\0')
 		*dst++ = *fr++;
@@ -39,10 +39,10 @@ static bool set_str(char *dst, char *fr)
 }
 
 ///
-uint32_t get_hex_index(char c)
+uint32_t	get_hex_index(char c)
 {
-	char hex_table[HEX_CHAR_TABLE_LENGTH];
-	int i;
+	char	hex_table[HEX_CHAR_TABLE_LENGTH];
+	int		i;
 
 	set_str(hex_table, HEX_CHAR_TABLE);
 	i = 0;
@@ -60,7 +60,7 @@ uint32_t get_hex_index(char c)
 			return (i);
 		i += 1;
 	}
-	return (0); // unreachable 
+	return (0);
 }
 
 /// 入力は以下のようなもの
@@ -72,9 +72,9 @@ uint32_t get_hex_index(char c)
 /// ```
 ///
 /// return t_u32x2(error_code, data)
-t_u32x2 colorcode2uint32(char *str)
+t_u32x2	colorcode2uint32(char *str)
 {
-	uint32_t r;
+	uint32_t	r;
 
 	if (*str++ != '0')
 		return (en_u32x2(e_result_load_err, 0));
@@ -93,10 +93,10 @@ t_u32x2 colorcode2uint32(char *str)
 }
 
 /// 数字文字列をin32_t型に変換する
-int32_t str2int(char *str)
+int32_t	str2int(char *str)
 {
-	int32_t sign;
-	int32_t r;
+	int32_t	sign;
+	int32_t	r;
 
 	sign = 1;
 	if (*str == '-')
