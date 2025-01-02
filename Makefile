@@ -26,7 +26,6 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/u16x4_ope_basic.c\
 			src/data/u16x4_ope_extra.c\
 			src/data/u16x4_ope_color.c\
-			src/data/print_data.c\
 			src/data/vec2d_64.c\
 			src/data/vec2d_64_ope_basic.c\
 			src/fdf_loader/loader.c\

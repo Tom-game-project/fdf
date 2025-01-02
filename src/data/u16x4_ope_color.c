@@ -6,11 +6,10 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:24:20 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 17:31:39 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:44:40 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "print_data.h"
 #include "u16x4.h"
 #include "u8x4.h"
 #include <stdbool.h>

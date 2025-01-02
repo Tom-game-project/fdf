@@ -20,6 +20,6 @@ int	f_index_out_of_range_error_msg(void);
 int	f_io_error_msg(void);
 int	f_arg_error_msg(void);
 int	f_is_not_fdf_file_msg(void);
-int	f_mlx_error_msg();
+int	f_mlx_error_msg(void);
 
 #endif
