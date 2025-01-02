@@ -91,7 +91,7 @@ $(MLX_HEADER):
 $(MLX):
 	$(MAKE) -C minilibx-linux
 
-clean:
+clean: cleanmaps
 	$(RM) $(RM_FLAGS) $(MAIN_OBJ)
 	$(RM) $(RM_FLAGS) minilibx-linux/
 	$(RM) $(RM_FLAGS) $(OBJS)
