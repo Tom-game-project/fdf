@@ -38,7 +38,9 @@ SRCS		=	src/draw/draw_line.c\
 			src/fdf_loader/checker.c\
 			src/error/result.c\
 			src/error/error_msg00.c\
-			src/error/error_msg01.c
+			src/error/error_msg01.c\
+			src/hook/hook_helper00.c\
+			src/hook/hook.c
 
 # for test
 TEST		=	test_run

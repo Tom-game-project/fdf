@@ -24,6 +24,7 @@ int	set_error_msg_function(int (*func[ERROR_VALIATION])())
 	func[e_result_io_err] = f_io_error_msg;
 	func[e_result_arg_err] = f_arg_error_msg;
 	func[e_result_is_not_fdf_file_err] = f_is_not_fdf_file_msg;
+	func[e_result_mlx_err] = f_mlx_error_msg;
 	return (0);
 }
 

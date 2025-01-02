@@ -22,6 +22,7 @@ enum e_result
 	e_result_io_err = 4,
 	e_result_arg_err = 5,
 	e_result_is_not_fdf_file_err = 6,
+	e_result_mlx_err = 7
 };
 
 int	print_error_msg(enum e_result err_code);
