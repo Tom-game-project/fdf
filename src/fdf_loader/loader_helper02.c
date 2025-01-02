@@ -37,7 +37,7 @@
 /// t_z_color_word word ワードデータの格納先
 /// uint32_t x          x座標
 /// bool (*is_delimiter)(char) 区切り文字の定義
-enum e_result	get_z_color_word(char *str, t_z_color_word word, uint32_t x,
+enum e_result	get_z_color_word(char *str, t_colorword word, uint32_t x,
 		bool (*is_delimiter)(char))
 {
 	int32_t		i;
@@ -56,11 +56,11 @@ enum e_result	get_z_color_word(char *str, t_z_color_word word, uint32_t x,
 		}
 		else if (!is_delimiter(*str) && !flag)
 			flag = true;
-		if (flag && w == x && i < Z_COLOR_WORD_MAX_LENGTH - 1)
+		if (flag && w == x && i < ZCOLORWORDMAXLENGTH - 1)
 			word[i++] = *str;
 		str++;
 	}
-	if (Z_COLOR_WORD_MAX_LENGTH < i)
+	if (ZCOLORWORDMAXLENGTH < i)
 		return (e_result_load_err);
 	word[i] = '\0';
 	return (e_result_ok);
@@ -101,11 +101,11 @@ t_i32x2	get_mapsize(char *filename, enum e_result *err)
 /// t_i32u32(-123, 0);
 /// ```
 /// を返すような関数
-t_i32u32	z_color2t_i32u32(t_z_color_word zcolor, int *err)
+t_i32u32	z_color2t_i32u32(t_colorword zcolor, int *err)
 {
 	t_i32u32		r;
 	int32_t			countofwords;
-	t_z_color_word	word;
+	t_colorword	word;
 	t_u32x2			color;
 
 	countofwords = count_word(zcolor, is_comma);
@@ -136,7 +136,7 @@ enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, t_vec2d_64 arr)
 {
 	uint32_t		x;
 	union u_64_elem	a;
-	t_z_color_word	word;
+	t_colorword	word;
 	int				err;
 
 	x = 0;

@@ -22,9 +22,9 @@
 
 // 受け付ける単語を格納するために最小限必要なサイズ,型
 // "-2147483648,0x00000000" '\0'
-# define Z_COLOR_WORD_MAX_LENGTH 23
+# define ZCOLORWORDMAXLENGTH 23
 
-typedef char	t_z_color_word[Z_COLOR_WORD_MAX_LENGTH];
+typedef char	t_colorword[23];
 
 // 簡単な文字列の操作
 bool			is_space(char c);
@@ -39,11 +39,11 @@ t_u32x2			colorcode2uint32(char *str);
 int32_t			str2int(char *str);
 bool			is_fdf_filename(char *filename);
 
-enum e_result	get_z_color_word(char *str, t_z_color_word word, uint32_t x,
+enum e_result	get_z_color_word(char *str, t_colorword word, uint32_t x,
 					bool (*is_delimiter)(char));
 
 t_i32x2			get_mapsize(char *filename, enum e_result *err);
-t_i32u32		z_color2t_i32u32(t_z_color_word zcolor, int *err);
+t_i32u32		z_color2t_i32u32(t_colorword zcolor, int *err);
 enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, t_vec2d_64 arr);
 enum e_result	load_map(t_vec2d_64 arr, char *filename);
 
