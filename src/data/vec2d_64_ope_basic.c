@@ -6,19 +6,20 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:25:27 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 13:44:58 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:25:31 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "i32x2.h"
-#include "vec2d_64.h"
 #include "stdint.h"
+#include "vec2d_64.h"
 #include <stdint.h>
-///  n 
+
+///  n
 /// w e
 ///  s
 
-/// return t_i32x2(w, e);
+/// return (t_i32x2(w, e));
 t_i32x2	get_we(vec2d_64 arr)
 {
 	t_u32x2		shape;
@@ -45,7 +46,7 @@ t_i32x2	get_we(vec2d_64 arr)
 	return (r);
 }
 
-/// return t_i32x2(w, e);
+/// return (t_i32x2(w, e));
 t_i32x2	get_ns(vec2d_64 arr)
 {
 	t_u32x2		shape;
@@ -70,4 +71,25 @@ t_i32x2	get_ns(vec2d_64 arr)
 		i += 1;
 	}
 	return (r);
+}
+
+enum e_result	add_vec_i32x2(vec2d_64 arr, t_i32x2 a)
+{
+	uint32_t	x;
+	uint32_t	y;
+	t_64_elem	i;
+
+	y = 0;
+	while (y < de_uint_y(get_shape(arr)))
+	{
+		x = 0;
+		while (x < de_uint_x(get_shape(arr)))
+		{
+			i.i32x2 = t_i32x2_add(get_vec2d_elem(arr, x, y).i32x2, a);
+			set_vec2d_elem(arr, x, y, i);
+			x += 1;
+		}
+		y += 1;
+	}
+	return (e_result_ok);
 }

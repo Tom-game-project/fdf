@@ -3,7 +3,8 @@ NAME		=	fdf
 MAIN_SRC	=	src/fdf.c
 
 SRCS		=	src/draw/draw_line.c\
-			src/draw/draw_line_helper.c\
+			src/draw/draw_line_helper00.c\
+			src/draw/draw_line_helper01.c\
 			src/draw/draw_lines.c\
 			src/draw/draw_map.c\
 			src/draw/draw_point.c\
@@ -33,8 +34,11 @@ SRCS		=	src/draw/draw_line.c\
 			src/fdf_loader/gnl/get_next_line_utils.c\
 			src/fdf_loader/loader_helper00.c\
 			src/fdf_loader/loader_helper01.c\
+			src/fdf_loader/loader_helper02.c\
 			src/fdf_loader/checker.c\
-			src/error/result.c
+			src/error/result.c\
+			src/error/error_msg00.c\
+			src/error/error_msg01.c
 
 # for test
 TEST		=	test_run

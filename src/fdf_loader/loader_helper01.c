@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:50 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/31 20:03:25 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 17:38:20 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int32_t	str2int(char *str)
 		if (is_decimalchar(*str))
 			r = 10 * r + (*str - '0');
 		else
-			printf("str2int Error!\n"); // TODO
+			printf("str2int Error!\n");
 		str++;
 	}
 	return (sign * r);
