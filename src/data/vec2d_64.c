@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../error/result.h"
 #include "i32x2.h"
 #include "u32x2.h"
 #include "vec2d_64.h"
-
-#include <stdlib.h>
 #include <stdint.h>
-#include "../error/result.h"
+#include <stdlib.h>
 
 // test functions
 #include <stdio.h>
-
 
 /// `vec<vec<t_64_elem>>`
 ///
@@ -31,8 +29,8 @@ vec2d_64	init_vec2d_64(uint32_t width, uint32_t height)
 {
 	vec2d_64	r;
 
-	r = (t_64_elem *)malloc(\
-		sizeof(t_64_elem) * (width * height + DATA_PADDING));
+	r = (t_64_elem *)malloc(sizeof(t_64_elem) * (width * height
+				+ DATA_PADDING));
 	if (r == NULL)
 		return (NULL);
 	r[SHARP].u32x2 = en_u32x2(width, height);
@@ -49,8 +47,8 @@ t_64_elem	get_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y)
 }
 
 /// data[y][x] = i;
-enum e_result	set_vec2d_elem(\
-	vec2d_64 data, uint32_t x, uint32_t y, t_64_elem i)
+enum e_result	set_vec2d_elem(vec2d_64 data, uint32_t x, uint32_t y,
+		t_64_elem i)
 {
 	uint32_t	width;
 	uint32_t	height;
@@ -85,7 +83,7 @@ enum e_result	vec2d_map(vec2d_64 arr, t_64_elem (*func)(t_64_elem a))
 	return (e_result_ok);
 }
 
-enum e_result	add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
+enum e_result	add_vec_i32x2(vec2d_64 arr, t_i32x2 a)
 {
 	uint32_t	x;
 	uint32_t	y;
@@ -105,4 +103,3 @@ enum e_result	add_vec_i32x2 (vec2d_64 arr, t_i32x2 a)
 	}
 	return (e_result_ok);
 }
-

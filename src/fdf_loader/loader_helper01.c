@@ -10,25 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
 #include "../data/u32x2.h"
 #include "../error/result.h"
-
 #include "loader_helper.h"
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
 
 #define HEX_CHAR_TABLE_LENGTH 16
 #define HEX_CHAR_TABLE "0123456789abcdef"
 #define LHEX_CHAR_TABLE "0123456789ABCDEF"
 
 /// # loader_helper01
-/// 
+///
 /// ここには、数字文字列をint,hexに変換する関数
 /// fdfフォーマットで書かれた最小単位の情報を解釈する関数
 ///
 
-/// unsafe 
+/// unsafe
 /// この関数では必ずdstのサイズを認識した上で実行してください
 /// また、この関数では最後は'\0'文字で埋められません
 static bool	set_str(char *dst, char *fr)
@@ -115,4 +114,3 @@ int32_t	str2int(char *str)
 	}
 	return (sign * r);
 }
-

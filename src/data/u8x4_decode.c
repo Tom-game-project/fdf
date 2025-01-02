@@ -31,4 +31,3 @@ uint8_t	de_u8x4_d(t_u8x4 data)
 {
 	return ((uint8_t)(data & 0xFFFFFFFF));
 }
-

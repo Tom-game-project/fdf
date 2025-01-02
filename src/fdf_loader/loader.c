@@ -17,33 +17,28 @@
 #include "../error/result.h"
 
 // data
-#include "../data/i32x2.h"
 #include "../data/i32u32.h"
+#include "../data/i32x2.h"
 #include "../data/vec2d_64.h"
-
+#include <fcntl.h>
 #include <limits.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <fcntl.h>
 #include <sys/stat.h>
 
 // for test
+#include "loader_helper.h"
 #include <stdio.h>
 #include <unistd.h>
-#include "loader_helper.h"
 
 /// 返り値はエラーコード
-/// 
+///
 /// char *str           一行分のデータ
 /// t_z_color_word word ワードデータの格納先
 /// uint32_t x          x座標
 /// bool (*is_delimiter)(char) 区切り文字の定義
-enum e_result	get_z_color_word(\
-	char *str,
-	t_z_color_word word,
-	uint32_t x,
-	bool (*is_delimiter)(char)
-)
+enum e_result	get_z_color_word(char *str, t_z_color_word word, uint32_t x,
+		bool (*is_delimiter)(char))
 {
 	int32_t		i;
 	uint32_t	w;
@@ -72,7 +67,7 @@ enum e_result	get_z_color_word(\
 }
 
 t_i32x2	get_mapsize(char *filename, enum e_result *err)
-{	
+{
 	int		fd;
 	char	*buf;
 	t_i32x2	counter;
@@ -87,8 +82,8 @@ t_i32x2	get_mapsize(char *filename, enum e_result *err)
 		buf = get_next_line(fd);
 		if (buf == NULL)
 			break ;
-		if (de_int_x(counter) != 0 && \
-		de_int_x(counter) != count_word(buf, is_space))
+		if (de_int_x(counter) != 0 && de_int_x(counter) != count_word(buf,
+				is_space))
 			*err = e_result_load_err;
 		else if (count_word(buf, is_space) != 0)
 			counter = en_i32x2(count_word(buf, is_space), de_int_y(counter));
@@ -175,8 +170,8 @@ enum e_result	load_map(vec2d_64 arr, char *filename)
 		buf = get_next_line(fd);
 		if (buf == NULL)
 			break ;
-		if (set_row(de_uint_y(counter), get_shape(arr), buf, arr) == \
-		e_result_load_err)
+		if (set_row(de_uint_y(counter), get_shape(arr), buf,
+				arr) == e_result_load_err)
 			err = e_result_load_err;
 		free(buf);
 		counter = t_u32x2_add(counter, en_u32x2(0, 1));
@@ -185,11 +180,10 @@ enum e_result	load_map(vec2d_64 arr, char *filename)
 }
 
 /// 配列用のデータを格納するための領域を確保してメモリに読み込んだデータをセットする
-enum e_result	alocate_memory_for_map(\
-vec2d_64 *arr, char *filename)
+enum e_result	alocate_memory_for_map(vec2d_64 *arr, char *filename)
 {
-	t_u32x2	mapsize;
-	enum e_result err;
+	t_u32x2			mapsize;
+	enum e_result	err;
 
 	if (!is_fdf_filename(filename))
 		return (e_result_is_not_fdf_file_err);
