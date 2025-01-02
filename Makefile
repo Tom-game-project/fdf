@@ -33,6 +33,7 @@ SRCS		=	src/draw/draw_line.c\
 			src/fdf_loader/gnl/get_next_line_utils.c\
 			src/fdf_loader/loader_helper00.c\
 			src/fdf_loader/loader_helper01.c\
+			src/fdf_loader/checker.c\
 			src/error/result.c
 
 # for test

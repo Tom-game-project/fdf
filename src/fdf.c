@@ -31,7 +31,6 @@
 #include "fdf.h"
 
 // test 
-#include <stdio.h>
 
 static int	cross_hook(t_mlx_data *data)
 {

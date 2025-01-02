@@ -71,14 +71,14 @@ enum e_result	get_z_color_word(\
 	return (e_result_ok);
 }
 
-t_i32x2	get_mapsize(char *filename, int *err)
+t_i32x2	get_mapsize(char *filename, enum e_result *err)
 {	
 	int		fd;
 	char	*buf;
 	t_i32x2	counter;
 
 	fd = open(filename, O_RDONLY);
-	*err = (fd == -1);
+	*err = (fd == -1) * e_result_io_err;
 	if (fd == -1)
 		return (en_i32x2(-1, e_result_io_err));
 	counter = en_i32x2(0, 0);
@@ -89,7 +89,7 @@ t_i32x2	get_mapsize(char *filename, int *err)
 			break ;
 		if (de_int_x(counter) != 0 && \
 		de_int_x(counter) != count_word(buf, is_space))
-			return (free(buf), close(fd), en_i32x2(-1, e_result_load_err));
+			*err = e_result_load_err;
 		else if (count_word(buf, is_space) != 0)
 			counter = en_i32x2(count_word(buf, is_space), de_int_y(counter));
 		counter = t_i32x2_add(counter, en_i32x2(0, 1));
@@ -97,7 +97,6 @@ t_i32x2	get_mapsize(char *filename, int *err)
 	}
 	return (close(fd), counter);
 }
-
 
 /// ```
 /// -123,0x00000000
@@ -190,16 +189,20 @@ enum e_result	alocate_memory_for_map(\
 vec2d_64 *arr, char *filename)
 {
 	t_u32x2	mapsize;
-	int		err;
+	enum e_result err;
 
+	if (!is_fdf_filename(filename))
+		return (e_result_is_not_fdf_file_err);
 	mapsize = get_mapsize(filename, &err);
-	if (err == 1)
+	if (err == e_result_io_err)
 		return (e_result_io_err);
+	else if (err == e_result_load_err)
+		return (e_result_load_err);
 	if (mapsize == en_u32x2(0, 0))
 		return (e_result_load_err);
 	if (de_int_x(mapsize) == -1)
 		return (e_result_load_err);
-		*arr = init_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
+	*arr = init_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
 	if (*arr == NULL)
 		return (e_result_allocation_err);
 	return (load_map(*arr, filename));

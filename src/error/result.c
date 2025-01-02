@@ -45,6 +45,11 @@ int f_arg_error_msg()
 	return ((void) write(STDERR_FILENO, "args error\n", 12), 1);
 }
 
+int f_is_not_fdf_file_msg()
+{
+	return ((void) write(STDERR_FILENO, "is not fdf file\n", 16), 1);
+}
+
 int set_error_msg_function(
 	int (*func[ERROR_VALIATION])()
 )
@@ -54,6 +59,7 @@ int set_error_msg_function(
 	func[e_result_load_err] = f_load_error_msg;
 	func[e_result_io_err] = f_io_error_msg;
 	func[e_result_arg_err] = f_arg_error_msg;
+	func[e_result_is_not_fdf_file_err] = f_is_not_fdf_file_msg;
 	return (0);
 }
 

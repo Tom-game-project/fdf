@@ -23,6 +23,7 @@ enum e_result
 	e_result_index_out_of_range_err = 3,
 	e_result_io_err = 4,
 	e_result_arg_err = 5,
+	e_result_is_not_fdf_file_err = 6,
 };
 
 int	print_error_msg(enum e_result err_code);

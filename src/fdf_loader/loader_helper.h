@@ -37,5 +37,6 @@ bool		is_decimalchar(char c);
 uint32_t	get_hex_index(char c);
 t_u32x2		colorcode2uint32(char *str);
 int32_t		str2int(char *str);
+bool	is_fdf_filename(char *filename);
 
 #endif
