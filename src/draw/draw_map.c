@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:22 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/31 19:58:24 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:47:09 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_64_elem	core_expr(vec2d_64 map, t_u32x2 counter, t_vector_directions vd)
 			vd.vector_z));
 	return (p);
 }
-
 
 /// malloc 
 vec2d_64	create_point_map(vec2d_64 map)
@@ -115,4 +114,3 @@ enum e_result	set_map(\
 	}
 	return (e_result_ok);
 }
-

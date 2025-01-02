@@ -6,10 +6,9 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:24:00 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/31 19:26:51 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:43:51 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "u8x4.h"
 #include <stdint.h>

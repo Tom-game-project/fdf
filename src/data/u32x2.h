@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:27:42 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 17:13:12 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:44:49 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdint.h>
 # include <stdint.h>
 # include <limits.h>
-
 
 /// # t_u32x2
 /// |-------64bit-------|

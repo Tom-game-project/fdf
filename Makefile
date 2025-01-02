@@ -55,13 +55,15 @@ CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024
 LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
 RM_FLAGS	=	-rf
 
-
 # Debug
 
 VALGRIND	=	valgrind
 VFLAGS		=	--leak-check=full -q
 SHA		=	sha256sum
 
+# Test Maps
+TEST_MAPS	=	maps/
+TEST_MAPS_ZIP	=	maps.zip
 
 # Rules
 all: $(NAME)
@@ -98,6 +100,19 @@ clean:
 fclean: clean
 	$(RM) $(RM_FLAGS) $(NAME)
 
+$(TEST_MAPS_ZIP): 
+	wget https://cdn.intra.42.fr/document/document/27142/maps.zip
+
+$(TEST_MAPS): $(TEST_MAPS_ZIP)
+	mkdir -p $(TEST_MAPS)
+	unzip $(TEST_MAPS_ZIP) -d $(TEST_MAPS)
+
+installmaps:$(TEST_MAPS)
+
+cleanmaps: 
+	$(RM) $(RM_FLAGS) $(TEST_MAPS)
+	$(RM) $(RM_FLAGS) $(TEST_MAPS_ZIP)
+
 re: fclean all
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test installmaps cleanmaps

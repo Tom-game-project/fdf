@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:26:36 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:32:54 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:42:35 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ struct s_mlx_ptr_win
 	void	*mlx_ptr;
 	void	*mlx_win;
 	void	*mlx_img;
-	int	*mlx_addr;
+	int		*mlx_addr;
 };
 
 typedef struct s_line			t_line;

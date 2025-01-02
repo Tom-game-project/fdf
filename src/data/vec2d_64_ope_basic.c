@@ -6,10 +6,9 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:25:27 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/31 19:31:49 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 13:44:58 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "i32x2.h"
 #include "vec2d_64.h"
@@ -18,7 +17,6 @@
 ///  n 
 /// w e
 ///  s
-
 
 /// return t_i32x2(w, e);
 t_i32x2	get_we(vec2d_64 arr)
