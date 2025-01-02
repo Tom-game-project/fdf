@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:16 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/31 19:42:48 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:18:45 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 #include "draw.h"
 #include <stdint.h>
 
-static t_i32x2	f(vec2d_64 arr, uint32_t x, uint32_t y)
+static t_i32x2	f(t_vec2d_64 arr, uint32_t x, uint32_t y)
 {
 	return (get_vec2d_elem(arr, x, y).i32x2);
 }
 
-static t_i32u32	g(vec2d_64 arr, uint32_t x, uint32_t y)
+static t_i32u32	g(t_vec2d_64 arr, uint32_t x, uint32_t y)
 {
 	return (get_vec2d_elem(arr, x, y).i32u32);
 }
 
-int	put_lines(t_mlx_data data, vec2d_64 arr, vec2d_64 zcolor,
+int	put_lines(t_mlx_data data, t_vec2d_64 arr, t_vec2d_64 zcolor,
 		t_i32x2 (*func)(t_i32x2, t_mlx_data))
 {
 	uint32_t	y;
@@ -56,7 +56,7 @@ int	put_lines(t_mlx_data data, vec2d_64 arr, vec2d_64 zcolor,
 	return (0);
 }
 
-int	put_back_lines(t_mlx_data data, vec2d_64 arr, t_i32x2 (*func)(t_i32x2,
+int	put_back_lines(t_mlx_data data, t_vec2d_64 arr, t_i32x2 (*func)(t_i32x2,
 			t_mlx_data))
 {
 	uint32_t	y;

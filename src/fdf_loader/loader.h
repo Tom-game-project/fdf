@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:57 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 17:59:21 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:19:30 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@
 typedef char	t_z_color_word[Z_COLOR_WORD_MAX_LENGTH];
 
 // enum e_result load_map(char *filename);
-enum e_result	alocate_memory_for_map(vec2d_64 *arr, char *filename);
+enum e_result	alocate_memory_for_map(t_vec2d_64 *arr, char *filename);
 
 #endif

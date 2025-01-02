@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:27:16 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:27:17 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:16:23 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	print_u8x4(t_u8x4 data)
 }
 
 /// i32u32を格納した二次元配列を表示します
-int	print_vec2d_elem_i32u64(vec2d_64 arr)
+int	print_vec2d_elem_i32u64(t_vec2d_64 arr)
 {
 	t_64_elem	tmp;
 
@@ -63,7 +63,7 @@ int	print_vec2d_elem_i32u64(vec2d_64 arr)
 	return (0);
 }
 
-int	print_vec2d_elem_i32x2(vec2d_64 arr)
+int	print_vec2d_elem_i32x2(t_vec2d_64 arr)
 {
 	t_64_elem	tmp;
 

@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:26:23 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/31 19:13:27 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:19:51 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ struct s_mlx_data
 	void		*mlx_win;
 	void		*mlx_img;
 	void		*mlx_addr;
-	vec2d_64	map;
-	vec2d_64	point_map;
+	t_vec2d_64	map;
+	t_vec2d_64	point_map;
 	t_i32x2		position;
 	t_i32x2		x_vector;
 	t_i32x2		y_vector;

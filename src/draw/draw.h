@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:26 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 17:44:04 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:25:29 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@ struct								s_colordiff
 
 typedef struct s_position			t_position;
 
-vec2d_64							calc_map(vec2d_64 map,
+t_vec2d_64			calc_map(t_vec2d_64 map, \
 										t_vector_directions vd);
-void								draw_line(t_mlx_ptr_win mlx_ptr_win,
+void				draw_line(t_mlx_ptr_win mlx_ptr_win, \
 										t_line l, t_colorpair cp);
-void								draw_back_line(t_mlx_ptr_win mlx_ptr_win,
-										t_line l);
-int									put_lines(t_mlx_data data, vec2d_64 arr,
-										vec2d_64 zcolor,
+void				draw_back_line(t_mlx_ptr_win mlx_ptr_win, t_line l);
+int					put_lines(t_mlx_data data, t_vec2d_64 arr, \
+										t_vec2d_64 zcolor, \
 										t_i32x2 (*func)(t_i32x2, t_mlx_data));
 
-int									put_back_lines(t_mlx_data data,
-										vec2d_64 arr, t_i32x2 (*func)(t_i32x2,
+int					put_back_lines(t_mlx_data data, \
+						t_vec2d_64 arr, t_i32x2 (*func)(t_i32x2, \
 											t_mlx_data));
-void								put_point(t_mlx_ptr_win data, t_i32x2 p,
+void				put_point(t_mlx_ptr_win data, t_i32x2 p, \
 										t_u8x4 color);
 
-enum e_result						set_map(vec2d_64 point_map, vec2d_64 map,
-										t_vector_directions vd);
+enum e_result		set_map(t_vec2d_64 point_map, t_vec2d_64 map, \
+						t_vector_directions vd);
+
 #endif

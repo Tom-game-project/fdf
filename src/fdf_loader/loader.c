@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:49:01 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 18:03:19 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:15:27 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 
 /// 配列用のデータを格納するための領域を確保してメモリに読み込んだデータをセットする
-enum e_result	alocate_memory_for_map(vec2d_64 *arr, char *filename)
+enum e_result	alocate_memory_for_map(t_vec2d_64 *arr, char *filename)
 {
 	t_u32x2			mapsize;
 	enum e_result	err;
@@ -32,7 +32,7 @@ enum e_result	alocate_memory_for_map(vec2d_64 *arr, char *filename)
 		return (e_result_load_err);
 	if (de_int_x(mapsize) == -1)
 		return (e_result_load_err);
-	*arr = init_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
+	*arr = init_t_vec2d_64(de_uint_x(mapsize), de_uint_y(mapsize));
 	if (*arr == NULL)
 		return (e_result_allocation_err);
 	return (load_map(*arr, filename));

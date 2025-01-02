@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:27:21 by tmuranak          #+#    #+#             */
-/*   Updated: 2024/12/28 16:27:22 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:16:11 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	print_u16x4(t_u16x4 data);
 int	print_u8x4(t_u8x4 data);
 //
 
-int	print_vec2d_elem_i32u64(vec2d_64 arr);
+int	print_vec2d_elem_i32u64(t_vec2d_64 arr);
 
-int	print_vec2d_elem_i32x2(vec2d_64 arr);
+int	print_vec2d_elem_i32x2(t_vec2d_64 arr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:53 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 18:02:18 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:19:19 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ t_i32u32	z_color2t_i32u32(t_z_color_word zcolor, int *err)
 /// @param uint32_t y      y座標
 /// @param t_i32x2 mapsize (width, height)
 /// @param char *buf       一行のデータ
-/// @param vec2d_64 arr    整形後のデータを格納する部分
-enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
+/// @param t_vec2d_64 arr    整形後のデータを格納する部分
+enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, t_vec2d_64 arr)
 {
 	uint32_t		x;
 	union u_64_elem	a;
@@ -153,7 +153,7 @@ enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr)
 }
 
 /// マップを読み込んで、配列にデータをセットする
-enum e_result	load_map(vec2d_64 arr, char *filename)
+enum e_result	load_map(t_vec2d_64 arr, char *filename)
 {
 	int				fd;
 	char			*buf;

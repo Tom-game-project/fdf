@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:26:18 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 16:58:06 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:19:40 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	event_handler(int key, t_mlx_data *data)
 		data->position = t_i32x2_add(data->position, en_i32x2(10000, 0));
 		put_lines(*data, data->point_map, data->map, div100);
 	}
-	else if (key == XK_a) //
+	else if (key == XK_a)
 	{
 		put_back_lines(*data, data->point_map, div100);
 		data->position = t_i32x2_add(data->position, en_i32x2(-10000, 0));
 		put_lines(*data, data->point_map, data->map, div100);
 	}
-	else if (key == XK_s) //(key == XK_Down)
+	else if (key == XK_s)
 	{
 		put_back_lines(*data, data->point_map, div100);
 		data->position = t_i32x2_add(data->position, en_i32x2(0, 10000));
@@ -162,7 +162,6 @@ int	main(int argc, char *argv[])
 				- de_int_x(get_ns(data.point_map)));
 		put_lines(data, data.point_map, data.map, div100);
 		mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.mlx_img, 0, 0);
-		// hook
 		mlx_hook(data.mlx_win, DestroyNotify, NoEventMask, cross_hook, &data);
 		mlx_hook(data.mlx_win, KeyPress, KeyPressMask, event_handler, &data);
 		mlx_loop_hook(data.mlx_ptr, loop_hook, &data);

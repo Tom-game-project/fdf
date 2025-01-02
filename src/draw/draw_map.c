@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:22 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 13:47:09 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:18:51 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 // ```
 // x * Vec(x) + y * Vec(y) + z * Vec(z)
 // ```
-t_64_elem	core_expr(vec2d_64 map, t_u32x2 counter, t_vector_directions vd)
+t_64_elem	core_expr(t_vec2d_64 map, t_u32x2 counter, t_vector_directions vd)
 {
 	t_64_elem	p;
 
@@ -46,10 +46,10 @@ t_64_elem	core_expr(vec2d_64 map, t_u32x2 counter, t_vector_directions vd)
 }
 
 /// malloc 
-vec2d_64	create_point_map(vec2d_64 map)
+t_vec2d_64	create_point_map(t_vec2d_64 map)
 {
 	return (
-		init_vec2d_64(
+		init_t_vec2d_64(
 			de_uint_x(get_shape(map)),
 			de_uint_y(get_shape(map))
 		)
@@ -68,13 +68,13 @@ vec2d_64	create_point_map(vec2d_64 map)
 ///   {(x2, y2), (.. , ..), (.. , ..), ...},
 /// }
 /// ```
-vec2d_64	calc_map(vec2d_64 map, t_vector_directions vd)
+t_vec2d_64	calc_map(t_vec2d_64 map, t_vector_directions vd)
 {
-	vec2d_64	rarr;
+	t_vec2d_64	rarr;
 	t_u32x2		counter;
 
 	counter = en_u32x2(0, 0);
-	rarr = init_vec2d_64(\
+	rarr = init_t_vec2d_64(\
 		de_uint_x(get_shape(map)), \
 		de_uint_y(get_shape(map)));
 	if (rarr == NULL)
@@ -95,7 +95,7 @@ vec2d_64	calc_map(vec2d_64 map, t_vector_directions vd)
 }
 
 enum e_result	set_map(\
-	vec2d_64 point_map, vec2d_64 map, t_vector_directions vd)
+	t_vec2d_64 point_map, t_vec2d_64 map, t_vector_directions vd)
 {
 	t_u32x2	counter;
 

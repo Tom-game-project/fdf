@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:43 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 17:58:21 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:20:45 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ enum e_result	get_z_color_word(char *str, t_z_color_word word, uint32_t x,
 
 t_i32x2			get_mapsize(char *filename, enum e_result *err);
 t_i32u32		z_color2t_i32u32(t_z_color_word zcolor, int *err);
-enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, vec2d_64 arr);
-enum e_result	load_map(vec2d_64 arr, char *filename);
+enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, t_vec2d_64 arr);
+enum e_result	load_map(t_vec2d_64 arr, char *filename);
 
 #endif

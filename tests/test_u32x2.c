@@ -115,11 +115,11 @@ int test01()
 
 	printf(
 			CYANSTR
-			"vec2d_64の動作をチェック\n"
+			"t_vec2d_64の動作をチェック\n"
 			RESETSTR
 	);
 	t_64_elem r;
-	vec2d_64 a = init_vec2d_64(width, height);
+	t_vec2d_64 a = init_t_vec2d_64(width, height);
 	for (uint32_t y = 0; y < height;y++)
 	{
 		for (uint32_t x = 0; x < width;x++)
@@ -212,11 +212,11 @@ int test06()
 
 	printf(
 			CYANSTR
-			"vec2d_64(t_i32u32)の動作をチェック\n"
+			"t_vec2d_64(t_i32u32)の動作をチェック\n"
 			RESETSTR
 	);
 	t_64_elem r;
-	vec2d_64 a = init_vec2d_64(width, height);
+	t_vec2d_64 a = init_t_vec2d_64(width, height);
 	for (uint32_t y = 0; y < height;y++)
 	{
 		for (uint32_t x = 0; x < width;x++)
@@ -363,7 +363,7 @@ int test12 ()
 			"読み込んだデータを整形して表示する\n"
 			RESETSTR
 	);
-	vec2d_64 arr;
+	t_vec2d_64 arr;
 
 	arr = NULL;
 	alocate_memory_for_map(&arr, "./maps/test_maps/42.fdf");
@@ -383,7 +383,7 @@ int test13()
 		"色々なファイルに形式に対応させられているかテスト"
 		RESETSTR
 	);
-	vec2d_64 arr;
+	t_vec2d_64 arr;
 	enum e_result err_code;
 
 	for (int i = 0; i < MAPFILELENGTH; i++)
@@ -415,8 +415,8 @@ int test14()
 		"スクリーン座標変換テスト\n"
 		RESETSTR
 	);
-	vec2d_64 a;
-	vec2d_64 map;
+	t_vec2d_64 a;
+	t_vec2d_64 map;
 
 	alocate_memory_for_map(&map, "maps/test_maps/42.fdf");
 	a = calc_map(map);
