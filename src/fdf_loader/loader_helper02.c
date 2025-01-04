@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 16:28:53 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 18:19:19 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 20:09:36 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_i32u32	z_color2t_i32u32(t_colorword zcolor, int *err)
 {
 	t_i32u32		r;
 	int32_t			countofwords;
-	t_colorword	word;
+	t_colorword		word;
 	t_u32x2			color;
 
 	countofwords = count_word(zcolor, is_comma);
@@ -136,7 +136,7 @@ enum e_result	set_row(uint32_t y, t_u32x2 mapsize, char *buf, t_vec2d_64 arr)
 {
 	uint32_t		x;
 	union u_64_elem	a;
-	t_colorword	word;
+	t_colorword		word;
 	int				err;
 
 	x = 0;

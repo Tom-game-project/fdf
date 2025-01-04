@@ -73,13 +73,15 @@ TEST_MAPS_ZIP	=	maps.zip
 # Rules
 all: $(NAME)
 
+bonus: $(NAME)
+
 test: $(TEST)
 	$(SHA) $(TEST)
 	#./$(TEST)
 	$(VALGRIND) $(VFLAGS) ./$(TEST)
 
-$(TEST): $(TEST_OBJS) $(OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(OBJS) $(LIBX_FLAGS) -o $(TEST)
+#$(TEST): $(TEST_OBJS) $(OBJS)
+#	$(CC) $(CFLAGS) $(TEST_OBJS) $(OBJS) $(LIBX_FLAGS) -o $(TEST)
 
 $(NAME): $(MAIN_OBJ) $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LIBX_FLAGS) -o $(NAME)
@@ -120,4 +122,4 @@ cleanmaps:
 
 re: fclean all
 
-.PHONY: all clean fclean re test installmaps cleanmaps
+.PHONY: all clean fclean re test installmaps cleanmaps bonus
