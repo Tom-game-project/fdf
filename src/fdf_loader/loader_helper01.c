@@ -108,8 +108,6 @@ int32_t	str2int(char *str)
 	{
 		if (is_decimalchar(*str))
 			r = 10 * r + (*str - '0');
-		else
-			printf("str2int Error!\n");
 		str++;
 	}
 	return (sign * r);
