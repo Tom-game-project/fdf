@@ -49,6 +49,7 @@ int	put_lines(t_mlx_data data, t_vec2d_64 arr, t_vec2d_64 zcolor,
 				data.mlx_addr}, (t_line){func(f(arr, x, y), data), func(f(arr,
 						x, y + 1), data)}, (t_colorpair){de_iu_y((g(zcolor, x,
 							y))), de_iu_y(g(zcolor, x, y + 1))});
+			//print_u8x4(de_iu_y(g(zcolor, x, y)));
 			x += 1;
 		}
 		y += 1;

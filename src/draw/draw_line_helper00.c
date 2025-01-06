@@ -18,18 +18,25 @@ int	abs(int a)
 	return (a * (((0 < a) << 1) - 1));
 }
 
-bool	int16_lt(int16_t a, int16_t b)
+bool	int16_gt(uint16_t a, uint16_t b)
 {
-	return (a < b);
+	return (a > b);
 }
 
-int16_t	int16mf(int16_t a, int16_t b)
+uint16_t	int16mf(uint16_t a, uint16_t b)
 {
-	return (abs(a - b));
+	if (a < b)
+	{
+		return (b - a);
+	}
+	else
+	{
+		return (a - b);
+	}
 }
 
-int16_t	shift8_func(int16_t a, int16_t b)
+uint16_t	shift8_func(uint16_t a, uint16_t b)
 {
 	(void) b;
-	return (a << 8);
+	return (a);
 }

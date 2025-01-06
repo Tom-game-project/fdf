@@ -22,6 +22,7 @@
 
 // mlx
 #include "../minilibx-linux/mlx.h"
+#include "args/args_structs.h"
 #include "data/i32x2.h"
 #include "data/vec2d_64.h"
 #include "draw/draw.h"
