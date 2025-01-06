@@ -123,6 +123,7 @@ clean: cleanmaps
 
 fclean: clean
 	$(RM) $(RM_FLAGS) $(NAME)
+	$(RM) $(RM_FLAGS) $(TEST_MAPS_ZIP)
 
 re: fclean all
 
@@ -136,7 +137,6 @@ $(TEST_MAPS): $(TEST_MAPS_ZIP)
 	unzip $(TEST_MAPS_ZIP) -d $(TEST_MAPS)
 
 installmaps: $(TEST_MAPS)
-	$(RM) $(RM_FLAGS) $(TEST_MAPS_ZIP)
 
 cleanmaps: 
 	$(RM) $(RM_FLAGS) $(TEST_MAPS)
