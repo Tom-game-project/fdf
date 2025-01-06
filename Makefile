@@ -1,14 +1,23 @@
-# minilibx_test
+# Compile option
+CC		=	cc
+CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024
+LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
+RM_FLAGS	=	-rf
+
+## ------------------ entry point ---------------------
 NAME		=	fdf
 MAIN_SRC	=	src/fdf.c
 
-SRCS		=	src/draw/draw_line.c\
+## --------------------- draw --------------------------
+DRAW_SRC	=	src/draw/draw_line.c\
 			src/draw/draw_line_helper00.c\
 			src/draw/draw_line_helper01.c\
 			src/draw/draw_lines.c\
 			src/draw/draw_map.c\
-			src/draw/draw_point.c\
-			src/data/i32u32_encode.c\
+			src/draw/draw_point.c
+
+## --------------------- data ---------------------------
+DATA_SRC	=	src/data/i32u32_encode.c\
 			src/data/i32u32_decode.c\
 			src/data/u32x2_ope_basic.c\
 			src/data/u32x2_encode.c\
@@ -27,46 +36,57 @@ SRCS		=	src/draw/draw_line.c\
 			src/data/u16x4_ope_extra.c\
 			src/data/u16x4_ope_color.c\
 			src/data/vec2d_64.c\
-			src/data/vec2d_64_ope_basic.c\
-			src/fdf_loader/loader.c\
+			src/data/vec2d_64_ope_basic.c
+
+## ----------------- fdf loader ------------------------
+FDF_LOADER_SRC	=	src/fdf_loader/loader.c\
 			src/fdf_loader/gnl/get_next_line.c\
 			src/fdf_loader/gnl/get_next_line_utils.c\
 			src/fdf_loader/loader_helper00.c\
 			src/fdf_loader/loader_helper01.c\
 			src/fdf_loader/loader_helper02.c\
-			src/fdf_loader/checker.c\
-			src/error/result.c\
+			src/fdf_loader/checker.c
+
+## --------------------- error -------------------------
+ERROR_SRC	=	src/error/result.c\
 			src/error/error_msg00.c\
-			src/error/error_msg01.c\
-			src/hook/hook_helper00.c\
+			src/error/error_msg01.c
+
+## --------------------- hook ---------------------------
+HOOK_SRC	=	src/hook/hook_helper00.c\
 			src/hook/hook.c
+
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# main src
+SRCS		=	$(DRAW_SRC)\
+			$(DATA_SRC)\
+			$(FDF_LOADER_SRC)\
+			$(ERROR_SRC)\
+			$(HOOK_SRC)
 
 # for test
 TEST		=	test_run
 TEST_SRCS	=	tests/test_u32x2.c
-
-# mlx tools
-MLX		=	minilibx-linux/libmlx.a
-MLX_HEADER	=	minilibx-linux/mlx.h
 
 # objects
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 OBJS 		=	$(SRCS:.c=.o)
 TEST_OBJS	=	$(TEST_SRCS:.c=.o)
 
-# Compiler option
-CC		=	cc
-CFLAGS		=	-Wextra -Werror -Wall -g -DBUFFER_SIZE=1024
-LIBX_FLAGS	=	-Lminilibx-linux -lmlx -lXext -lX11
-RM_FLAGS	=	-rf
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# third party
+## mlx tools
+MLX		=	minilibx-linux/libmlx.a
+MLX_HEADER	=	minilibx-linux/mlx.h
 
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Debug
 
 VALGRIND	=	valgrind
 VFLAGS		=	--leak-check=full -q
 SHA		=	sha256sum
 
-# Test Maps
+# -------------- Test map Install Tools ---------------
 TEST_MAPS	=	maps/
 TEST_MAPS_ZIP	=	maps.zip
 
@@ -104,6 +124,10 @@ clean: cleanmaps
 fclean: clean
 	$(RM) $(RM_FLAGS) $(NAME)
 
+re: fclean all
+
+# ------ Test map Install Tools ----------
+
 $(TEST_MAPS_ZIP): 
 	wget https://cdn.intra.42.fr/document/document/27142/maps.zip
 
@@ -117,6 +141,6 @@ installmaps: $(TEST_MAPS)
 cleanmaps: 
 	$(RM) $(RM_FLAGS) $(TEST_MAPS)
 
-re: fclean all
+reinstallmaps: cleanmaps installmaps
 
 .PHONY: all clean fclean re test installmaps cleanmaps bonus
