@@ -11,14 +11,10 @@
 /* ************************************************************************** */
 
 #include "../error/result.h"
-#include "i32x2.h"
 #include "u32x2.h"
 #include "vec2d_64.h"
 #include <stdint.h>
 #include <stdlib.h>
-
-// test functions
-#include <stdio.h>
 
 /// `vec<vec<t_64_elem>>`
 ///

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "result.h"
-#include "unistd.h"
 #include "error_msg_helper.h"
 
 #define ERROR_VALIATION 10

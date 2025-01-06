@@ -28,8 +28,6 @@
 
 // for test
 #include "loader_helper.h"
-#include <stdio.h>
-#include <unistd.h>
 
 /// 返り値はエラーコード
 ///

@@ -22,7 +22,6 @@
 
 // mlx
 #include "../minilibx-linux/mlx.h"
-#include "args/args_structs.h"
 #include "data/i32x2.h"
 #include "data/vec2d_64.h"
 #include "draw/draw.h"
@@ -59,6 +58,12 @@ int	set_hooks(t_mlx_data *data)
 	return (0);
 }
 
+int	usage(void)
+{
+	write(STDERR_FILENO, "usage: ./fdf path/to/fdf/file\n", 30);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_mlx_data	data;
@@ -84,5 +89,5 @@ int	main(int argc, char *argv[])
 		return (mlx_destroy_display(data.mlx_ptr), free(data.mlx_ptr),
 			free(data.map), free(data.point_map), 0);
 	}
-	return (1);
+	return (usage());
 }

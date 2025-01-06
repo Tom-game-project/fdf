@@ -15,7 +15,6 @@
 #include "loader_helper.h"
 #include <stdbool.h>
 #include <stdint.h>
-#include <stdio.h>
 
 #define HEX_CHAR_TABLE_LENGTH 16
 #define HEX_CHAR_TABLE "0123456789abcdef"
