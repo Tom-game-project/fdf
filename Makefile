@@ -80,9 +80,6 @@ test: $(TEST)
 	#./$(TEST)
 	$(VALGRIND) $(VFLAGS) ./$(TEST)
 
-#$(TEST): $(TEST_OBJS) $(OBJS)
-#	$(CC) $(CFLAGS) $(TEST_OBJS) $(OBJS) $(LIBX_FLAGS) -o $(TEST)
-
 $(NAME): $(MAIN_OBJ) $(OBJS) $(MLX)
 	$(CC) $(CFLAGS) $(MAIN_OBJ) $(OBJS) $(LIBX_FLAGS) -o $(NAME)
 
@@ -114,11 +111,11 @@ $(TEST_MAPS): $(TEST_MAPS_ZIP)
 	mkdir -p $(TEST_MAPS)
 	unzip $(TEST_MAPS_ZIP) -d $(TEST_MAPS)
 
-installmaps:$(TEST_MAPS)
+installmaps: $(TEST_MAPS)
+	$(RM) $(RM_FLAGS) $(TEST_MAPS_ZIP)
 
 cleanmaps: 
 	$(RM) $(RM_FLAGS) $(TEST_MAPS)
-	$(RM) $(RM_FLAGS) $(TEST_MAPS_ZIP)
 
 re: fclean all
 

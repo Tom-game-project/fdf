@@ -28,7 +28,8 @@ static int16_t	int16_sub(int16_t a, int16_t b)
 // TODO
 // color tools
 
-t_u16x4	t_u16x4_map(t_u16x4 a, t_u16x4 b, uint16_t (*func)(uint16_t a, uint16_t b))
+t_u16x4	t_u16x4_map(t_u16x4 a, t_u16x4 b, \
+uint16_t (*func)(uint16_t a, uint16_t b))
 {
 	return (en_u16x4(func(de_u16x4_a(a), de_u16x4_a(b)), func(de_u16x4_b(a),
 				de_u16x4_b(b)), func(de_u16x4_c(a), de_u16x4_c(b)),

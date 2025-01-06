@@ -73,8 +73,8 @@ void	draw_line_helper(t_mlx_ptr_win mlx_ptr_win, t_line l,
 	e = en_i32x2(x(d) - y(d), 0);
 	if (t_i32x2_max(d) == 0)
 		return ;
-	ci.s = t_u16x4_div_scalar(t_u16x4_map(cp.s, cp.e, int16mf),
-				(uint16_t)t_i32x2_max(d));
+	ci.s = t_u16x4_div_scalar(t_u16x4_map(cp.s, cp.e, int16mf), \
+		(uint16_t)t_i32x2_max(d));
 	ci.m = create_u16x4_bool_map(cp.s, cp.e, int16_gt);
 	while (true)
 	{
