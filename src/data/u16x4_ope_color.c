@@ -29,7 +29,7 @@ static int16_t	int16_sub(int16_t a, int16_t b)
 // TODO
 // color tools
 
-t_u16x4	t_u16x4_map(t_u16x4 a, t_u16x4 b, int16_t (*func)(int16_t a, int16_t b))
+t_u16x4	t_u16x4_map(t_u16x4 a, t_u16x4 b, uint16_t (*func)(uint16_t a, uint16_t b))
 {
 	return (en_u16x4(func(de_u16x4_a(a), de_u16x4_a(b)), func(de_u16x4_b(a),
 				de_u16x4_b(b)), func(de_u16x4_c(a), de_u16x4_c(b)),
@@ -51,8 +51,8 @@ t_u16x4	t_u16x4_cal_color(t_u16x4 a, t_u16x4 b, t_u8x4 map)
 		func[de_u8x4_d(map)](de_u16x4_d(a), de_u16x4_d(b))));
 }
 
-t_u8x4	create_u16x4_bool_map(t_u16x4 a, t_u16x4 b, bool (*func)(int16_t a,
-			int16_t b))
+t_u8x4	create_u16x4_bool_map(t_u16x4 a, t_u16x4 b, bool (*func)(uint16_t a,
+			uint16_t b))
 {
 	return (en_u8x4(func(de_u16x4_a(a), de_u16x4_a(b)), func(de_u16x4_b(a),
 				de_u16x4_b(b)), func(de_u16x4_c(a), de_u16x4_c(b)),

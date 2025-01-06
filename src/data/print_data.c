@@ -36,12 +36,14 @@ int	print_i32u32(t_i32u32 data)
 
 int	print_u16x4(t_u16x4 data)
 {
+	//return (printf("t_u16x4(%x %x %x %x)\n", de_u16x4_a(data), de_u16x4_b(data),
 	return (printf("t_u16x4(%d %d %d %d)\n", de_u16x4_a(data), de_u16x4_b(data),
 			de_u16x4_c(data), de_u16x4_d(data)));
 }
 
 int	print_u8x4(t_u8x4 data)
 {
+	//return (printf("t_u8x4(%x %x %x %x)\n", de_u8x4_a(data), de_u8x4_b(data),
 	return (printf("t_u8x4(%d %d %d %d)\n", de_u8x4_a(data), de_u8x4_b(data),
 			de_u8x4_c(data), de_u8x4_d(data)));
 }

@@ -48,13 +48,13 @@ t_u16x4		t_u16x4_div_scalar(t_u16x4 a, int16_t b);
 t_u16x4		t_u16x4_map(\
 t_u16x4 a, \
 t_u16x4 b, \
-int16_t (*func)(int16_t a, int16_t b)\
+uint16_t (*func)(uint16_t a, uint16_t b)\
 );
 
 t_u8x4		create_u16x4_bool_map(\
 t_u16x4 a, \
 t_u16x4 b, \
-bool (*func)(int16_t a, int16_t b)\
+bool (*func)(uint16_t a, uint16_t b)\
 );
 t_u16x4		t_u16x4_cal_color(t_u16x4 a, t_u16x4 b, t_u8x4 map);
 

@@ -18,9 +18,9 @@
 # include "draw.h"
 
 int		abs(int a);
-bool	int16_lt(int16_t a, int16_t b);
-int16_t	int16mf(int16_t a, int16_t b);
-int16_t	shift8_func(int16_t a, int16_t b);
+bool	int16_gt(uint16_t a, uint16_t b);
+uint16_t	int16mf(uint16_t a, uint16_t b);
+uint16_t	shift8_func(uint16_t a, uint16_t b);
 
 void	draw_line_helper(t_mlx_ptr_win mlx_ptr_win, t_line l, \
 		t_colordiff cp);
