@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/02 19:39:30 by tmuranak          #+#    #+#             */
+/*   Updated: 2025/01/02 19:39:32 by tmuranak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 // X11
 #include <X11/X.h>
 #include <X11/keysym.h>
@@ -39,9 +51,9 @@ int	key_event_proc(int key, t_mlx_data *data)
 	else if (key == XK_w)
 		lateral_movement(data, 0, -10000);
 	else if (key == XK_d)
-		lateral_movement(data, 10000,0);
+		lateral_movement(data, 10000, 0);
 	else if (key == XK_a)
-		lateral_movement(data, -10000,0);
+		lateral_movement(data, -10000, 0);
 	else if (key == XK_s)
 		lateral_movement(data, 0, 10000);
 	else if (key == XK_Right)
@@ -60,4 +72,3 @@ int	loop_hook(t_mlx_data *data)
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->mlx_img, 0, 0);
 	return (0);
 }
-

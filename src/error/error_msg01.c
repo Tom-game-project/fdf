@@ -22,7 +22,7 @@ int	f_is_not_fdf_file_msg(void)
 	return ((void)write(STDERR_FILENO, "is not fdf file\n", 16), 1);
 }
 
-int	f_mlx_error_msg()
+int	f_mlx_error_msg(void)
 {
 	return ((void)write(STDERR_FILENO, "minilibx error\n", 15), 1);
 }

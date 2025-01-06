@@ -6,7 +6,7 @@
 /*   By: tmuranak <tmuranak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 18:26:18 by tmuranak          #+#    #+#             */
-/*   Updated: 2025/01/02 18:19:40 by tmuranak         ###   ########.fr       */
+/*   Updated: 2025/01/02 19:43:44 by tmuranak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,30 @@
 
 enum e_result	set_mlx(t_mlx_data *data, char *filename)
 {
-	data -> mlx_ptr = mlx_init();
-	if (data -> mlx_ptr == NULL)
+	data->mlx_ptr = mlx_init();
+	if (data->mlx_ptr == NULL)
 		return (e_result_mlx_err);
-	data -> mlx_win = mlx_new_window(data -> mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
+	data->mlx_win = mlx_new_window(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT,
 			filename);
-	if (data -> mlx_ptr == NULL)
+	if (data->mlx_ptr == NULL)
 		return (e_result_mlx_err);
-	data -> mlx_img = mlx_new_image(data -> mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (data -> mlx_img == NULL)
+	data->mlx_img = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (data->mlx_img == NULL)
 		return (e_result_mlx_err);
-	data -> mlx_addr = mlx_get_data_addr(data -> mlx_img, &data->bpp, &data->size_l,
+	data->mlx_addr = mlx_get_data_addr(data->mlx_img, &data->bpp, &data->size_l,
 			&data->endian);
 	if (data->mlx_addr == NULL)
 		return (e_result_mlx_err);
 	mlx_clear_window(data->mlx_ptr, data->mlx_win);
 	return (e_result_ok);
+}
+
+int	set_hooks(t_mlx_data *data)
+{
+	mlx_hook(data->mlx_win, DestroyNotify, NoEventMask, cross_hook, data);
+	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, key_event_proc, data);
+	mlx_loop_hook(data->mlx_ptr, loop_hook, data);
+	return (0);
 }
 
 int	main(int argc, char *argv[])
@@ -71,9 +79,7 @@ int	main(int argc, char *argv[])
 				- de_int_x(get_ns(data.point_map)));
 		put_lines(data, data.point_map, data.map, div100);
 		mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.mlx_img, 0, 0);
-		mlx_hook(data.mlx_win, DestroyNotify, NoEventMask, cross_hook, &data);
-		mlx_hook(data.mlx_win, KeyPress, KeyPressMask, key_event_proc, &data);
-		mlx_loop_hook(data.mlx_ptr, loop_hook, &data);
+		set_hooks(&data);
 		mlx_loop(data.mlx_ptr);
 		return (mlx_destroy_display(data.mlx_ptr), free(data.mlx_ptr),
 			free(data.map), free(data.point_map), 0);

@@ -19,9 +19,6 @@
 #include "draw.h"
 #include <stdint.h>
 
-// test
-#include "../data/print_data.h"
-
 static t_i32x2	f(t_vec2d_64 arr, uint32_t x, uint32_t y)
 {
 	return (get_vec2d_elem(arr, x, y).i32x2);
