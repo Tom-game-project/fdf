@@ -20,6 +20,7 @@
 /// # t_u8x4
 /// |------------ 64bit ------------|
 /// | 16bit | 16bit | 16bit | 16bit |
+/// |   a   |   b   |   c   |   d   |
 typedef uint64_t	t_u16x4;
 
 // encode

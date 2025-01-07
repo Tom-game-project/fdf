@@ -16,8 +16,8 @@
 
 /// # t_u8x4
 /// |---------- 32bit ----------|
-/// | 8bit | 8bit | 8bit | 8bit |
-///
+/// |-8bit-|-8bit-|-8bit-|-8bit-|
+/// |  a   |  b   |  c   |  d   |
 typedef uint32_t	t_u8x4;
 
 t_u8x4	en_u8x4(\
